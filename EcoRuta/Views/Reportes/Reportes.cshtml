@@ -1,0 +1,84 @@
+﻿@model List<Application.ViewModels.Reportes.ReportesViewModel>
+
+@{
+    ViewData["Title"] = "Reportes";
+}
+
+<head>
+    <style>
+        .row{
+        margin-top: 30px;
+        }
+
+        .crearbtn{
+        margin-top: 30px;
+        text-align: center;
+        }
+
+        .form-btn{
+        display: flex;
+        }
+
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card {
+        border: 1px solid black;
+        }
+
+        .footer {
+        margin-top: 100px;
+        }
+    </style>
+</head>
+
+<div class="crearbtn">
+    <a class="btn btn-primary" asp-controller="Reportes" asp-action="CreateReporte">Nuevo Reporte</a>
+</div>
+
+<div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @try
+        {
+            @foreach (var obj in Model)
+            {
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <p>Titulo: @obj.Titulo</p>
+                            <p>Descripción: @obj.Descripcion</p>
+                            <p>Estado: @obj.Estado</p>
+                            <p>Fecha de creación: @obj.FechaHora </p>
+
+                            @if(obj.Estado == "Pendiente")
+                            {
+                                <div class="form-btn">
+                                    <form asp-controller="Reportes" asp-action="EditReporte" method="post">
+                                        <input type="hidden" name="Id" value="@obj.ReporteId" />
+                                        <button class="btn btn-warning" type="submit">Editar</button>
+                                    </form>
+                                    <form asp-controller="Reportes" asp-action="DeleteReporte" method="post">
+                                        <input type="hidden" name="Id" value="@obj.ReporteId" />
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+        catch (Exception ex)
+        {
+            <h2>Error: @ex</h2>
+        }
+    </div>
+</div>
