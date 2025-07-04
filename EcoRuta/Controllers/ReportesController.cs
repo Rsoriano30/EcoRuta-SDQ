@@ -20,7 +20,7 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
-        #region
+        #region Edit
         public async Task<IActionResult> EditReporte(int Id)
         {
             var model = await _reportesService.GetById(Id);
@@ -29,7 +29,7 @@ namespace EcoRuta.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditReportePost(ReportesViewModel model)
+        public async Task<IActionResult> EditReportePost(ReporteViewModel model)
         {
             try
             {   
@@ -47,13 +47,13 @@ namespace EcoRuta.Controllers
         #region Create
 
         [HttpGet]
-        public IActionResult CreateReporte(ReportesHandlerViewModel model)
+        public IActionResult CreateReporte(ReporteHandlerViewModel model)
         {
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateReportePost(ReportesHandlerViewModel model)
+        public async Task<IActionResult> CreateReportePost(ReporteHandlerViewModel model)
         {
             var response = await _reportesService.Add(model);
 

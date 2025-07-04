@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using Application.Intefaces.Repositories;
 using Application.Intefaces.Services;
 using Application.ViewModels.Reportes;
+using Application.ViewModels.Rutas;
 using AutoMapper;
 using Domain.Entities;
 
 namespace Application.Services
 {
-    public class ReportesService : GenericService<ReporteHandlerViewModel, ReporteViewModel, Reporte>, IReportesService
+    public class RutasService : GenericService<RutaHandlerViewModel, RutaViewModel, Ruta>, IRutasService
     {
-        private readonly IReportesRepository _repository;
+        private readonly IRutasRepository _repository;
         private readonly IMapper _mapper;
 
-        public ReportesService(IReportesRepository repository, IMapper mapper) : base(repository, mapper)
+        public RutasService(IRutasRepository repository, IMapper mapper) : base(repository, mapper)
         {
             _repository = repository;
             _mapper = mapper;

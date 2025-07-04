@@ -20,6 +20,7 @@ namespace Application
             AddApplicationLayerGenericServices(services);
 
             services.AddTransient<IReportesService, ReportesService>();
+            services.AddTransient<IRutasService, RutasService>();
 
             #endregion
         }

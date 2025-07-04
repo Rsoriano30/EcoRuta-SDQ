@@ -17,18 +17,16 @@ namespace Structure
     {
         public static void AddPersistenceInfraestructureLayer(this IServiceCollection services, IConfiguration config)
         {
-            #region Database Connection
-            
+            //--------- Database Connection
             services.AddDbContext<EcoRutaContext>(options => options.UseSqlServer(config.GetConnectionString("DbConnection"),
                 m => m.MigrationsAssembly(typeof(EcoRutaContext).Assembly.FullName)));
-
-            #endregion
 
             #region Repositories
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.AddTransient<IReportesRepository, ReportesRepository>();
+            services.AddTransient<IRutasRepository, RutasRepository>();
             #endregion
 
         }

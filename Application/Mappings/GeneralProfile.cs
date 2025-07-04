@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application.ViewModels.Reportes;
 using Domain.Entities;
 using AutoMapper;
+using Application.ViewModels.Rutas;
 
 namespace Application.Mappings
 {
@@ -13,16 +14,26 @@ namespace Application.Mappings
     {
         public GeneralProfile()
         {
-            #region Reportes
-            CreateMap<Reporte, ReportesViewModel>()
+            //-------------------------- Reportes
+            CreateMap<Reporte, ReporteViewModel>()
                     .ReverseMap()
                     .ForMember(x => x.Usuario, opt => opt.Ignore())
                     .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<Reporte, ReportesHandlerViewModel>()
+            CreateMap<Reporte, ReporteHandlerViewModel>()
                     .ReverseMap()
+                    .ForMember(x => x.ReporteId, opt => opt.Ignore())
+                    // temporal, ya que el usuario si va.
                     .ForMember(x => x.Usuario, opt => opt.Ignore());
-            #endregion
+
+            //-------------------------- Rutas
+            CreateMap<Ruta, RutaViewModel>()
+                    .ReverseMap()
+                    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Ruta, RutaHandlerViewModel>()
+                    .ReverseMap()
+                    .ForMember(x => x.RutaId, opt => opt.Ignore());
         }
     }
 }

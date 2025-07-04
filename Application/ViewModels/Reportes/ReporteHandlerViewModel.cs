@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels.Reportes
 {
-    public class ReportesHandlerViewModel
+    public class ReporteHandlerViewModel
     {
-        public int ReporteId { get; set; }
-
         public int? UsuarioId { get; set; }
 
         public string? Titulo { get; set; }
