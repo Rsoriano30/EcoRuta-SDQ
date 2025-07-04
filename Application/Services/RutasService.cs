@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Intefaces.Repositories;
 using Application.Intefaces.Services;
-using Application.ViewModels.Reportes;
 using Application.ViewModels.Rutas;
 using AutoMapper;
 using Domain.Entities;
 
 namespace Application.Services
 {
-    public class RutasService : GenericService<RutaHandlerViewModel, RutaViewModel, Ruta>, IRutasService
+    public class RutasService : GenericService<RutaSaveViewModel, RutaViewModel, Ruta>, IRutasService
     {
         private readonly IRutasRepository _repository;
         private readonly IMapper _mapper;

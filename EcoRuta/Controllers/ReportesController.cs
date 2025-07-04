@@ -13,7 +13,7 @@ namespace EcoRuta.Controllers
             _reportesService = reportesService;
         }
 
-        public async Task<IActionResult> Reportes()
+        public async Task<IActionResult> Index()
         {
             var model = await _reportesService.GetAll();
 
@@ -35,7 +35,7 @@ namespace EcoRuta.Controllers
             {   
                 await _reportesService.Update(model, model.ReporteId);
 
-                return RedirectToAction("Reportes", "Reportes");
+                return RedirectToAction("Index", "Reportes");
             }
             catch
             {
@@ -47,13 +47,13 @@ namespace EcoRuta.Controllers
         #region Create
 
         [HttpGet]
-        public IActionResult CreateReporte(ReporteHandlerViewModel model)
+        public IActionResult CreateReporte(ReporteSaveViewModel model)
         {
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateReportePost(ReporteHandlerViewModel model)
+        public async Task<IActionResult> CreateReportePost(ReporteSaveViewModel model)
         {
             var response = await _reportesService.Add(model);
 
@@ -63,7 +63,7 @@ namespace EcoRuta.Controllers
             }
             else
             {
-                return RedirectToAction("Reportes");
+                return RedirectToAction("Index");
             }
         }
 
@@ -86,7 +86,7 @@ namespace EcoRuta.Controllers
                 Console.WriteLine(Id);
                 await _reportesService.Delete(Id);
 
-                return RedirectToAction("Reportes", "Reportes");
+                return RedirectToAction("Index", "Reportes");
             }
             catch (Exception ex)
             {

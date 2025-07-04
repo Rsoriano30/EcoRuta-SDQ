@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels.Rutas
 {
-    public class RutaViewModel : RutaHandlerViewModel
+    public class RutaViewModel : RutaSaveViewModel
     {
         public int RutaId { get; set; }
 

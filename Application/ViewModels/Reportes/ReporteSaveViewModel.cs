@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels.Reportes
 {
-    public class ReporteHandlerViewModel
+    public class ReporteSaveViewModel
     {
         public int? UsuarioId { get; set; }
 

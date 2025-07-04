@@ -9,7 +9,7 @@ using Domain.Entities;
 
 namespace Application.Intefaces.Services
 {
-    public interface IReportesService : IGenericService<ReporteHandlerViewModel, ReporteViewModel, Reporte>
+    public interface IReportesService : IGenericService<ReporteSaveViewModel, ReporteViewModel, Reporte>
     {
     }
 }

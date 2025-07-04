@@ -15,7 +15,7 @@ namespace EcoRuta.Controllers
             _rutasService = rutasService;
         }
 
-        public async Task<IActionResult> Rutas()
+        public async Task<IActionResult> Index()
         {
             var model = await _rutasService.GetAll();
 
@@ -23,13 +23,13 @@ namespace EcoRuta.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateRuta(RutaHandlerViewModel model)
+        public IActionResult CreateRuta(RutaSaveViewModel model)
         {
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRutaPost(RutaHandlerViewModel model)
+        public async Task<IActionResult> CreateRutaPost(RutaSaveViewModel model)
         {
             var response = await _rutasService.Add(model);
 
@@ -39,7 +39,7 @@ namespace EcoRuta.Controllers
             }
             else
             {
-                return RedirectToAction("Rutas");
+                return RedirectToAction("Index");
             }
         }
     }

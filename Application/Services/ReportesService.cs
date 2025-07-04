@@ -11,7 +11,7 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class ReportesService : GenericService<ReporteHandlerViewModel, ReporteViewModel, Reporte>, IReportesService
+    public class ReportesService : GenericService<ReporteSaveViewModel, ReporteViewModel, Reporte>, IReportesService
     {
         private readonly IReportesRepository _repository;
         private readonly IMapper _mapper;

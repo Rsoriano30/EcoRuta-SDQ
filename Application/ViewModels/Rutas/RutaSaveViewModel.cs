@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels.Rutas
 {
-    public class RutaHandlerViewModel
+    public class RutaSaveViewModel
     {
         public string? NombreRuta { get; set; }
 
