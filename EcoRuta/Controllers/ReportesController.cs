@@ -20,6 +20,13 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Detalles(int id)
+        {
+            var model = await _reportesService.GetById(id);
+
+            return View(model);
+        }
+
         #region Edit
         public async Task<IActionResult> EditReporte(int Id)
         {

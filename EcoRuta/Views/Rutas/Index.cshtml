@@ -34,7 +34,7 @@
 </head>
 
 <div class="crearbtn">
-    <a class="btn btn-primary" asp-controller="Rutas" asp-action="CreateRuta">Nuevo Reporte</a>
+    <a class="btn btn-primary" asp-controller="Rutas" asp-action="CreateRuta">Nueva ruta</a>
 </div>
 
 <div>
@@ -47,13 +47,11 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-
                             <p>Id: @obj.RutaId</p>
                             <p>Nombre: @obj.NombreRuta</p>
-                            <p>Nom: @obj.PuntoInicio</p>
-                            <p>Fecha de creación: @obj.PuntoFinal</p>
-                            <p>Estado: @obj.Estado</p>
-                                    
+                            <p>Punto de Salida: @obj.PuntoInicio</p>
+                            <p>Punto de Llegada: @obj.PuntoFinal</p>
+                            <p>Estado: @(obj.Estado == true ? "Activa" : "Inactiva")</p>   
                         </div>
                     </div>
                 </div>

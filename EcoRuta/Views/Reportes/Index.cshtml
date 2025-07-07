@@ -30,6 +30,7 @@
         .footer {
         margin-top: 100px;
         }
+
     </style>
 </head>
 
@@ -51,11 +52,16 @@
                             <p>Titulo: @obj.Titulo</p>
                             <p>Descripción: @obj.Descripcion</p>
                             <p>Estado: @obj.Estado</p>
-                            <p>Fecha de creación: @obj.FechaHora </p>
 
-                            @if(obj.Estado == "Pendiente")
-                            {
-                                <div class="form-btn">
+                            <div class="form-btn">
+
+                                <form asp-controller="Reportes" asp-action="Detalles" method="get">
+                                    <input type="hidden" name="Id" value="@obj.ReporteId" />
+                                    <button class="btn btn-secondary" type="submit">Detalles</button>
+                                </form>
+
+                                @if(obj.Estado == "Pendiente")
+                                {
                                     <form asp-controller="Reportes" asp-action="EditReporte" method="post">
                                         <input type="hidden" name="Id" value="@obj.ReporteId" />
                                         <button class="btn btn-warning" type="submit">Editar</button>
@@ -64,12 +70,8 @@
                                         <input type="hidden" name="Id" value="@obj.ReporteId" />
                                         <button class="btn btn-danger" type="submit">Eliminar</button>
                                     </form>
-                                </div>
-                            }
-                            else
-                            {
-                                
-                            }
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
