@@ -9,13 +9,5 @@ namespace Application.ViewModels.Rutas
     public class RutaViewModel : RutaSaveViewModel
     {
         public int RutaId { get; set; }
-
-        //public string? NombreRuta { get; set; }
-
-        //public string? PuntoInicio { get; set; }
-
-        //public string? PuntoFinal { get; set; }
-
-        //public bool? Estado { get; set; }
     }
 }

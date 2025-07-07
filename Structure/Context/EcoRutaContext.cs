@@ -118,6 +118,7 @@ public partial class EcoRutaContext : DbContext
 
             entity.Property(e => e.ReporteId).HasColumnName("ReporteID");
             entity.Property(e => e.Descripcion).HasColumnType("text");
+            entity.Property(e => e.Comentario).HasColumnType("text");
             entity.Property(e => e.Estado)
                 .HasMaxLength(20)
                 .HasDefaultValue("Pendiente");

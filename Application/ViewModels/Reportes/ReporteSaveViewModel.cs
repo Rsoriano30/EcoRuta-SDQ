@@ -17,5 +17,7 @@ namespace Application.ViewModels.Reportes
         public DateTime? FechaHora { get; set; }
 
         public string? Estado { get; set; }
+
+        public string? Comentario { get; set; }
     }
 }

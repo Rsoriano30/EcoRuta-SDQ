@@ -22,6 +22,9 @@ namespace Application
             services.AddTransient<IReportesService, ReportesService>();
             services.AddTransient<IRutasService, RutasService>();
             services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<ICamionesService, CamionesService>();
+            services.AddTransient<IChoferesService, ChoferesService>();
+            services.AddTransient<IAsignacionesService, AsignacionesService>();
 
             #endregion
         }

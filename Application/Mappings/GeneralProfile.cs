@@ -8,6 +8,9 @@ using Domain.Entities;
 using AutoMapper;
 using Application.ViewModels.Rutas;
 using Application.ViewModels.Usuarios;
+using Application.ViewModels.Camiones;
+using Application.ViewModels.Choferes;
+using Application.ViewModels.Asignaciones;
 
 namespace Application.Mappings
 {
@@ -35,6 +38,33 @@ namespace Application.Mappings
             CreateMap<Ruta, RutaSaveViewModel>()
                     .ReverseMap()
                     .ForMember(x => x.RutaId, opt => opt.Ignore());
+
+            //-------------------------- Camiones
+            CreateMap<Camione, CamionViewModel>()
+                    .ReverseMap()
+                    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Camione, CamionSaveViewModel>()
+                    .ReverseMap()
+                    .ForMember(x => x.CamionId, opt => opt.Ignore());
+
+            //-------------------------- Choferes
+            CreateMap<Chofere, ChoferViewModel>()
+                    .ReverseMap()
+                    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Chofere, ChoferSaveViewModel>()
+                    .ReverseMap()
+                    .ForMember(x => x.ChoferId, opt => opt.Ignore());
+
+            //-------------------------- Asignaciones
+            CreateMap<AsignacionesRutum, AsignacionViewModel>()
+                    .ReverseMap()
+                    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<AsignacionesRutum, AsignacionSaveViewModel>()
+                    .ReverseMap()
+                    .ForMember(x => x.CamionId, opt => opt.Ignore());
 
             //-------------------------- Usuarios
             CreateMap<Usuario, LoginViewModel>()

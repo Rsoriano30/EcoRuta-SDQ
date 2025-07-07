@@ -9,15 +9,5 @@ namespace Application.ViewModels.Reportes
     public class ReporteViewModel : ReporteSaveViewModel
     {
         public int ReporteId { get; set; }
-
-        //public int? UsuarioId { get; set; }
-
-        //public string? Titulo { get; set; }
-
-        //public string? Descripcion { get; set; }
-
-        //public DateTime? FechaHora { get; set; }
-
-        //public string? Estado { get; set; }
     }
 }
