@@ -1,4 +1,5 @@
 ﻿using Application.Intefaces.Services;
+using Application.ViewModels.Asignaciones;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
@@ -12,7 +13,7 @@ namespace EcoRuta.Controllers
         private readonly IAsignacionesService _asignacionesService;
 
         public AsignacionesController(
-            IAsignacionesService asignacionesService, 
+            IAsignacionesService asignacionesService,
             IChoferesService choferesService,
             ICamionesService camionesService,
             IRutasService rutasService,
@@ -27,14 +28,60 @@ namespace EcoRuta.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.rutas = await _rutasService.GetAll();
-            ViewBag.camiones = await _camionesService.GetAll();
-            ViewBag.choferes = await _choferesService.GetAll();
-            ViewBag.horarios = await _horariosService.GetAll();
-
-            var model = await _asignacionesService.GetAll();
+            var model = await _asignacionesService.GetAllWithJoin();
 
             return View(model);
+        }
+
+        public async Task<IActionResult> CreateAsignPost(AsignacionViewModel model)
+        {
+            await _asignacionesService.Add(model);
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> EditAsign(int id, bool ModoEditar)
+        {
+            ViewBag.Rutas = await _rutasService.GetAll();
+            ViewBag.Horarios = await _horariosService.GetAll();
+            ViewBag.Camiones = await _camionesService.GetAll();
+            ViewBag.Choferes = await _choferesService.GetAll();
+            ViewBag.ModoEditar = ModoEditar;
+
+            AsignacionesDetailsViewModel model = new();
+            if (ModoEditar)
+            {
+                try
+                {
+                    model = await _asignacionesService.GetWithJoin(id);
+                }
+                catch
+                {
+                    return RedirectToAction("PageNotFound", "Home");
+                }
+
+                return View(model);
+            }
+            else
+            {
+                return View(model);
+            }
+
+        }
+
+        public async Task<IActionResult> EditAsignPost(AsignacionViewModel model)
+        {
+            try
+            {
+                await _asignacionesService.Update(model, model.AsignacionId);
+            }
+            catch
+            {
+                return RedirectToAction("PageNotFound", "Home");
+            }
+
+            return RedirectToAction("Index");
+            
         }
     }
 }

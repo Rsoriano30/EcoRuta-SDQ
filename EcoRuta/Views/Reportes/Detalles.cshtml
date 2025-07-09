@@ -32,26 +32,32 @@
             <div class="card">
                 <div class="card-body">
 
-                    <p>Titulo: @Model.Titulo</p>
-                    <p>Descripción: @Model.Descripcion</p>
-                    <p>Estado: @Model.Estado</p>
-                    <p>Fecha de creación: @Model.FechaHora </p>
+                    @if (Model != null)
+                    {
+                        <p>Titulo: @Model.Titulo</p>
+                        <p>Descripción: @Model.Descripcion</p>
+                        <p>Estado: @Model.Estado</p>
+                        <p>Fecha de creación: @Model.FechaHora </p>
 
-                    @if (Model.Comentario != null && Model.Comentario != "Pendiente")
-                    {
-                        <P>Comentario: @Model.Comentario</P>
-                    }
-                    else if (Model.Estado == "Pendiente")
-                    {
-                        <p>Este reporte sigue pendiente</p>
+                        @if (Model.Comentario != null && Model.Comentario != "Pendiente")
+                        {
+                            <P>Comentario: @Model.Comentario</P>
+                        }
+                        else if (Model.Estado == "Pendiente")
+                        {
+                            <p>Este reporte sigue pendiente</p>
+                        }
+                        else
+                        {
+                            <p>No hay comentario</p>
+                        }
+
+                        <a class="btn btn-danger" asp-action="Index">Volver</a>
                     }
                     else
                     {
-                        <p>No hay comentario</p>
+                        <h2>No se encontró el Reporte</h2>
                     }
-
-                    <a class="btn btn-danger" asp-action="Index">Volver</a>
-
                 </div>
             </div>
         </div>

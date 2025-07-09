@@ -42,29 +42,36 @@
 
         @try
         {
-            @foreach (var obj in Model)
+            if (Model != null)
             {
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
+                @foreach (var obj in Model)
+                {
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
 
-                            <p>Nombre: @obj.Nombre</p>
-                            <p>Cedúla: @obj.Cedula</p>
+                                <p>Nombre: @obj.Nombre</p>
+                                <p>Cédula: @obj.Cedula</p>
 
-                            <div class="form-btn">
-                                <form asp-controller="Choferes" asp-action="EditChofer method="post">
-                                    <input type="hidden" name="Id" value="@obj.ChoferId" />
-                                    <button class="btn btn-warning" type="submit">Editar</button>
-                                </form>
-                                <form asp-controller="Choferes" asp-action="DeleteChofer" method="post">
-                                    <input type="hidden" name="Id" value="@obj.ChoferId" />
-                                    <button class="btn btn-danger" type="submit">Eliminar</button>
-                                </form>
+                                <div class="form-btn">
+                                    <form asp-controller="Choferes" asp-action="EditChofer method="post">
+                                        <input type="hidden" name="Id" value="@obj.ChoferId" />
+                                        <button class="btn btn-warning" type="submit">Editar</button>
+                                    </form>
+                                    <form asp-controller="Choferes" asp-action="DeleteChofer" method="post">
+                                        <input type="hidden" name="Id" value="@obj.ChoferId" />
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </div>
+
                             </div>
-
                         </div>
                     </div>
-                </div>
+                }
+            }
+            else
+            {
+                <h2>No se encontraron choferes</h2>
             }
         }
         catch (Exception ex)

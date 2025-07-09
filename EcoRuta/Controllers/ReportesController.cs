@@ -22,6 +22,7 @@ namespace EcoRuta.Controllers
 
         public async Task<IActionResult> Detalles(int id)
         {
+
             var model = await _reportesService.GetById(id);
 
             return View(model);

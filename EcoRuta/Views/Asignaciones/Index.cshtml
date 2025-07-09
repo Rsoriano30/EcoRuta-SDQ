@@ -1,21 +1,22 @@
-﻿@model List<Application.ViewModels.Camiones.CamionViewModel>
+﻿@using Application.ViewModels.Asignaciones
+@model List<AsignacionesDetailsViewModel>
 
 @{
-    ViewData["Title"] = "Camiones";
+    ViewData["Title"] = "Asignaciones";
 }
 
 <head>
     <style>
-        .row{
+        .row {
         margin-top: 30px;
         }
 
-        .crearbtn{
+        .crearbtn {
         margin-top: 30px;
         text-align: center;
         }
 
-        .form-btn{
+        .form-btn {
         display: flex;
         }
 
@@ -34,14 +35,18 @@
 </head>
 
 <div class="crearbtn">
-    <a class="btn btn-primary" asp-controller="Camiones" asp-action="CreateCamion">Agregar Camión</a>
+    <form asp-controller="Asignaciones" asp-action="EditAsign" method="post">
+        <input name="id" value="0" type="hidden" />
+        <intput name="ModoEditar" value="false" type="hidden" />
+        <button class="btn btn-primary" type="submit">Crear asignación</button>
+    </form>
 </div>
 
 <div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         @try
-        {
+        {   
             if (Model != null)
             {
                 @foreach (var obj in Model)
@@ -50,17 +55,21 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <p>Placa: @obj.Placa</p>
-                                <p>Modelo: @obj.Modelo</p>
-                                <p>Año: @obj.Año</p>
+                                <p>Ruta: @(obj.NombreRuta)</p>
+                                <p>Hora de salida: @obj.HoraSalida</p>
+                                <p>Hora de llegada: @obj.HoraLlegada</p>
+                                <p>Camión: @obj.PlacaCamion</p>
+                                <p>Chofer: @obj.NombreChofer</p>
+                                <p>Cédula: @obj.CedulaChofer</p>
 
 
                                 <div class="form-btn">
-                                    <form asp-controller="Camiones" asp-action="EditCamion" method="post">
-                                        <input type="hidden" name="Id" value="@obj.CamionId" />
+                                    <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+                                        <input type="hidden" name="Id" value="@obj.AsignacionId" />
+										<input type="hidden" name="ModoEditar" value="true" />
                                         <button class="btn btn-warning" type="submit">Editar</button>
                                     </form>
-                                    <form asp-controller="Camiones" asp-action="DeleteCamion" method="post">
+                                    <form asp-controller="Asignaciones" asp-action="DeleteAsignPost" method="post">
                                         <input type="hidden" name="Id" value="@obj.CamionId" />
                                         <button class="btn btn-danger" type="submit">Eliminar</button>
                                     </form>
@@ -70,12 +79,11 @@
                         </div>
                     </div>
                 }
+			}
+			else
+			{
+				<h2>No se encontraron asignaciones.</h2>
             }
-            else
-            {
-                <h2>No se encontraron camiones</h2>
-            }
-
         }
         catch (Exception ex)
         {
