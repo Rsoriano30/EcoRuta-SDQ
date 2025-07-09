@@ -21,5 +21,19 @@ namespace Application.Services
             _repository = repository;
             _mapper = mapper;
         }
+
+        public async Task<List<AsignacionesDetailsViewModel>> GetAllWithJoin()
+        {
+            var lista = await _repository.GetAllWithJoin();
+
+            return _mapper.Map<List<AsignacionesDetailsViewModel>>(lista);
+        }
+
+        public async Task<AsignacionesDetailsViewModel> GetWithJoin(int id)
+        {
+            var model = await _repository.GetWithJoin(id);
+
+            return _mapper.Map<AsignacionesDetailsViewModel>(model);
+        }
     }
 }

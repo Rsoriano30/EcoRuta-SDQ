@@ -7,10 +7,6 @@ namespace Structure.Context;
 
 public partial class EcoRutaContext : DbContext
 {
-    public EcoRutaContext()
-    {
-    }
-
     public EcoRutaContext(DbContextOptions<EcoRutaContext> options)
         : base(options)
     {

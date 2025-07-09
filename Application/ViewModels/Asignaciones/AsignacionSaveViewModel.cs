@@ -8,6 +8,8 @@ namespace Application.ViewModels.Asignaciones
 {
     public class AsignacionSaveViewModel
     {
+        public int? RutaId { get; set; }
+
         public int? HorarioId { get; set; }
 
         public int? ChoferId { get; set; }

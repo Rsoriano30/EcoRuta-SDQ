@@ -10,5 +10,7 @@ namespace Application.Intefaces.Services
 {
     public interface IAsignacionesService : IGenericService<AsignacionSaveViewModel, AsignacionViewModel, AsignacionesRutum>
     {
+        Task<List<AsignacionesDetailsViewModel>> GetAllWithJoin();
+        Task<AsignacionesDetailsViewModel> GetWithJoin(int id);
     }
 }

@@ -11,6 +11,8 @@ using Application.ViewModels.Camiones;
 using Application.ViewModels.Choferes;
 using Application.ViewModels.Asignaciones;
 using Domain.Entities;
+using System.Reflection;
+using Application.ViewModels.Horarios;
 
 namespace Application.Mappings
 {
@@ -39,6 +41,15 @@ namespace Application.Mappings
                     .ReverseMap()
                     .ForMember(x => x.RutaId, opt => opt.Ignore());
 
+            //-------------------------- Horarios
+            CreateMap<Horario, HorarioViewModel>()
+                    .ReverseMap()
+                    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Horario, HorarioSaveViewModel>()
+                    .ReverseMap()
+                    .ForMember(x => x.HorarioId, opt => opt.Ignore());
+
             //-------------------------- Camiones
             CreateMap<Camione, CamionViewModel>()
                     .ReverseMap()
@@ -65,6 +76,15 @@ namespace Application.Mappings
             CreateMap<AsignacionesRutum, AsignacionSaveViewModel>()
                     .ReverseMap()
                     .ForMember(x => x.CamionId, opt => opt.Ignore());
+
+            CreateMap<AsignacionesRutum, AsignacionesDetailsViewModel>()
+                    .ForMember(dest => dest.NombreRuta, opt => opt.MapFrom(src => src.Ruta != null ? src.Ruta.NombreRuta : null))
+                    .ForMember(dest => dest.HoraSalida, opt => opt.MapFrom(src => src.Horario != null ? src.Horario.HoraSalida : null))
+                    .ForMember(dest => dest.HoraLlegada, opt => opt.MapFrom(src => src.Horario != null ? src.Horario.HoraLlegada : null))
+                    .ForMember(dest => dest.PlacaCamion, opt => opt.MapFrom(src => src.Camion != null ? src.Camion.Placa : null))
+                    .ForMember(dest => dest.NombreChofer, opt => opt.MapFrom(src => src.Chofer != null ? src.Chofer.Nombre : null))
+                    .ForMember(dest => dest.CedulaChofer, opt => opt.MapFrom(src => src.Chofer != null ? src.Chofer.Cedula : null));
+
 
             //-------------------------- Usuarios
             CreateMap<Usuario, LoginViewModel>()
