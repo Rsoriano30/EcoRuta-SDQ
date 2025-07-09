@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Intefaces.Repositories;
-using Application.ViewModels.Asignaciones;
-using Domain.Entities;
 using Structure.Context;
 
 namespace Structure.Repositories
 {
-    public class AsignacionesRepository : GenericRepository<AsignacionesRutum>, IAsignacionesRepository
+    public class HorariosRepository : GenericRepository<Domain.Entities.Horario>, IHorariosRepository
     {
         private readonly EcoRutaContext _context;
 
-        public AsignacionesRepository(EcoRutaContext context) : base(context)
+        public HorariosRepository(EcoRutaContext context) : base(context)
         {
             _context = context;
         }

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities;
+namespace Domain.Unused.Entities;
 
 public partial class AsignacionesRutum
 {
     public int AsignacionId { get; set; }
-
-    public int? RutaId { get; set; }
 
     public int? HorarioId { get; set; }
 
@@ -20,6 +18,4 @@ public partial class AsignacionesRutum
     public virtual Chofere? Chofer { get; set; }
 
     public virtual Horario? Horario { get; set; }
-
-    public virtual Ruta? Ruta { get; set; }
 }

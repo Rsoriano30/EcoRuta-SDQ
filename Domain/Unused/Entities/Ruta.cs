@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities;
+namespace Domain.Unused.Entities;
 
 public partial class Ruta
 {
@@ -15,5 +15,5 @@ public partial class Ruta
 
     public bool? Estado { get; set; }
 
-    public virtual ICollection<AsignacionesRutum> AsignacionesRuta { get; set; } = new List<AsignacionesRutum>();
+    public virtual ICollection<Horario> Horarios { get; set; } = new List<Horario>();
 }

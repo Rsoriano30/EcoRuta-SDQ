@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities;
-
+namespace Domain.Unused.Entities;
 public partial class Chofere
 {
     public int ChoferId { get; set; }

@@ -31,6 +31,7 @@ namespace Structure
             services.AddTransient<ICamionesRepository, CamionesRepository>();
             services.AddTransient<IChoferesRepository, ChoferesRepository>();
             services.AddTransient<IAsignacionesRepository, AsignacionesRepository>();
+            services.AddTransient<IHorariosRepository, HorariosRepository>();
             #endregion
 
         }

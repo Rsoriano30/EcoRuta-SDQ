@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities;
+namespace Domain.Unused.Entities;
 
 public partial class Reporte
 {
@@ -13,9 +13,9 @@ public partial class Reporte
 
     public string? Descripcion { get; set; }
 
-    public DateTime? FechaHora { get; set; }
-
     public string? Comentario { get; set; }
+
+    public DateTime? FechaHora { get; set; }
 
     public string? Estado { get; set; }
 

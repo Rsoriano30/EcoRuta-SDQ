@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.ViewModels.Reportes;
-using Domain.Entities;
 using AutoMapper;
 using Application.ViewModels.Rutas;
 using Application.ViewModels.Usuarios;
 using Application.ViewModels.Camiones;
 using Application.ViewModels.Choferes;
 using Application.ViewModels.Asignaciones;
+using Domain.Entities;
 
 namespace Application.Mappings
 {

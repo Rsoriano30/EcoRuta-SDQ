@@ -25,6 +25,7 @@ namespace Application
             services.AddTransient<ICamionesService, CamionesService>();
             services.AddTransient<IChoferesService, ChoferesService>();
             services.AddTransient<IAsignacionesService, AsignacionesService>();
+            services.AddTransient<IHorariosService, HorariosService>();
 
             #endregion
         }
