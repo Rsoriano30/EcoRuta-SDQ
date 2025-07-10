@@ -1,0 +1,55 @@
+﻿@using Application.ViewModels.Reportes
+@model ReporteViewModel
+
+@{
+    ViewData["Title"] = "Borrar reporte";
+}
+
+<head>
+    <style>
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card{
+        border: 1px solid black;
+        margin-top: 100px;
+        width: 400px;
+        justify-self: center;
+        }
+
+        .footer {
+        margin-top: 210px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+
+        @if (Model != null)
+        {
+            <div class="card-header">
+                <hS>¿Seguro que quieres borrar esta reporte?</hS>
+            </div>
+            <div class="card-body">
+
+                <p>Tirulo: @Model.Titulo</p>
+                <p>Descripción: @Model.Descripcion</p>
+
+                <form asp-controller="Reportes" asp-action="DeleteReportePost" method="post">
+
+                    <input type="hidden" name="Id" value="@Model.ReporteId" />
+                    <button class="btn btn-warning" type="submit">Eliminar</button>
+                    <a class="btn btn-danger" asp-controller="Reportes" asp-action="Index">Cancelar</a>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="card-body">
+                <h2>No se encontró el reporte</h2>
+            </div>
+        }
+    </div>
+</body>

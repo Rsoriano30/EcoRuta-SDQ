@@ -1,0 +1,93 @@
+﻿@using Application.ViewModels.Asignaciones
+@model List<AsignacionesDetailsViewModel>
+
+@{
+    ViewData["Title"] = "Asignaciones";
+}
+
+<head>
+    <style>
+        .row {
+        margin-top: 30px;
+        }
+
+        .crearbtn {
+        margin-top: 30px;
+        text-align: center;
+        }
+
+        .form-btn {
+        display: flex;
+        }
+
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card {
+        border: 1px solid black;
+        }
+
+        .footer {
+        margin-top: 100px;
+        }
+    </style>
+</head>
+
+<div class="crearbtn">
+    <form asp-controller="Asignaciones" asp-action="EditAsign" method="post">
+        <input name="id" value="0" type="hidden" />
+        <intput name="ModoEditar" value="false" type="hidden" />
+        <button class="btn btn-primary" type="submit">Crear asignación</button>
+    </form>
+</div>
+
+<div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @try
+        {   
+            if (Model != null)
+            {
+                @foreach (var obj in Model)
+                {
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <p>Ruta: @(obj.NombreRuta ?? "Ninguna")</p>
+                                <p>Hora de salida: @(obj.HorarioId.HasValue ? $"{obj.HoraSalida}" : "Ninguna" )</p>
+                                <p>Hora de llegada: @obj.HoraLlegada @(obj.HorarioId.HasValue ? $"{obj.HoraLlegada}" : "Ninguna")</p>
+                                <p>Camión: @(obj.PlacaCamion ?? "Ninguno")</p>
+                                <p>Chofer: @(obj.NombreChofer ?? "Ninguno")</p>
+                                <p>Cédula: @(obj.CedulaChofer ?? "Ninguna")</p>
+
+
+                                <div class="form-btn">
+                                    <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+                                        <input type="hidden" name="Id" value="@obj.AsignacionId" />
+										<input type="hidden" name="ModoEditar" value="true" />
+                                        <button class="btn btn-warning" type="submit">Editar</button>
+                                    </form>
+                                    <form asp-controller="Asignaciones" asp-action="DeleteAsignPost" method="post">
+                                        <input type="hidden" name="Id" value="@obj.CamionId" />
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+			}
+			else
+			{
+				<h2>No se encontraron asignaciones.</h2>
+            }
+        }
+        catch (Exception ex)
+        {
+            <h2>Error: @ex</h2>
+        }
+    </div>
+</div>
