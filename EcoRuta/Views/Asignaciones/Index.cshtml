@@ -55,12 +55,12 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <p>Ruta: @(obj.NombreRuta)</p>
-                                <p>Hora de salida: @obj.HoraSalida</p>
-                                <p>Hora de llegada: @obj.HoraLlegada</p>
-                                <p>Camión: @obj.PlacaCamion</p>
-                                <p>Chofer: @obj.NombreChofer</p>
-                                <p>Cédula: @obj.CedulaChofer</p>
+                                <p>Ruta: @(obj.NombreRuta ?? "Ninguna")</p>
+                                <p>Hora de salida: @(obj.HorarioId.HasValue ? $"{obj.HoraSalida}" : "Ninguna" )</p>
+                                <p>Hora de llegada: @obj.HoraLlegada @(obj.HorarioId.HasValue ? $"{obj.HoraLlegada}" : "Ninguna")</p>
+                                <p>Camión: @(obj.PlacaCamion ?? "Ninguno")</p>
+                                <p>Chofer: @(obj.NombreChofer ?? "Ninguno")</p>
+                                <p>Cédula: @(obj.CedulaChofer ?? "Ninguna")</p>
 
 
                                 <div class="form-btn">

@@ -71,11 +71,11 @@ namespace Application.Mappings
             //-------------------------- Asignaciones
             CreateMap<AsignacionesRutum, AsignacionViewModel>()
                     .ReverseMap()
-                    .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+                    /*.ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null))*/;
 
             CreateMap<AsignacionesRutum, AsignacionSaveViewModel>()
                     .ReverseMap()
-                    .ForMember(x => x.CamionId, opt => opt.Ignore());
+                    .ForMember(x => x.AsignacionId, opt => opt.Ignore());
 
             CreateMap<AsignacionesRutum, AsignacionesDetailsViewModel>()
                     .ForMember(dest => dest.NombreRuta, opt => opt.MapFrom(src => src.Ruta != null ? src.Ruta.NombreRuta : null))
