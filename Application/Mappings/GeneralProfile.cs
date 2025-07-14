@@ -70,8 +70,7 @@ namespace Application.Mappings
 
             //-------------------------- Asignaciones
             CreateMap<AsignacionesRutum, AsignacionViewModel>()
-                    .ReverseMap()
-                    /*.ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null))*/;
+                    .ReverseMap();
 
             CreateMap<AsignacionesRutum, AsignacionSaveViewModel>()
                     .ReverseMap()

@@ -46,19 +46,24 @@ public partial class EcoRutaContext : DbContext
 
             entity.HasOne(d => d.Camion).WithMany(p => p.AsignacionesRuta)
                 .HasForeignKey(d => d.CamionId)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK__Asignacio__Camio__72C60C4A");
 
             entity.HasOne(d => d.Chofer).WithMany(p => p.AsignacionesRuta)
                 .HasForeignKey(d => d.ChoferId)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK__Asignacio__Chofe__71D1E811");
 
             entity.HasOne(d => d.Horario).WithMany(p => p.AsignacionesRuta)
                 .HasForeignKey(d => d.HorarioId)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK__Asignacio__Horar__70DDC3D8");
 
             entity.HasOne(d => d.Ruta).WithMany(p => p.AsignacionesRuta)
                 .HasForeignKey(d => d.RutaId)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("FK__Asignacio__RutaI__6FE99F9F");
+
         });
 
         modelBuilder.Entity<Camione>(entity =>
