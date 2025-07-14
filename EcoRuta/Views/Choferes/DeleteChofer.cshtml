@@ -1,8 +1,8 @@
-﻿@using Application.ViewModels.Reportes
-@model ReporteViewModel
+﻿@using Application.ViewModels.Choferes
+@model ChoferViewModel
 
 @{
-    ViewData["Title"] = "Borrar reporte";
+    ViewData["Title"] = "Borrar";
 }
 
 <head>
@@ -30,18 +30,18 @@
         @if (Model != null)
         {
             <div class="card-header">
-                <hS>¿Seguro que quieres borrar esta reporte?</hS>
+                <hS>¿Seguro que quieres borrar este camión?</hS>
             </div>
             <div class="card-body">
 
-                <p>Titulo: @Model.Titulo</p>
-                <p>Descripción: @Model.Descripcion</p>
+                <p>Nombre: @Model.Nombre</p>
+                <p>Cédula: @Model.Cedula</p>
 
-                <form asp-controller="Reportes" asp-action="DeleteReportePost" method="post">
+                <form asp-controller="Choferes" asp-action="DeleteChoferPost" method="post">
+                    <input type="hidden" name="Id" value="@Model.ChoferId" />
 
-                    <input type="hidden" name="Id" value="@Model.ReporteId" />
-                    <button class="btn btn-warning" type="submit">Eliminar</button>
-                    <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                    <a class="btn btn-warning" asp-action="Index">Cancelar</a>
                 </form>
             </div>
         }

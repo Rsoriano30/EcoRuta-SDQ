@@ -23,23 +23,23 @@ namespace EcoRuta.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateRuta(RutaSaveViewModel model)
+        public IActionResult CreateRuta()
         {
-            return View(model);
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateRutaPost(RutaSaveViewModel model)
         {
-            var response = await _rutasService.Add(model);
+            try
+            {
+                _rutasService.Add(model);
 
-            if (response == null)
+                return RedirectToAction("Index");
+            }
+            catch
             {
                 return RedirectToAction("CreateRuta", model);
-            }
-            else
-            {
-                return RedirectToAction("Index");
             }
         }
     }

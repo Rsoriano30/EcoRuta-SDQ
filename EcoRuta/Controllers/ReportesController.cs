@@ -13,6 +13,7 @@ namespace EcoRuta.Controllers
             _reportesService = reportesService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = await _reportesService.GetAll();
@@ -20,6 +21,7 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Detalles(int id)
         {
 

@@ -1,8 +1,12 @@
-﻿using Application.Intefaces.Services;
+﻿using System.Security.Claims;
+using Application.Intefaces.Services;
 using Application.ViewModels.Usuarios;
-using Domain.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace EcoRuta.Controllers
 {
@@ -15,7 +19,10 @@ namespace EcoRuta.Controllers
             _usuarioService = usuarioService;
         }
 
+        [HttpGet]
         public IActionResult Login() => View();
+
+        [HttpGet]
         public IActionResult Register() => View();
 
         [HttpPost]
@@ -44,10 +51,40 @@ namespace EcoRuta.Controllers
         {
             var user = await _usuarioService.GetByEmailAndPasswordAsync(model.Correo, model.Contraseña);
 
-            if (user != false) { return RedirectToAction("Index", "Reportes"); }
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Credenciales inválidas.");
+                return View(model);
+            }
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Nombre),
+                new Claim(ClaimTypes.Email, user.Correo),
+                new Claim(ClaimTypes.Role, user.TipoUsuario),
+                new Claim("UserId", user.UsuarioId.ToString())
+            };
 
-            ModelState.AddModelError("", "Credenciales inválidas.");
-            return View(model);
+            // Crear la identidad y principal
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true // Si se mantiene la sesión
+            };
+
+            await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+            switch (user.TipoUsuario)
+            {
+                case "Usuario":
+                    return RedirectToAction("Index", "Home");
+
+                case "Administrador":
+                    return RedirectToAction("Index", "Asignaciones");
+
+                default:
+                    ModelState.AddModelError("", "Rol desconocido");
+                    return View(model);
+            }
         }
     }
 }

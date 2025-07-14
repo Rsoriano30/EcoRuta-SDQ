@@ -57,21 +57,12 @@
 
                                 <div class="form-btn">
 
-                                    <form asp-controller="Reportes" asp-action="Detalles" method="get">
-                                        <input type="hidden" name="Id" value="@obj.ReporteId" />
-                                        <button class="btn btn-secondary" type="submit">Detalles</button>
-                                    </form>
+                                    <a name="id" class="btn btn-secondary" asp-action="Detalles" asp-route-id="@obj.ReporteId">Detalles</a>
 
                                     @if(obj.Estado == "Pendiente")
                                     {
-                                        <form asp-controller="Reportes" asp-action="EditReporte" method="post">
-                                            <input type="hidden" name="Id" value="@obj.ReporteId" />
-                                            <button class="btn btn-warning" type="submit">Editar</button>
-                                        </form>
-                                        <form asp-controller="Reportes" asp-action="DeleteReporte" method="post">
-                                            <input type="hidden" name="Id" value="@obj.ReporteId" />
-                                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                                        </form>
+                                        <a name="id" class="btn btn-warning" asp-action="EditReporte" asp-route-id="@obj.ReporteId">Editar</a>
+                                        <a name="id" class="btn btn-danger" asp-action="DeleteReporte" asp-route-id="@obj.ReporteId">Elminar</a>
                                     }
                                 </div>
                             </div>

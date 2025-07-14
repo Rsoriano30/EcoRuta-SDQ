@@ -13,6 +13,7 @@ namespace EcoRuta.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -23,6 +24,7 @@ namespace EcoRuta.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult PageNotFound()
         {
             return View("404");

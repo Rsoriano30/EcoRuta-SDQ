@@ -26,6 +26,7 @@ namespace EcoRuta.Controllers
             _horariosService = horariosService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = await _asignacionesService.GetAllWithJoin();
@@ -33,13 +34,37 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> CreateAsignPost(AsignacionViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> CreateAsignPost(AsignacionSaveViewModel model)
         {
-            await _asignacionesService.Add(model);
+            try
+            {
+                await _asignacionesService.Add(model);
 
-            return RedirectToAction("Index");
+                if (model.RutaId == null)
+                {
+                    throw new Exception("El campo Ruta es obligatorio.");
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                AsignacionesDetailsViewModel _model = new()
+                {
+                    RutaId = model.RutaId,
+                    HorarioId = model.HorarioId,
+                    ChoferId = model.ChoferId,
+                    CamionId = model.CamionId
+                };
+
+                ViewBag.ModoEditar = false;
+
+                return RedirectToAction("EditAsign", _model);
+            }
         }
 
+        [HttpGet]
         public async Task<IActionResult> EditAsign(int id, bool ModoEditar)
         {
             ViewBag.Rutas = await _rutasService.GetAll();
@@ -69,6 +94,7 @@ namespace EcoRuta.Controllers
 
         }
 
+        [HttpPost]
         public async Task<IActionResult> EditAsignPost(AsignacionViewModel model)
         {
             try
@@ -81,7 +107,21 @@ namespace EcoRuta.Controllers
             }
 
             return RedirectToAction("Index");
-            
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAsignPost(int id)
+        {
+            try
+            {
+                await _asignacionesService.Delete(id);
+            }
+            catch
+            {
+                return RedirectToAction("PageNotFound", "Home");
+            }
+            return RedirectToAction("Index");
         }
     }
 }
