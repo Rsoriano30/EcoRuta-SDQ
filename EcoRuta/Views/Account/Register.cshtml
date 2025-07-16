@@ -2,35 +2,66 @@
 @model RegisterViewModel
 
 @{
+
     ViewData["Title"] = "Registro";
 }
 
-<h2>Registro</h2>
+<head>
+    <style>
+        .footer {
+            margin-top: 125px;
+        }
 
-<form asp-action="Register" method="post">
-    <div>
-        <label>Nombre:</label>
-        <input asp-for="Nombre" />
-    </div>
-    <div>
-        <label>Apellido:</label>
-        <input asp-for="Apellido" />
-    </div>
-    <div>
-        <label>Email:</label>
-        <input asp-for="Correo" />
-    </div>
-    <div>
-        <label>Contraseña:</label>
-        <input asp-for="Contraseña" type="password" />
-    </div>
+        .card-bottom{
+            margin-top: 15px;
+        }
 
-    @*Okay, este comentario porque para Anderson o alguien de frontend ponga que se pueda elegir el tipo si "Usuario o administrador", 
-    porque esta harcodeado para ser "Usuario"; debe ser un campo oculto al usuario, pero aun asi debe de poder afectarlo*@
-     <div>
-        <input  type="hidden" value="Usuario" asp-for="TipoUsuario" />
-    </div>
+        body {
+            background-color: #f3e3b2;
+        }
 
-    <button type="submit">Registrarse</button>
-    <a class="btn btn-danger" asp-action="Login">Volver</a>
-</form>
+        .card {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+
+        h2{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-4 offset-4">
+        <h2>Registro</h2>
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Account" asp-action="Register" method="post">
+
+                    <label asp-for="TipoUsuario">Tipo de usuario</label>
+                    <select class="form-control" asp-for="TipoUsuario">
+                        <option value="Usuario">Usuario</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+
+                    <label asp-for="Nombre">Nombre:</label>
+                    <input class="form-control" asp-for="Nombre" type="text" required />
+
+                    <label asp-for="Apellido">Apellido:</label>
+                    <input class="form-control" asp-for="Apellido" type="text" required />
+
+                    <label asp-for="Correo">Correo:</label>
+                    <input class="form-control" asp-for="Correo" type="email" required />
+
+                    <label asp-for="Contraseña">Contraseña:</label>
+                    <input class="form-control" asp-for="Contraseña" type="password" required />
+
+                    <div class="card-bottom">
+                        <button class="btn btn-primary" type="submit">Enviar</button>
+                        <a class="btn btn-danger" asp-action="Login">volver</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

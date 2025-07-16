@@ -24,7 +24,6 @@ namespace EcoRuta.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult PageNotFound()
         {
             return View("404");

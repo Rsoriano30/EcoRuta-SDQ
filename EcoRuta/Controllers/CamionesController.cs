@@ -1,9 +1,11 @@
 ﻿using Application.Intefaces.Services;
 using Application.ViewModels.Camiones;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class CamionesController : Controller
     {
         private readonly ICamionesService _camionesService;

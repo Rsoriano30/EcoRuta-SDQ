@@ -1,9 +1,11 @@
 ﻿using Application.Intefaces.Services;
 using Application.ViewModels.Asignaciones;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class AsignacionesController : Controller
     {
         private readonly IRutasService _rutasService;

@@ -3,10 +3,12 @@ using Application.Services;
 using Application.ViewModels.Camiones;
 using Application.ViewModels.Reportes;
 using Application.ViewModels.Rutas;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
+    [Authorize(Roles = "Administrador,Usuario")]
     public class RutasController : Controller
     {
         private readonly IRutasService _rutasService;

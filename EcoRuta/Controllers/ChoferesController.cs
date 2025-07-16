@@ -1,9 +1,11 @@
 ﻿using Application.Intefaces.Services;
 using Application.ViewModels.Choferes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class ChoferesController : Controller
     {
         private readonly IChoferesService _choferesService;

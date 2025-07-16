@@ -1,9 +1,11 @@
 ﻿using Application.Intefaces.Services;
 using Application.ViewModels.Reportes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
+    [Authorize(Roles = "Usuario")]
     public class ReportesController : Controller
     {
         private readonly IReportesService _reportesService;
@@ -24,7 +26,14 @@ namespace EcoRuta.Controllers
         [HttpGet]
         public async Task<IActionResult> Detalles(int id)
         {
+            var model = await _reportesService.GetById(id);
 
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Evaluacion(int id)
+        {
             var model = await _reportesService.GetById(id);
 
             return View(model);
