@@ -41,10 +41,10 @@ namespace EcoRuta.Controllers
             {
                 await _asignacionesService.Add(model);
 
-                if (model.RutaId == null)
-                {
-                    throw new Exception("El campo Ruta es obligatorio.");
-                }
+                //if (model.RutaId == null)
+                //{
+                //    throw new Exception("El campo Ruta es obligatorio.");
+                //}
 
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace EcoRuta.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditAsign(int id, bool ModoEditar)
+        public async Task<IActionResult> EditAsign(int Id, bool ModoEditar)
         {
             ViewBag.Rutas = await _rutasService.GetAll();
             ViewBag.Horarios = await _horariosService.GetAll();
@@ -78,7 +78,7 @@ namespace EcoRuta.Controllers
             {
                 try
                 {
-                    model = await _asignacionesService.GetWithJoin(id);
+                    model = await _asignacionesService.GetWithJoin(Id);
                 }
                 catch
                 {
@@ -91,7 +91,6 @@ namespace EcoRuta.Controllers
             {
                 return View(model);
             }
-
         }
 
         [HttpPost]
@@ -110,18 +109,26 @@ namespace EcoRuta.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DeleteAsign(int id)
+        {
+            var model = await _asignacionesService.GetWithJoin(id);
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> DeleteAsignPost(int id)
         {
             try
             {
                 await _asignacionesService.Delete(id);
+                return RedirectToAction("Index");
             }
             catch
             {
                 return RedirectToAction("PageNotFound", "Home");
             }
-            return RedirectToAction("Index");
         }
     }
 }

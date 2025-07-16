@@ -21,6 +21,7 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        #region Create
         [HttpGet]
         public async Task<IActionResult> CreateCamion()
         {
@@ -41,7 +42,9 @@ namespace EcoRuta.Controllers
 
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Edit
         [HttpGet]
         public async Task<IActionResult> EditCamion(int id)
         {
@@ -71,7 +74,9 @@ namespace EcoRuta.Controllers
 
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Delete
         [HttpGet]
         public async Task<IActionResult> DeleteCamion(int id)
         {
@@ -101,5 +106,6 @@ namespace EcoRuta.Controllers
 
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }
