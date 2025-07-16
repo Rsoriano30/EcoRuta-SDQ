@@ -13,6 +13,7 @@ using Application.ViewModels.Asignaciones;
 using Domain.Entities;
 using System.Reflection;
 using Application.ViewModels.Horarios;
+using System.Xml.Serialization;
 
 namespace Application.Mappings
 {
@@ -80,10 +81,11 @@ namespace Application.Mappings
                     .ForMember(dest => dest.NombreRuta, opt => opt.MapFrom(src => src.Ruta != null ? src.Ruta.NombreRuta : null))
                     .ForMember(dest => dest.HoraSalida, opt => opt.MapFrom(src => src.Horario != null ? src.Horario.HoraSalida : null))
                     .ForMember(dest => dest.HoraLlegada, opt => opt.MapFrom(src => src.Horario != null ? src.Horario.HoraLlegada : null))
+                    .ForMember(dest => dest.DiaInicio, opt => opt.MapFrom(src => src.Horario != null ? src.Horario.DiaInicio :  null))
+                    .ForMember(dest => dest.DiaFin, opt => opt.MapFrom(src => src.Horario != null ? src.Horario.DiaFin : null))
                     .ForMember(dest => dest.PlacaCamion, opt => opt.MapFrom(src => src.Camion != null ? src.Camion.Placa : null))
                     .ForMember(dest => dest.NombreChofer, opt => opt.MapFrom(src => src.Chofer != null ? src.Chofer.Nombre : null))
                     .ForMember(dest => dest.CedulaChofer, opt => opt.MapFrom(src => src.Chofer != null ? src.Chofer.Cedula : null));
-
 
             //-------------------------- Usuarios
             CreateMap<Usuario, LoginViewModel>()
