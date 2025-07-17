@@ -35,7 +35,7 @@
 </head>
 
 <div class="crearbtn">
-    <form asp-controller="Asignaciones" asp-action="EditAsign" method="post">
+    <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
         <input name="id" value="0" type="hidden" />
         <intput name="ModoEditar" value="false" type="hidden" />
         <button class="btn btn-primary" type="submit">Crear asignación</button>
@@ -56,12 +56,24 @@
                             <div class="card-body">
 
                                 <p>Ruta: @(obj.NombreRuta ?? "Ninguna")</p>
-                                <p>Hora de salida: @(obj.HorarioId.HasValue ? $"{obj.HoraSalida}" : "Ninguna" )</p>
-                                <p>Hora de llegada: @obj.HoraLlegada @(obj.HorarioId.HasValue ? $"{obj.HoraLlegada}" : "Ninguna")</p>
-                                <p>Camión: @(obj.PlacaCamion ?? "Ninguno")</p>
-                                <p>Chofer: @(obj.NombreChofer ?? "Ninguno")</p>
-                                <p>Cédula: @(obj.CedulaChofer ?? "Ninguna")</p>
+                                @if (obj.HorarioId.HasValue)
+                                {
+                                    if (obj.DiaFin.Equals(obj.DiaInicio)) 
+                                    {
+                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio a @obj.DiaFin</p>
+                                    }
+                                }
+                                else
+                                {
+                                    <P>Horario: Ninguno</P>
+                                }
 
+                                <p>Placa del Camión: @(obj.PlacaCamion ?? "Ninguno")</p>
+                                <p>Chofer: @(obj.NombreChofer ?? "Ninguno")</p>
 
                                 <div class="form-btn">
                                     <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
@@ -69,8 +81,8 @@
 										<input type="hidden" name="ModoEditar" value="true" />
                                         <button class="btn btn-warning" type="submit">Editar</button>
                                     </form>
-                                    <form asp-controller="Asignaciones" asp-action="DeleteAsignPost" method="post">
-                                        <input type="hidden" name="Id" value="@obj.CamionId" />
+                                    <form asp-controller="Asignaciones" asp-action="DeleteAsign" method="get">
+                                        <input type="hidden" name="Id" value="@obj.AsignacionId" />
                                         <button class="btn btn-danger" type="submit">Eliminar</button>
                                     </form>
                                 </div>

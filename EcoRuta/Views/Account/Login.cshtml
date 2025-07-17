@@ -1,18 +1,54 @@
 ﻿@using Application.ViewModels.Usuarios
 @model LoginViewModel
 
-<h2>Iniciar Sesión</h2>
+@{
+    ViewData["Title"] = "Login";
+}
 
-<form asp-action="Login" method="post">
-    <div>
-        <label>Correo:</label>
-        <input asp-for="Correo" />
-    </div>
-    <div>
-        <label>Contraseña:</label>
-        <input asp-for="Contraseña" type="password" />
-    </div>
+<head>
+    <style>
+        .footer {
+            margin-top: 125px;
+        }
 
-    <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
-    <a class="btn btn-danger" asp-action="Register">Registrarse</a>
-</form>
+        .card-bottom {
+            padding-top: 15px;
+        }
+
+        body {
+            background-color: #f3e3b2;
+        }
+
+        .card {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-4 offset-4">
+        <h2>Iniciar Sesión</h2>
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Account" asp-action="Login" method="post">
+
+                    <label asp-for="Correo">Correo:</label>
+                    <input class="form-control" asp-for="Correo" type="email" />
+
+                    <label asp-for="Contraseña">Contraseña:</label>
+                    <input class="form-control" asp-for="Contraseña" type="password" />
+
+                    <div class="card-bottom">
+                        <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+                        <a class="btn btn-success" asp-action="Register">Registrarse</a>
+                    </div>
+                </form>                
+            </div>
+        </div>
+    </div>
+</body>

@@ -17,6 +17,10 @@ namespace Application.ViewModels.Asignaciones
         public TimeOnly? HoraSalida { get; set; }
         public TimeOnly? HoraLlegada { get; set; }
 
+        public string? DiaInicio { get; set; }
+
+        public string? DiaFin { get; set; }
+
         public int? CamionId { get; set; }
         public string? PlacaCamion { get; set; }
 

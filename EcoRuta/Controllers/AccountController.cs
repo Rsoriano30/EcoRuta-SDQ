@@ -1,8 +1,12 @@
-﻿using Application.Intefaces.Services;
+﻿using System.Security.Claims;
+using Application.Intefaces.Services;
 using Application.ViewModels.Usuarios;
-using Domain.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace EcoRuta.Controllers
 {
@@ -15,39 +19,69 @@ namespace EcoRuta.Controllers
             _usuarioService = usuarioService;
         }
 
+        [HttpGet]
         public IActionResult Login() => View();
+
+        [HttpGet]
         public IActionResult Register() => View();
-
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                if (model.Contraseña.Length < 8)
-                {
-                    ModelState.AddModelError("", "La contraseña debe tener al menos 8 caracteres.");
-                    return View(model);
-                }
-
-                //no implementado todavia el hashing
-                //model.Contraseña = PassWordHash
-
-                await _usuarioService.Add(model);
-                return View("Login");
-
-            }
-            return View(model);
-        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
+
             var user = await _usuarioService.GetByEmailAndPasswordAsync(model.Correo, model.Contraseña);
 
-            if (user != false) { return RedirectToAction("Index", "Reportes"); }
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Credenciales inválidas.");
+                return View(model);
+            }
 
-            ModelState.AddModelError("", "Credenciales inválidas.");
-            return View(model);
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Nombre),
+                new Claim(ClaimTypes.NameIdentifier, user.UsuarioId.ToString()),
+                new Claim(ClaimTypes.Role, user.TipoUsuario)
+            };
+
+            var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync("MyCookieAuth", principal);
+
+            if (user.TipoUsuario == "Administrador")
+                return RedirectToAction("Dashboard", "Admin");
+
+            else if (user.TipoUsuario == "Usuario")
+                return RedirectToAction("Index", "Reportes");
+
+            return RedirectToAction("Login");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            try
+            {
+                var hasher = new PasswordHasher<object>();
+                model.Contraseña = hasher.HashPassword(null, model.Contraseña);
+
+                await _usuarioService.Add(model);
+
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+            {
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

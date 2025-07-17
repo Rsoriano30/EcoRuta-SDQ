@@ -36,8 +36,11 @@
             <label asp-for="PuntoFinal">Destino:</label>
             <input class="form-control" type="text" asp-for="PuntoFinal" required />
 
-            <label asp-for="NombreRuta">Estado:</label>
-            <input class="form-control" type="text" asp-for="Estado" required />
+            <label asp-for="Estado">Estado:</label>
+            <select class="form-control" asp-for="Estado" required>
+                <option value="@(true)">True</option>
+                <option value="@(false)">False</option>
+            </select>
 
             <div>
                 <br />

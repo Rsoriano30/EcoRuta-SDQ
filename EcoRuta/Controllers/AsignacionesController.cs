@@ -1,9 +1,11 @@
 ﻿using Application.Intefaces.Services;
 using Application.ViewModels.Asignaciones;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class AsignacionesController : Controller
     {
         private readonly IRutasService _rutasService;
@@ -26,6 +28,7 @@ namespace EcoRuta.Controllers
             _horariosService = horariosService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = await _asignacionesService.GetAllWithJoin();
@@ -33,14 +36,38 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> CreateAsignPost(AsignacionViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> CreateAsignPost(AsignacionSaveViewModel model)
         {
-            await _asignacionesService.Add(model);
+            try
+            {
+                await _asignacionesService.Add(model);
 
-            return RedirectToAction("Index");
+                //if (model.RutaId == null)
+                //{
+                //    throw new Exception("El campo Ruta es obligatorio.");
+                //}
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                AsignacionesDetailsViewModel _model = new()
+                {
+                    RutaId = model.RutaId,
+                    HorarioId = model.HorarioId,
+                    ChoferId = model.ChoferId,
+                    CamionId = model.CamionId
+                };
+
+                ViewBag.ModoEditar = false;
+
+                return RedirectToAction("EditAsign", _model);
+            }
         }
 
-        public async Task<IActionResult> EditAsign(int id, bool ModoEditar)
+        [HttpGet]
+        public async Task<IActionResult> EditAsign(int Id, bool ModoEditar)
         {
             ViewBag.Rutas = await _rutasService.GetAll();
             ViewBag.Horarios = await _horariosService.GetAll();
@@ -53,7 +80,7 @@ namespace EcoRuta.Controllers
             {
                 try
                 {
-                    model = await _asignacionesService.GetWithJoin(id);
+                    model = await _asignacionesService.GetWithJoin(Id);
                 }
                 catch
                 {
@@ -66,9 +93,9 @@ namespace EcoRuta.Controllers
             {
                 return View(model);
             }
-
         }
 
+        [HttpPost]
         public async Task<IActionResult> EditAsignPost(AsignacionViewModel model)
         {
             try
@@ -81,7 +108,29 @@ namespace EcoRuta.Controllers
             }
 
             return RedirectToAction("Index");
-            
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteAsign(int id)
+        {
+            var model = await _asignacionesService.GetWithJoin(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAsignPost(int id)
+        {
+            try
+            {
+                await _asignacionesService.Delete(id);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("PageNotFound", "Home");
+            }
         }
     }
 }

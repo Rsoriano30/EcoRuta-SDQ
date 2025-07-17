@@ -49,11 +49,15 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <p>Id: @obj.RutaId</p>
                                 <p>Nombre: @obj.NombreRuta</p>
                                 <p>Punto de Salida: @obj.PuntoInicio</p>
                                 <p>Punto de Llegada: @obj.PuntoFinal</p>
-                                <p>Estado: @(obj.Estado == true ? "Activa" : "Inactiva")</p>   
+                                <p>Estado: @(obj.Estado == true ? "Activa" : "Inactiva")</p>
+
+                                <div class="form-btn">
+                                    <a name="id" class="btn btn-warning" asp-action="EditRuta" asp-route-id="@obj.RutaId">Editar</a>
+                                    <a name="id" class="btn btn-danger" asp-action="DeleteRuta" asp-route-id="@obj.RutaId">Eliminar</a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Intefaces.Repositories;
+using Application.ViewModels.Usuarios;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Structure.Context;
@@ -18,13 +19,20 @@ namespace Structure.Repositories
             _context = context;
         }
 
-        public async Task<bool> GetByEmailAndPasswordAsync(string email, string password)
+        public async Task<Usuario> GetByEmailAndPasswordAsync(string email, string password)
         {
-            bool succes;
+            Usuario? user = await _context.Usuarios
+                .Where(u => u.Correo == email && u.Contraseña == password)
+                .Select(u => new Usuario
+                {
+                    Nombre = u.Nombre,
+                    Correo = u.Correo,
+                    TipoUsuario = u.TipoUsuario,
+                    UsuarioId = u.UsuarioId,
+                })
+                .FirstOrDefaultAsync();
 
-            return await _context.Usuarios.AnyAsync(u => u.Correo == email 
-            && /*u.PasswordHash == password*/ u.Contraseña == password);
-
+            return user;
         }
     }
 }

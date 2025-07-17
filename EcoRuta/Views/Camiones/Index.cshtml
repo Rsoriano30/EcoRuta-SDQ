@@ -34,7 +34,7 @@
 </head>
 
 <div class="crearbtn">
-    <a class="btn btn-primary" asp-controller="Camiones" asp-action="CreateCamion">Agregar Camión</a>
+    <a class="btn btn-primary" asp-controller="Camiones" asp-action="CreateCamion">Nuevo Camión</a>
 </div>
 
 <div>
@@ -54,18 +54,10 @@
                                 <p>Modelo: @obj.Modelo</p>
                                 <p>Año: @obj.Año</p>
 
-
                                 <div class="form-btn">
-                                    <form asp-controller="Camiones" asp-action="EditCamion" method="post">
-                                        <input type="hidden" name="Id" value="@obj.CamionId" />
-                                        <button class="btn btn-warning" type="submit">Editar</button>
-                                    </form>
-                                    <form asp-controller="Camiones" asp-action="DeleteCamion" method="post">
-                                        <input type="hidden" name="Id" value="@obj.CamionId" />
-                                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                                    </form>
+                                    <a name="id" class="btn btn-warning" asp-action="EditCamion" asp-route-id="@obj.CamionId">Editar</a>
+                                    <a name="id" class="btn btn-danger" asp-action="DeleteCamion" asp-route-id="@obj.CamionId">Eliminar</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>

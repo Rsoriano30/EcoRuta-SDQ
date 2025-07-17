@@ -2,22 +2,25 @@
 @model ReporteViewModel
 
 @{
+    //placeholder
+    int usuarioId = 1;
+
     ViewData["title"] = "Editar";
 }
 
 <head>
     <style>
         .footer {
-            margin-top: 125px;
+        margin-top: 125px;
         }
 
         body {
-            background-color: #f3e3b2;
+        background-color: #f3e3b2;
         }
 
         .card {
-            border: 1px solid black;
-            margin-top: 100px;
+        border: 1px solid black;
+        margin-top: 100px;
         }
     </style>
 </head>
@@ -29,22 +32,31 @@
 
             @if (Model != null)
             {
-                <form asp-controller="Reportes" asp-action="EditReportePost" method="post">
+                @if (Model.Estado == "Pendiente")
+                {
+                    <form asp-controller="Reportes" asp-action="EditReportePost" method="post">
 
-                    <input class="form-control" type="hidden" asp-for="ReporteId" required />
+                        <input type="hidden" value="@usuarioId" asp-for="UsuarioId" required/>
+                        <input type="hidden" asp-for="ReporteId" required />
+                        <input type="hidden" asp-for="Estado" required/>
 
-                    <label asp-for="Titulo">Titulo:</label>
-                    <input class="form-control" type="text" asp-for="Titulo" required />
+                        <label asp-for="Titulo">Titulo:</label>
+                        <input class="form-control" type="text" asp-for="Titulo" required />
 
-                    <label asp-for="Descripcion">Descripción:</label>
-                    <input class="form-control" type="text" asp-for="Descripcion" required />
+                        <label asp-for="Descripcion">Descripción:</label>
+                        <input class="form-control" type="text" asp-for="Descripcion" required />
 
-                    <div>
-                        <br />
-                        <button class="btn btn-success" type="submit">Editar</button>
-                        <a class="btn btn-danger" asp-action="Index">Volver</a>
-                    </div>
-                </form>
+                        <div>
+                            <br />
+                            <button class="btn btn-success" type="submit">Editar</button>
+                            <a class="btn btn-danger" asp-action="Index">Volver</a>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <p>Este reporte ya no puede ser editado.</p>
+                }
             }
 			else
 			{

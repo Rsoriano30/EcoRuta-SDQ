@@ -1,9 +1,11 @@
 ﻿using Application.Intefaces.Services;
 using Application.ViewModels.Reportes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
+    [Authorize(Roles = "Usuario")]
     public class ReportesController : Controller
     {
         private readonly IReportesService _reportesService;
@@ -13,6 +15,7 @@ namespace EcoRuta.Controllers
             _reportesService = reportesService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = await _reportesService.GetAll();
@@ -20,15 +23,24 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Detalles(int id)
         {
+            var model = await _reportesService.GetById(id);
 
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Evaluacion(int id)
+        {
             var model = await _reportesService.GetById(id);
 
             return View(model);
         }
 
         #region Edit
+        [HttpGet]
         public async Task<IActionResult> EditReporte(int Id)
         {
             var model = await _reportesService.GetById(Id);
@@ -40,7 +52,7 @@ namespace EcoRuta.Controllers
         public async Task<IActionResult> EditReportePost(ReporteViewModel model)
         {
             try
-            {   
+            {
                 await _reportesService.Update(model, model.ReporteId);
 
                 return RedirectToAction("Index", "Reportes");
@@ -63,15 +75,14 @@ namespace EcoRuta.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateReportePost(ReporteSaveViewModel model)
         {
-            var response = await _reportesService.Add(model);
-
-            if (response == null)
+            try
+            {
+                await _reportesService.Add(model);
+                return RedirectToAction("Index");
+            }
+            catch
             {
                 return RedirectToAction("CreateReporte", model);
-            }
-            else
-            {
-                return RedirectToAction("Index");
             }
         }
 

@@ -34,7 +34,7 @@
 </head>
 
 <div class="crearbtn">
-    <a class="btn btn-primary" asp-controller="Choferes" asp-action="CreateChofer">Agregar Chofer</a>
+    <a class="btn btn-primary" asp-controller="Choferes" asp-action="CreateChofer">Nuevo Chofer</a>
 </div>
 
 <div>
@@ -54,16 +54,9 @@
                                 <p>Cédula: @obj.Cedula</p>
 
                                 <div class="form-btn">
-                                    <form asp-controller="Choferes" asp-action="EditChofer method="post">
-                                        <input type="hidden" name="Id" value="@obj.ChoferId" />
-                                        <button class="btn btn-warning" type="submit">Editar</button>
-                                    </form>
-                                    <form asp-controller="Choferes" asp-action="DeleteChofer" method="post">
-                                        <input type="hidden" name="Id" value="@obj.ChoferId" />
-                                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                                    </form>
+                                    <a name="id" class="btn btn-warning" asp-action="EditChofer" asp-route-id="@obj.ChoferId">Editar</a>
+                                    <a name="id" class="btn btn-danger" asp-action="DeleteChofer" asp-route-id="@obj.ChoferId">Eliminar</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
