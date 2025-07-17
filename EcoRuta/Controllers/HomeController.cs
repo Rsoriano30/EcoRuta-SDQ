@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using EcoRuta.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
@@ -27,6 +28,13 @@ namespace EcoRuta.Controllers
         public IActionResult PageNotFound()
         {
             return View("404");
+        }
+
+        [Authorize(Roles = "Administrador")]
+        public async Task<IActionResult> Dashboard()
+        {
+            await Task.Delay(1);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

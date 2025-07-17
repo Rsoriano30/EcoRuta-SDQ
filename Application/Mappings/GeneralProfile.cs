@@ -29,9 +29,9 @@ namespace Application.Mappings
 
             CreateMap<Reporte, ReporteSaveViewModel>()
                     .ReverseMap()
-                    .ForMember(x => x.ReporteId, opt => opt.Ignore())
+                    .ForMember(x => x.ReporteId, opt => opt.Ignore());
                     // temporal, ya que el usuario si va.
-                    .ForMember(x => x.Usuario, opt => opt.Ignore());
+                    //.ForMember(x => x.Usuario, opt => opt.Ignore());
 
             //-------------------------- Rutas
             CreateMap<Ruta, RutaViewModel>()

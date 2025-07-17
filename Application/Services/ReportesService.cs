@@ -21,5 +21,25 @@ namespace Application.Services
             _repository = repository;
             _mapper = mapper;
         }
+
+        public async Task<List<ReporteViewModel>> GetCurrentMothReportesPendientes()
+        {
+            var query = _repository.GetQuery();
+            var reportes = query.Where(i => i.Estado == "Pendiente" &&
+                                            i.FechaHora.HasValue && 
+                                            i.FechaHora.Value.Month == DateTime.Now.Month && 
+                                            i.FechaHora.Value.Year == DateTime.Now.Year).ToList();
+
+            return _mapper.Map<List<ReporteViewModel>>(reportes);
+        }
+
+        public async Task<List<ReporteViewModel>> GetByUsuarioId(int usuarioId)
+        {
+            var query = _repository.GetQuery();
+
+            var reportes = query.Where(i => i.UsuarioId == usuarioId).ToList();
+
+            return _mapper.Map<List<ReporteViewModel>>(reportes);
+        }
     }
 }

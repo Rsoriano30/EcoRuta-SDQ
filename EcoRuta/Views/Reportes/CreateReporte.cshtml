@@ -1,8 +1,22 @@
 ﻿@using Application.ViewModels.Reportes
+@using System.Security.Claims
 @model ReporteSaveViewModel
 
 @{
-    int user_id = User.FindFirst("NameIdentifier") != null ? int.Parse(User.FindFirst("NameIdentifier").Value) : 0;
+
+    int user_id;
+
+    try
+    {
+        user_id = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString());
+    }
+    catch
+    {
+        user_id = 0;
+    }
+    //var claim = Int32.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).ToString());
+
+//	 user_id = claim != null ? Int32.Parse(claim.Value) : 0;
     ViewData["title"] = "Crear";
 }
 
@@ -28,7 +42,7 @@
     <div class="card-body">
         <form asp-controller="Reportes" asp-action="CreateReportePost" method="post">
 
-			<input asp-for="UsuarioId" type="hidden" value="@user_id" />"
+			<input asp-for="UsuarioId" type="hidden" value="@user_id" />
             <label asp-for="Titulo">Titulo:</label>
             <input class="form-control" type="text" asp-for="Titulo" required />
 

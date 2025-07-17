@@ -55,7 +55,7 @@ namespace EcoRuta.Controllers
 
                 if (user.TipoUsuario == "Administrador")
                 {
-                    return RedirectToAction("Dashboard", "Admin");
+                    return RedirectToAction("Dashboard", "Home");
                 }
 
                 else if (user.TipoUsuario == "Usuario")
