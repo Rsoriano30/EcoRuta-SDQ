@@ -28,10 +28,7 @@ namespace EcoRuta.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var user = await _usuarioService.GetByEmailAndPasswordAsync(model.Correo, model.Contraseña);
+            var user = await _usuarioService.GetByEmailAsync(model.Correo);
 
             if (user == null)
             {
@@ -39,23 +36,33 @@ namespace EcoRuta.Controllers
                 return View(model);
             }
 
-            var claims = new List<Claim>
+            var hasher = new PasswordHasher<object>();
+            var result = hasher.VerifyHashedPassword(null, user.Contraseña, model.Contraseña);
+
+            if (result == PasswordVerificationResult.Success)
             {
-                new Claim(ClaimTypes.Name, user.Nombre),
-                new Claim(ClaimTypes.NameIdentifier, user.UsuarioId.ToString()),
-                new Claim(ClaimTypes.Role, user.TipoUsuario)
-            };
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Nombre),
+                    new Claim(ClaimTypes.NameIdentifier, user.UsuarioId.ToString()),
+                    new Claim(ClaimTypes.Role, user.TipoUsuario)
+                };
 
-            var identity = new ClaimsIdentity(claims, "MyCookieAuth");
-            var principal = new ClaimsPrincipal(identity);
+                var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+                var principal = new ClaimsPrincipal(identity);
 
-            await HttpContext.SignInAsync("MyCookieAuth", principal);
+                await HttpContext.SignInAsync("MyCookieAuth", principal);
 
-            if (user.TipoUsuario == "Administrador")
-                return RedirectToAction("Dashboard", "Admin");
+                if (user.TipoUsuario == "Administrador")
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
 
-            else if (user.TipoUsuario == "Usuario")
-                return RedirectToAction("Index", "Reportes");
+                else if (user.TipoUsuario == "Usuario")
+                {
+                    return RedirectToAction("Index", "Reportes");
+                }
+            }
 
             return RedirectToAction("Login");
         }

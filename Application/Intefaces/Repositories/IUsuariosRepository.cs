@@ -5,6 +5,6 @@ namespace Application.Intefaces.Repositories
 {
     public interface IUsuariosRepository : IGenericRepository<Usuario>
     {
-        Task<Usuario> GetByEmailAndPasswordAsync(string email, string password);
+        Task<Usuario> GetByEmailAsync(string email);
     }
 }

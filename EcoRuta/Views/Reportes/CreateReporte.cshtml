@@ -2,7 +2,7 @@
 @model ReporteSaveViewModel
 
 @{
-    //id_usuario = 
+    int user_id = User.FindFirst("NameIdentifier") != null ? int.Parse(User.FindFirst("NameIdentifier").Value) : 0;
     ViewData["title"] = "Crear";
 }
 
@@ -28,6 +28,7 @@
     <div class="card-body">
         <form asp-controller="Reportes" asp-action="CreateReportePost" method="post">
 
+			<input asp-for="UsuarioId" type="hidden" value="@user_id" />"
             <label asp-for="Titulo">Titulo:</label>
             <input class="form-control" type="text" asp-for="Titulo" required />
 

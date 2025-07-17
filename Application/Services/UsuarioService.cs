@@ -22,9 +22,9 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public async Task<Usuario> GetByEmailAndPasswordAsync(string email, string password)
+        public async Task<Usuario> GetByEmailAsync(string email)
         {
-            return await _repository.GetByEmailAndPasswordAsync(email, password);
+            return await _repository.GetByEmailAsync(email);
         }
     }
 }
