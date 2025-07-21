@@ -1,5 +1,5 @@
-﻿@using Application.ViewModels.Camiones
-@model CamionViewModel
+﻿@using Application.ViewModels.Horarios
+@model HorarioViewModel
 
 @{
     ViewData["Title"] = "Borrar";
@@ -30,16 +30,26 @@
         @if (Model != null)
         {
             <div class="card-header">
-                <hS>¿Seguro que quieres borrar este camión?</hS>
+                <hS>¿Seguro que quieres borrar este horario?</hS>
             </div>
             <div class="card-body">
 
-                <p>Titulo: @Model.Placa</p>
-                <p>Modelo: @Model.Modelo</p>
-                <p>Año: @Model.Año</p>
+                <p>Hora de salida: @Model.HoraSalida</p>
+                <p>Hora de llegada: @Model.HoraLlegada</p>
 
-                <form asp-controller="Camiones" asp-action="DeleteCamionPost" method="post">
-                    <input type="hidden" name="Id" value="@Model.CamionId" />
+                @if (Model.DiaInicio == Model.DiaFin)
+                {
+                    <p>Día activa: @Model.DiaInicio</p>
+                }
+                else
+                {
+                    <p>Día de inicio: @Model.DiaInicio</p>
+                    <p>Día de finalización: @Model.DiaFin</p>
+                }
+
+                <form asp-controller="Horarios" asp-action="DeleteHorarioPost" method="post">
+                    <input type="hidden" name="Id" value="@Model.HorarioId" />
+
                     <button class="btn btn-danger" type="submit">Eliminar</button>
                     <a class="btn btn-warning" asp-action="Index">Cancelar</a>
                 </form>
@@ -48,7 +58,7 @@
         else
         {
             <div class="card-body">
-                <h2>No se encontró el camión</h2>
+                <h2>No se encontró el horario</h2>
             </div>
         }
     </div>

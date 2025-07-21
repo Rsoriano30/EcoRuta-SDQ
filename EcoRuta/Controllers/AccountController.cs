@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using System.Security.Principal;
 
 namespace EcoRuta.Controllers
 {
@@ -20,11 +21,15 @@ namespace EcoRuta.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login() => View();
+        public IActionResult Login()
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Register() => View();
 
+        #region Login Logic
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -66,6 +71,7 @@ namespace EcoRuta.Controllers
 
             return RedirectToAction("Login");
         }
+        #endregion
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -83,6 +89,13 @@ namespace EcoRuta.Controllers
             {
                 return View(model);
             }
+        }
+
+        public async Task<IActionResult> CloseSession(string NameIdentifier)
+        {
+            await HttpContext.SignOutAsync("MyCookieAuth");
+
+            return RedirectToAction("Login");
         }
 
         [HttpGet]

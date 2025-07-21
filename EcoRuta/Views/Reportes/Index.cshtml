@@ -34,9 +34,12 @@
     </style>
 </head>
 
-<div class="crearbtn">
-    <a class="btn btn-primary" asp-controller="Reportes" asp-action="CreateReporte">Nuevo Reporte</a>
-</div>
+@if (User.IsInRole("Usuario"))
+{
+    <div class="crearbtn">
+        <a class="btn btn-primary" asp-controller="Reportes" asp-action="CreateReporte">Nuevo Reporte</a>
+    </div>
+}
 
 <div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

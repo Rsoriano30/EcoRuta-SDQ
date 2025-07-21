@@ -34,27 +34,34 @@
                     <form asp-controller="Reportes" asp-action="EditReportePost" method="post">
 
                         <input type="hidden" asp-for="UsuarioId" required />
-                        <input type="hidden" asp-for="ReporteId" required />
-
-                        <label asp-for="Titulo">Titulo:</label>
-                        <input class="form-control" type="text" asp-for="Titulo" required />
-
-                        <label asp-for="Descripcion">Descripción:</label>
-                        <input class="form-control" type="text" asp-for="Descripcion" required />
+                        <input type="hidden" asp-for="ReporteId" required />             
 
                         @switch (User.IsInRole("Administrador"))
                         {
                             case true:
-								<label asp-for="Estado">Estado:</label>
+                                <label asp-for="Titulo">Titulo:</label>
+                                <input class="form-control" type="text" asp-for="Descripcion" readonly />
+
+                                <label asp-for="Descripcion">Descripción:</label>
+                                <input class="form-control" type="text" asp-for="Titulo" readonly />
+
+								<label asp-for="Estado">Repuesta:</label>
                                 <select class="form-control" asp-for="Estado" required>
                                     <option value="Rechazado">Rechazar</option>
                                     <option value="Aprobado">Aprobar</option>
                                 </select>
-
-                                <input></input>
+                                                                
+                                <label asp-for="Comentario">Comentario</label>
+                                <input class="form-control" type="text" asp-for="Comentario"  required />
                                 break;
 
                             case false:
+                                <label asp-for="Titulo">Titulo:</label>
+                                <input class="form-control" type="text" asp-for="Descripcion" required />
+
+                                <label asp-for="Descripcion">Descripción:</label>
+                                <input class="form-control" type="text" asp-for="Titulo" required />
+
                                 <input type="hidden" asp-for="Estado" required />
                                 break;
                         }

@@ -61,6 +61,7 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Usuario,Administrador")]
         [HttpPost]
         public async Task<IActionResult> EditReportePost(ReporteViewModel model)
         {
@@ -79,13 +80,14 @@ namespace EcoRuta.Controllers
 
         #region Create
 
-        [Authorize(Roles = "Usuario,Administrador")]
+        [Authorize(Roles = "Usuario")]
         [HttpGet]
         public IActionResult CreateReporte(ReporteSaveViewModel model)
         {
             return View(model);
         }
 
+        [Authorize(Roles = "Usuario")]
         [HttpPost]
         public async Task<IActionResult> CreateReportePost(ReporteSaveViewModel model)
         {
@@ -103,7 +105,7 @@ namespace EcoRuta.Controllers
         #endregion
 
         #region Delete
-        [Authorize(Roles = "Usuario,Administrador")]
+        [Authorize(Roles = "Usuario")]
         [HttpGet]
         public async Task<IActionResult> DeleteReporte(int Id)
         {
@@ -112,6 +114,7 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Usuario")]
         [HttpPost]
         public async Task<IActionResult> DeleteReportePost(int Id)
         {
