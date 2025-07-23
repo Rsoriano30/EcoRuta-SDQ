@@ -2,10 +2,10 @@
 using Application.ViewModels.Reportes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EcoRuta.Controllers
 {
-    [Authorize(Roles = "Usuario")]
     public class ReportesController : Controller
     {
         private readonly IReportesService _reportesService;
@@ -15,14 +15,34 @@ namespace EcoRuta.Controllers
             _reportesService = reportesService;
         }
 
+        [Authorize(Roles = "Usuario,Administrador")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = await _reportesService.GetAll();
+            int user_id = 0;
 
-            return View(model);
+            try
+            {
+                user_id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString());
+            }
+            catch
+            {
+            }
+            
+            switch (User.IsInRole("Administrador"))
+            {
+                case true:
+                    var full_model = await _reportesService.GetCurrentMothReportesPendientes();
+                    return View(full_model);
+
+                case false:
+                    var my_model = await _reportesService.GetByUsuarioId(user_id);
+                    return View(my_model);
+            }
+        
         }
 
+        [Authorize(Roles = "Usuario,Administrador")]
         [HttpGet]
         public async Task<IActionResult> Detalles(int id)
         {
@@ -31,15 +51,8 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Evaluacion(int id)
-        {
-            var model = await _reportesService.GetById(id);
-
-            return View(model);
-        }
-
         #region Edit
+        [Authorize(Roles = "Usuario,Administrador")]
         [HttpGet]
         public async Task<IActionResult> EditReporte(int Id)
         {
@@ -48,6 +61,7 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Usuario,Administrador")]
         [HttpPost]
         public async Task<IActionResult> EditReportePost(ReporteViewModel model)
         {
@@ -66,12 +80,14 @@ namespace EcoRuta.Controllers
 
         #region Create
 
+        [Authorize(Roles = "Usuario")]
         [HttpGet]
         public IActionResult CreateReporte(ReporteSaveViewModel model)
         {
             return View(model);
         }
 
+        [Authorize(Roles = "Usuario")]
         [HttpPost]
         public async Task<IActionResult> CreateReportePost(ReporteSaveViewModel model)
         {
@@ -89,7 +105,8 @@ namespace EcoRuta.Controllers
         #endregion
 
         #region Delete
-
+        [Authorize(Roles = "Usuario")]
+        [HttpGet]
         public async Task<IActionResult> DeleteReporte(int Id)
         {
             var model = await _reportesService.GetById(Id);
@@ -97,6 +114,7 @@ namespace EcoRuta.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Usuario")]
         [HttpPost]
         public async Task<IActionResult> DeleteReportePost(int Id)
         {

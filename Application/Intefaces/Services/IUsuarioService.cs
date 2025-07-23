@@ -10,6 +10,6 @@ namespace Application.Intefaces.Services
 {
     public interface IUsuarioService : IGenericService<RegisterViewModel, LoginViewModel, Usuario>
     {
-        Task<Usuario> GetByEmailAndPasswordAsync(string email, string password);
+        Task<Usuario> GetByEmailAsync(string email);
     }
 }

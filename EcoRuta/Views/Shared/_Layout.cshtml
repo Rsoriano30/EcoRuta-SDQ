@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +9,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EcoRuta.styles.css" asp-append-version="true" />
+
+    <style>
+        .session-btn{
+            margin-right: 10px;
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -44,7 +53,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Choferes" asp-action="Index">Choferes</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a>
+                                </li>
                             }
+
+                            <li class="nav-item ms-auto" style="margin-right: 10px;">
+                                <a class="btn btn-danger" name="NameIdentifier" asp-area="" asp-controller="Account" asp-route-id="@(User.FindFirst(ClaimTypes.NameIdentifier))" asp-action="CloseSession">Cerrar sesión</a>
+                            </li>
                         }
                         else
                         {

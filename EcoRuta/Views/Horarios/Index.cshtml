@@ -1,0 +1,88 @@
+﻿@model List<Application.ViewModels.Horarios.HorarioViewModel>
+
+@{
+    ViewData["Title"] = "Horarios";
+}
+
+<head>
+    <style>
+        .row {
+        margin-top: 30px;
+        }
+
+        .crearbtn {
+        margin-top: 30px;
+        text-align: center;
+        }
+
+        .form-btn {
+        display: flex;
+        }
+
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card {
+        border: 1px solid black;
+        }
+
+        .footer {
+        margin-top: 100px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="crearbtn">
+        <a class="btn btn-primary" asp-controller="Horarios" asp-action="CreateHorario">Nuevo Horario</a>
+    </div>
+
+    <div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @try
+            {
+                if (Model != null)
+                {
+                    @foreach (var obj in Model)
+                    {
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p>Horas: @obj.HoraSalida - @obj.HoraLlegada</p>
+                                    @if (obj.DiaInicio != null && obj.DiaFin != null && obj.DiaInicio != obj.DiaFin)
+                                    {
+                                        <p>Días: @obj.DiaInicio a @obj.DiaFin</p>
+                                    }
+                                    else
+                                    {
+                                        switch (obj.DiaInicio)
+                                        {
+                                            case null:
+                                                <p>Días: @obj.DiaFin</p>
+                                                break;
+
+                                            case not null:
+                                                <p>Días: @obj.DiaInicio</p>
+                                                break;
+                                        }
+                                    }
+
+									<div class="form-btn">
+										<a name="id" class="btn btn-warning" asp-action="EditHorario" asp-route-id="@obj.HorarioId">Editar</a>
+                                        <a name="id" class="btn btn-danger" asp-action="DeleteHorario" asp-route-id="@obj.HorarioId">Eliminar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				<p>Error al cargar los horarios: @ex.Message</p>
+			}
+        </div>
+    </div>
+</body>

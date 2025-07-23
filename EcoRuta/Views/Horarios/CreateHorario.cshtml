@@ -1,0 +1,66 @@
+﻿@using Application.ViewModels.Horarios
+@model HorarioSaveViewModel
+
+@{
+    //List<TimeOnly> horas = new();
+    ViewData["title"] = "Crear";
+}
+
+<head>
+    <style>
+        body {
+            background-color: #f3e3b2;
+        }
+
+        .card {
+            border: 1px solid black;
+            margin-top: 100px;
+            width: 400px;
+        }
+
+        .footer {
+            margin-top: 190px;
+        }
+    </style>
+</head>
+
+<div class="card col-4 offset-4">
+    <div class="card-body">
+        <form asp-controller="Horarios" asp-action="CreateHorarioPost" method="post">
+
+            <label asp-for="HoraSalida">Hora de salida:</label>
+            <input class="form-control" type="time" asp-for="HoraSalida" required />
+
+            <label asp-for="HoraLlegada">Hora de llegada:</label>
+            <input class="form-control" type="time" asp-for="HoraLlegada" required />
+
+            <label asp-for="DiaInicio">Dia de inicio</label>
+            <select class="form-control" asp-for="DiaInicio">
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miércoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Domingo">Domingo</option>
+            </select>
+
+            <label asp-for="DiaFin">Dia de finalización:</label>
+            <select class="form-control" asp-for="DiaFin">
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miércoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Domingo">Domingo</option>
+            </select>
+
+            <div>
+                <br />
+                <button class="btn btn-success" type="submit">Crear</button>
+                <a class="btn btn-danger" asp-action="Index">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>

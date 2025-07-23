@@ -10,5 +10,7 @@ namespace Application.Intefaces.Services
 {
     public interface IReportesService : IGenericService<ReporteSaveViewModel, ReporteViewModel, Reporte>
     {
+        Task<List<ReporteViewModel>> GetCurrentMothReportesPendientes();
+        Task<List<ReporteViewModel>> GetByUsuarioId(int usuarioId);
     }
 }
