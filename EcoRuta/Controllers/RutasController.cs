@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EcoRuta.Controllers
 {
-    [Authorize(Roles = "Administrador,Usuario")]
+    
     public class RutasController : Controller
     {
         private readonly IRutasService _rutasService;
@@ -18,6 +18,7 @@ namespace EcoRuta.Controllers
             _rutasService = rutasService;
         }
 
+        [Authorize(Roles = "Administrador,Usuario")]
         public async Task<IActionResult> Index()
         {
             var model = await _rutasService.GetAll();
@@ -26,12 +27,14 @@ namespace EcoRuta.Controllers
         }
 
         #region Create
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult CreateRuta()
         {
             return View();
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> CreateRutaPost(RutaSaveViewModel model)
         {
@@ -49,6 +52,7 @@ namespace EcoRuta.Controllers
         #endregion
 
         #region Edit
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public async Task<IActionResult> EditRuta(int id)
         {
@@ -64,6 +68,7 @@ namespace EcoRuta.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> EditRutaPost(RutaViewModel model)
         {
@@ -81,6 +86,7 @@ namespace EcoRuta.Controllers
         #endregion
 
         #region Delete
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public async Task<IActionResult> DeleteRuta(int id)
         {
@@ -96,6 +102,7 @@ namespace EcoRuta.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<IActionResult> DeleteRutaPost(int id)
         {

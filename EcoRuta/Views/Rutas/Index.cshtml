@@ -33,9 +33,12 @@
     </style>
 </head>
 
-<div class="crearbtn">
-    <a class="btn btn-primary" asp-controller="Rutas" asp-action="CreateRuta">Nueva ruta</a>
-</div>
+@if (User.IsInRole("Administrador"))
+{
+    <div class="crearbtn">
+        <a class="btn btn-primary" asp-controller="Rutas" asp-action="CreateRuta">Nueva ruta</a>
+    </div>
+}
 
 <div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -54,10 +57,13 @@
                                 <p>Punto de Llegada: @obj.PuntoFinal</p>
                                 <p>Estado: @(obj.Estado == true ? "Activa" : "Inactiva")</p>
 
-                                <div class="form-btn">
-                                    <a name="id" class="btn btn-warning" asp-action="EditRuta" asp-route-id="@obj.RutaId">Editar</a>
-                                    <a name="id" class="btn btn-danger" asp-action="DeleteRuta" asp-route-id="@obj.RutaId">Eliminar</a>
-                                </div>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <div class="form-btn">
+                                        <a name="id" class="btn btn-warning" asp-action="EditRuta" asp-route-id="@obj.RutaId">Editar</a>
+                                        <a name="id" class="btn btn-danger" asp-action="DeleteRuta" asp-route-id="@obj.RutaId">Eliminar</a>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
