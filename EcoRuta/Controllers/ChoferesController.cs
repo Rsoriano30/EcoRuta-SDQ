@@ -32,6 +32,11 @@ namespace EcoRuta.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateChoferPost(ChoferSaveViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("CreateChofer", model);
+            }
+
             try
             {
                 await _choferesService.Add(model);
@@ -46,7 +51,7 @@ namespace EcoRuta.Controllers
 
         [HttpGet]
         public async Task<IActionResult> EditChofer(int id)
-        {
+        {            
             var model = await _choferesService.GetById(id);
 
             if (model == null)
@@ -62,6 +67,11 @@ namespace EcoRuta.Controllers
         [HttpPost]
         public async Task<IActionResult> EditChoferPost(ChoferViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("EditChofer", model);
+            }
+
             try
             {
                 await _choferesService.Update(model, model.ChoferId);
