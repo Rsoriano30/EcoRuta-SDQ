@@ -1,105 +1,404 @@
 ﻿@using Application.ViewModels.Asignaciones
 @model List<AsignacionesDetailsViewModel>
-
 @{
     ViewData["Title"] = "Asignaciones";
 }
 
 <head>
     <style>
-        .row {
-        margin-top: 30px;
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
         .crearbtn {
-        margin-top: 30px;
-        text-align: center;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+            .crearbtn button {
+                background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+                color: white;
+                padding: 14px 30px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+                box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+                .crearbtn button:hover {
+                    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 16px rgba(33, 150, 243, 0.4);
+                }
+
+        .row {
+            margin: 30px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        .col {
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+            .col:hover {
+                transform: translateY(-5px);
+            }
+
+        .card {
+            background-color: #f8fcff;
+            border-radius: 12px;
+            border: 1px solid #bbdefb;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .card:hover {
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            }
+
+        .card-header {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 15px 20px;
+            border-bottom: 1px solid #90caf9;
+            font-weight: bold;
+            color: #1565C0;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+            .card-body p {
+                margin-bottom: 12px;
+                font-size: 15px;
+                padding: 5px 0;
+                border-bottom: 1px solid #f5f5f5;
+            }
+
+                .card-body p:last-of-type {
+                    border-bottom: none;
+                    margin-bottom: 15px;
+                }
+
+                .card-body p strong {
+                    color: #1565C0;
+                    font-weight: 600;
+                }
+
+        .ruta-info {
+            color: #388E3C;
+            font-weight: 500;
+        }
+
+        .horario-info {
+            color: #F57C00;
+            font-weight: 500;
+        }
+
+        .camion-info {
+            color: #7B1FA2;
+            font-weight: 500;
+        }
+
+        .chofer-info {
+            color: #1976D2;
+            font-weight: 500;
+        }
+
+        .ninguno-info {
+            color: #999;
+            font-style: italic;
         }
 
         .form-btn {
-        display: flex;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e3f2fd;
         }
 
-        body {
-        background-color: #f3e3b2;
+            .form-btn form {
+                flex: 1;
+            }
+
+            .form-btn button {
+                width: 100%;
+                padding: 10px;
+                border-radius: 8px;
+                font-size: 14px;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                font-weight: 500;
+            }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fdd835 0%, #fbc02d 100%);
+            color: #000;
+            box-shadow: 0 3px 8px rgba(253, 216, 53, 0.3);
         }
 
-        .card {
-        border: 1px solid black;
+            .btn-warning:hover {
+                background: linear-gradient(135deg, #fbc02d 0%, #f9a825 100%);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(253, 216, 53, 0.4);
+            }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+            color: #fff;
+            box-shadow: 0 3px 8px rgba(229, 57, 53, 0.3);
         }
 
-        .footer {
-        margin-top: 100px;
+            .btn-danger:hover {
+                background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
+            }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
         }
+
+            .no-data h2 {
+                color: #1565C0;
+                margin-bottom: 15px;
+                font-size: 24px;
+            }
+
+            .no-data p {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+
+        .error-message {
+            background-color: #ffebee;
+            border: 1px solid #ffcdd2;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            color: #c62828;
+        }
+
+            .error-message h2 {
+                margin-bottom: 10px;
+                color: #d32f2f;
+            }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .info-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-btn
+
+        {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .row {
+            padding: 0 10px;
+        }
+
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .col {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+            .col:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+
+            .col:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+
+            .col:nth-child(3) {
+                animation-delay: 0.3s;
+            }
+
+            .col:nth-child(4) {
+                animation-delay: 0.4s;
+            }
+
+            .col:nth-child(5) {
+                animation-delay: 0.5s;
+            }
+
+            .col:nth-child(6) {
+                animation-delay: 0.6s;
+            }
     </style>
 </head>
 
 <div class="crearbtn">
     <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
         <input name="id" value="0" type="hidden" />
-        <intput name="ModoEditar" value="false" type="hidden" />
-        <button class="btn btn-primary" type="submit">Crear asignación</button>
+        <input name="ModoEditar" value="false" type="hidden" />
+        <button class="btn btn-primary" type="submit">➕ Nueva Asignación</button>
     </form>
 </div>
 
 <div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
         @try
-        {   
-            if (Model != null)
+        {
+            if (Model != null && Model.Any())
             {
                 @foreach (var obj in Model)
                 {
                     <div class="col">
                         <div class="card">
+                            <div class="card-header">
+                                📋 Asignación #@obj.AsignacionId
+                            </div>
                             <div class="card-body">
+                                <div class="info-row">
+                                    <span class="info-icon">🛣️</span>
+                                    <p>
+                                        <strong>Ruta:</strong>
+                                        <span class="@(string.IsNullOrEmpty(obj.NombreRuta) ? "ninguno-info" : "ruta-info")">
+                                            @(obj.NombreRuta ?? "Ninguna")
+                                        </span>
+                                    </p>
+                                </div>
 
-                                <p>Ruta: @(obj.NombreRuta ?? "Ninguna")</p>
                                 @if (obj.HorarioId.HasValue)
                                 {
-                                    if (obj.DiaFin.Equals(obj.DiaInicio)) 
-                                    {
-                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio</p>
-                                    }
-                                    else
-                                    {
-                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio a @obj.DiaFin</p>
-                                    }
+                                    <div class="info-row">
+                                        <span class="info-icon">⏰</span>
+                                        @if (obj.DiaFin.Equals(obj.DiaInicio))
+                                        {
+                                            <p>
+                                                <strong>Horario:</strong>
+                                                <span class="horario-info">@obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio</span>
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                <strong>Horario:</strong>
+                                                <span class="horario-info">@obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio a @obj.DiaFin</span>
+                                            </p>
+                                        }
+                                    </div>
                                 }
                                 else
                                 {
-                                    <P>Horario: Ninguno</P>
+                                    <div class="info-row">
+                                        <span class="info-icon">⏰</span>
+                                        <p><strong>Horario:</strong> <span class="ninguno-info">Ninguno</span></p>
+                                    </div>
                                 }
 
-                                <p>Placa del Camión: @(obj.PlacaCamion ?? "Ninguno")</p>
-                                <p>Chofer: @(obj.NombreChofer ?? "Ninguno")</p>
+                                <div class="info-row">
+                                    <span class="info-icon">🚛</span>
+                                    <p>
+                                        <strong>Placa del Camión:</strong>
+                                        <span class="@(string.IsNullOrEmpty(obj.PlacaCamion) ? "ninguno-info" : "camion-info")">
+                                            @(obj.PlacaCamion ?? "Ninguno")
+                                        </span>
+                                    </p>
+                                </div>
+
+                                <div class="info-row">
+                                    <span class="info-icon">👤</span>
+                                    <p>
+                                        <strong>Chofer:</strong>
+                                        <span class="@(string.IsNullOrEmpty(obj.NombreChofer) ? "ninguno-info" : "chofer-info")">
+                                            @(obj.NombreChofer ?? "Ninguno")
+                                        </span>
+                                    </p>
+                                </div>
 
                                 <div class="form-btn">
                                     <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
                                         <input type="hidden" name="Id" value="@obj.AsignacionId" />
-										<input type="hidden" name="ModoEditar" value="true" />
-                                        <button class="btn btn-warning" type="submit">Editar</button>
+                                        <input type="hidden" name="ModoEditar" value="true" />
+                                        <button class="btn btn-warning" type="submit">✏️ Editar</button>
                                     </form>
                                     <form asp-controller="Asignaciones" asp-action="DeleteAsign" method="get">
                                         <input type="hidden" name="Id" value="@obj.AsignacionId" />
-                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                        <button class="btn btn-danger" type="submit">🗑️ Eliminar</button>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 }
-			}
-			else
-			{
-				<h2>No se encontraron asignaciones.</h2>
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body no-data">
+                            <h2>📋 No se encontraron asignaciones</h2>
+                            <p>¡Comienza creando tu primera asignación!</p>
+                            <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+                                <input name="id" value="0" type="hidden" />
+                                <input name="ModoEditar" value="false" type="hidden" />
+                                <button class="btn btn-primary" type="submit">➕ Crear Primera Asignación</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             }
         }
         catch (Exception ex)
         {
-            <h2>Error: @ex</h2>
+            <div class="col-12">
+                <div class="error-message">
+                    <h2>❌ Error</h2>
+                    <p>@ex.Message</p>
+                </div>
+            </div>
         }
     </div>
-</div>
