@@ -2,58 +2,75 @@
 @model LoginViewModel
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = null;
 }
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EcoRuta</title>
     <link rel="stylesheet" href="~/css/login.css" />
+
     <style>
-        .footer {
-            margin-top: 125px;
-        }
-
-        .card-bottom {
-            padding-top: 15px;
-        }
-
-        body {
-            background-color: #f3e3b2;
-        }
-
-        .card {
-            border: 1px solid black;
-            margin-top: 20px;
-        }
-
-        h2 {
-            margin-top: 20px;
+        .login-container {
+            height: 50%;
         }
     </style>
 </head>
-
 <body>
-    <div class="col-4 offset-4">
-        <h2>Iniciar Sesión</h2>
-        <div class="card">
-            <div class="card-body">
-                <form asp-controller="Account" asp-action="Login" method="post">
+    <div class="login-page">
+        <div class="login-container">
+            <div class="login-form-section">
+                <div class="logo-section">
+                    <h1>EcoRuta</h1>
+                    <p>Bienvenido de nuevo</p>
+                </div>
 
-                    <label asp-for="Correo">Correo:</label>
-                    <input class="form-control" asp-for="Correo" type="email" />
-
-                    <label asp-for="Contraseña">Contraseña:</label>
-                    <input class="form-control" asp-for="Contraseña" type="password" />
-
-                    <div class="card-bottom">
-                        <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
-                        <a class="btn btn-success" asp-action="Register">Registrarse</a>
+                <form asp-action="Login" method="post">
+                    <div class="form-group">
+                        <label asp-for="Correo"></label>
+                        <input type="email" asp-for="Correo" placeholder="Ingresa tu usuario" required/>
+                        <span asp-validation-for="Correo" class="error-message"></span>
                     </div>
-                </form>                
+
+                    <div class="form-group">
+                        <label asp-for="Contraseña"></label>
+                        <input type="password" asp-for="Contraseña" placeholder="Ingresa tu contraseña" required/>
+                        <span asp-validation-for="Contraseña" class="error-message"></span>
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        Iniciar Sesión
+                        <span class="loading"></span>
+                    </button>
+
+                    <div class="divider"><span>O</span></div>
+
+                    <div class="register-link">
+                        ¿No tienes cuenta? <a asp-controller="Account" asp-action="Register">Regístrate</a>
+                    </div>
+                </form>
             </div>
+
+            <div class="login-image-section">
+                <div class="background-elements"></div>
+                <div class="eco-illustration">
+                    <div class="eco-icon">🌿</div>
+                    <div class="eco-text">
+                        <h3>Movilidad Sostenible</h3>
+                        <p>Conecta con una comunidad que apuesta por un futuro más verde.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </body>
-
+</html>

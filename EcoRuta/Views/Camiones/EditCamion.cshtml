@@ -6,113 +6,37 @@
 }
 
 <head>
-    <style>
-        body {
-            background-color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .card {
-            background-color: #f4fef4;
-            border-radius: 12px;
-            border: 1px solid #c8e6c9;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-            padding: 20px;
-            width: 400px;
-            margin-top: 50px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .btn-success {
-            background-color: #4CAF50;
-            color: white;
-            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
-        }
-
-            .btn-success:hover {
-                background-color: #45a049;
-                transform: scale(1.05);
-            }
-
-        .btn-danger {
-            background-color: #e53935;
-            color: white;
-            box-shadow: 0 4px 8px rgba(198, 40, 40, 0.3);
-        }
-
-            .btn-danger:hover {
-                background-color: #c62828;
-                transform: scale(1.05);
-            }
-
-        p {
-            text-align: center;
-            color: #d32f2f;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
-<div class="card">
-    <h3 style="text-align: center; margin-bottom: 20px;">Editar Camión</h3>
-    @if (Model != null)
-    {
-        <form asp-controller="Camiones" asp-action="EditCamionPost" method="post">
-            <input type="hidden" asp-for="CamionId" />
+<body>
+    <div class="main-wrapper">
+        <div class="card">
+            <h3 style="text-align: center; margin-bottom: 20px;">Editar Camión</h3>
+            @if (Model != null)
+            {
+                <form asp-controller="Camiones" asp-action="EditCamionPost" method="post">
+                    <input type="hidden" asp-for="CamionId" />
 
-            <label asp-for="Placa">Placa:</label>
-            <input class="form-control" type="text" asp-for="Placa" required />
+                    <label asp-for="Placa">Placa:</label>
+                    <input class="form-control" type="text" asp-for="Placa" required />
 
-            <label asp-for="Modelo">Modelo:</label>
-            <input class="form-control" type="text" asp-for="Modelo" required />
+                    <label asp-for="Modelo">Modelo:</label>
+                    <input class="form-control" type="text" asp-for="Modelo" required />
 
-            <label asp-for="Año">Año:</label>
-            <input class="form-control" type="text" asp-for="Año" required />
+                    <label asp-for="Año">Año:</label>
+                    <input class="form-control" type="text" asp-for="Año" required />
 
-            <div class="btn-container">
-                <button class="btn btn-success" type="submit">Guardar</button>
-                <a class="btn btn-danger" asp-action="Index">Volver</a>
-            </div>
-        </form>
-    }
-    else
-    {
-        <p>No se encontró el camión.</p>
-    }
-</div>
+                    <div class="btn-container">
+                        <button class="btn btn-success" type="submit">Guardar</button>
+                        <a class="btn btn-danger" asp-action="Index">Volver</a>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p>No se encontró el camión.</p>
+            }
+        </div>
+    </div>
+</body>

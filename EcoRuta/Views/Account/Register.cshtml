@@ -2,65 +2,110 @@
 @model RegisterViewModel
 
 @{
-
     ViewData["Title"] = "Registro";
+    Layout = null;
 }
 
 <head>
+    <link href="~/css/login.css" rel="stylesheet" />
     <style>
-        .footer {
-            margin-top: 125px;
+        .login-container {
+            width: 45%;
+            height: 600px;
+            max-height: 600px; 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden; 
+            margin: 40px auto; 
         }
 
-        .card-bottom{
-            margin-top: 15px;
+        .login-form-section, .login-image-section {
+            padding: 20px 30px; 
+            height: 100%; 
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
         }
 
-        body {
-            background-color: #f3e3b2;
+        .form-group input {
+            padding: 10px 15px;
+            font-size: 0.95rem;
         }
 
-        .card {
-            border: 1px solid black;
-            margin-top: 20px;
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #E8E8E8;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
         }
-
-        h2{
-            margin-top: 20px;
+        .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
         }
     </style>
 </head>
 
 <body>
-    <div class="col-4 offset-4">
-        <h2>Registro</h2>
-        <div class="card">
-            <div class="card-body">
-                <form asp-controller="Account" asp-action="Register" method="post">
+    <div class="login-container">
+        <div class="login-form-section">
+            <div class="logo-section">
+                <h1>Registro</h1>
+                <p>Crea tu cuenta</p>
+            </div>
 
+            <form asp-controller="Account" asp-action="Register" method="post">
+                <div class="form-group">
                     <label asp-for="TipoUsuario">Tipo de usuario</label>
-                    <select class="form-control" asp-for="TipoUsuario">
+                    <select asp-for="TipoUsuario">
                         <option value="Usuario">Usuario</option>
                         <option value="Administrador">Administrador</option>
                     </select>
+                </div>
 
+                <div class="form-group">
                     <label asp-for="Nombre">Nombre:</label>
-                    <input class="form-control" asp-for="Nombre" type="text" required />
+                    <input asp-for="Nombre" type="text" placeholder="Tu nombre" />
+                </div>
 
+                <div class="form-group">
                     <label asp-for="Apellido">Apellido:</label>
-                    <input class="form-control" asp-for="Apellido" type="text" required />
+                    <input asp-for="Apellido" type="text" placeholder="Tu apellido" />
+                </div>
 
+                <div class="form-group">
                     <label asp-for="Correo">Correo:</label>
-                    <input class="form-control" asp-for="Correo" type="email" required />
+                    <input asp-for="Correo" type="email" placeholder="ejemplo@email.com" />
+                </div>
 
+                <div class="form-group">
                     <label asp-for="Contraseña">Contraseña:</label>
-                    <input class="form-control" asp-for="Contraseña" type="password" required />
+                    <input asp-for="Contraseña" type="password" placeholder="********" />
+                </div>
 
-                    <div class="card-bottom">
-                        <button class="btn btn-primary" type="submit">Enviar</button>
-                        <a class="btn btn-danger" asp-action="Login">volver</a>
-                    </div>
-                </form>
+                <button class="login-button" type="submit">Enviar</button>
+                <div class="register-link">
+                    <a asp-action="Login">Volver</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="login-image-section">
+            <div class="eco-illustration">
+                <div class="eco-icon">🌱</div>
+                <div class="eco-text">
+                    <h3>Bienvenido</h3>
+                    <p>Únete y ayuda a cuidar el planeta</p>
+                </div>
+                <div class="background-elements"></div>
             </div>
         </div>
     </div>
