@@ -1,0 +1,64 @@
+﻿@using Application.ViewModels.Rutas;
+@model RutaViewModel
+
+@{
+    ViewData["title"] = "Editar";
+}
+
+<head>
+    <style>
+        .footer {
+        margin-top: 125px;
+        }
+
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card {
+        border: 1px solid black;
+        margin-top: 100px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="card col-4 offset-4">
+        <div class="card-body">
+
+            @if (Model != null)
+            {
+                <form asp-controller="Rutas" asp-action="EditRutaPost" method="post">
+
+                    <input type="hidden" value="@Model.RutaId" asp-for="RutaId" required />
+
+                    <label asp-for="NombreRuta">Nombre:</label>
+                    <input class="form-control" type="text" asp-for="NombreRuta" required />
+
+                    <label asp-for="PuntoInicio">Punto de salida:</label>
+                    <input class="form-control" type="text" asp-for="PuntoInicio" required />
+
+                    <label asp-for="PuntoFinal">Punto de llegada:</label>
+                    <input class="form-control" type="text" asp-for="PuntoFinal" required />
+
+                    <label asp-for="Estado">Estado:</label>
+                    <select class="form-control" asp-for="Estado" required>
+                        <option value="@(true)">Activa</option>
+                        <option value="@(false)">Inactiva</option>
+                    </select>
+
+                    <div>
+                        <br />
+                        <button class="btn btn-success" type="submit">Editar</button>
+                        <a class="btn btn-danger" asp-action="Index">Volver</a>
+                    </div>
+                </form>
+            }
+			else
+			{
+				<p>No se encontró la ruta.</p>
+			}
+        </div>
+    </div>
+</body>

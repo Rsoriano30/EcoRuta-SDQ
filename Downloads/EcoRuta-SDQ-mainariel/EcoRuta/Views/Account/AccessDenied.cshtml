@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Acceso Denegado";
+}
+
+<head>
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+            .btn-primary:hover {
+                background-color: #45a049;
+                transform: scale(1.05);
+            }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: white;
+        }
+
+            .btn-danger:hover {
+                background-color: #c62828;
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+
+<body>
+    <p>No cuenta con el permiso necesario para acceder a esta página.</p>
+
+    <div class="btn-container">
+        <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Ir al login</a>
+        <button class="btn btn-danger" onclick="history.back()">Volver a la página anterior</button>
+    </div>
+</body>

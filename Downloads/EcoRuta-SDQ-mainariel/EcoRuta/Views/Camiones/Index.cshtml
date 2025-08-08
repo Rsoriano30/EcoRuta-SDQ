@@ -1,0 +1,157 @@
+﻿@model List<Application.ViewModels.Camiones.CamionViewModel>
+
+@{
+    ViewData["Title"] = "Camiones";
+}
+
+<head>
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .crearbtn {
+            margin: 30px auto;
+            text-align: center;
+            max-width: 1200px;
+        }
+
+            .crearbtn a {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 25px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+            }
+
+                .crearbtn a:hover {
+                    background-color: #45a049;
+                    transform: scale(1.05);
+                }
+
+        .row {
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+
+        .col {
+            transition: transform 0.3s ease;
+        }
+
+            .col:hover {
+                transform: translateY(-5px);
+            }
+
+        .card {
+            background-color: #f4fef4;
+            border-radius: 12px;
+            border: 1px solid #c8e6c9;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+            .card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            }
+
+        .card-body {
+            padding: 20px;
+        }
+
+            .card-body p {
+                margin-bottom: 10px;
+                font-size: 15px;
+            }
+
+        .form-btn {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+            .form-btn a {
+                flex: 1;
+                padding: 8px;
+                border-radius: 6px;
+                font-size: 14px;
+                text-align: center;
+                text-decoration: none;
+                transition: background-color 0.2s ease;
+            }
+
+        .btn-warning {
+            background-color: #fdd835;
+            color: #000;
+        }
+
+            .btn-warning:hover {
+                background-color: #fbc02d;
+                transform: scale(1.05);
+            }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: #fff;
+        }
+
+            .btn-danger:hover {
+                background-color: #c62828;
+                transform: scale(1.05);
+            }
+
+        h2 {
+            text-align: center;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+
+<div class="crearbtn">
+    <a class="btn btn-primary" asp-controller="Camiones" asp-action="CreateCamion">Nuevo Camión</a>
+</div>
+
+<div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @try
+        {
+            if (Model != null)
+            {
+                @foreach (var obj in Model)
+                {
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <p><strong>Placa:</strong> @obj.Placa</p>
+                                <p><strong>Modelo:</strong> @obj.Modelo</p>
+                                <p><strong>Año:</strong> @obj.Año</p>
+
+                                <div class="form-btn">
+                                    <a name="id" class="btn btn-warning" asp-action="EditCamion" asp-route-id="@obj.CamionId">Editar</a>
+                                    <a name="id" class="btn btn-danger" asp-action="DeleteCamion" asp-route-id="@obj.CamionId">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <h2>No se encontraron camiones</h2>
+            }
+        }
+        catch (Exception ex)
+        {
+            <h2>Error: @ex</h2>
+        }
+    </div>
+</div></div>

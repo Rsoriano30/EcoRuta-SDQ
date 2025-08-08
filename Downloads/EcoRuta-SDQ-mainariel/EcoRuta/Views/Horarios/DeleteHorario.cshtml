@@ -1,0 +1,65 @@
+﻿@using Application.ViewModels.Horarios
+@model HorarioViewModel
+
+@{
+    ViewData["Title"] = "Borrar";
+}
+
+<head>
+    <style>
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card{
+        border: 1px solid black;
+        margin-top: 100px;
+        width: 400px;
+        justify-self: center;
+        }
+
+        .footer {
+        margin-top: 210px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+
+        @if (Model != null)
+        {
+            <div class="card-header">
+                <hS>¿Seguro que quieres borrar este horario?</hS>
+            </div>
+            <div class="card-body">
+
+                <p>Hora de salida: @Model.HoraSalida</p>
+                <p>Hora de llegada: @Model.HoraLlegada</p>
+
+                @if (Model.DiaInicio == Model.DiaFin)
+                {
+                    <p>Día activa: @Model.DiaInicio</p>
+                }
+                else
+                {
+                    <p>Día de inicio: @Model.DiaInicio</p>
+                    <p>Día de finalización: @Model.DiaFin</p>
+                }
+
+                <form asp-controller="Horarios" asp-action="DeleteHorarioPost" method="post">
+                    <input type="hidden" name="Id" value="@Model.HorarioId" />
+
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                    <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="card-body">
+                <h2>No se encontró el horario</h2>
+            </div>
+        }
+    </div>
+</body>
