@@ -1,0 +1,55 @@
+﻿@using Application.ViewModels.Choferes
+@model ChoferViewModel
+
+@{
+    ViewData["Title"] = "Borrar";
+}
+
+<head>
+    <style>
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card{
+        border: 1px solid black;
+        margin-top: 100px;
+        width: 400px;
+        justify-self: center;
+        }
+
+        .footer {
+        margin-top: 210px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+
+        @if (Model != null)
+        {
+            <div class="card-header">
+                <hS>¿Seguro que quieres borrar este chofer?</hS>
+            </div>
+            <div class="card-body">
+
+                <p>Nombre: @Model.Nombre</p>
+                <p>Cédula: @Model.Cedula</p>
+
+                <form asp-controller="Choferes" asp-action="DeleteChoferPost" method="post">
+                    <input type="hidden" name="Id" value="@Model.ChoferId" />
+
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                    <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="card-body">
+                <h2>No se encontró el chofer</h2>
+            </div>
+        }
+    </div>
+</body>

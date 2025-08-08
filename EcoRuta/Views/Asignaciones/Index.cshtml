@@ -1,0 +1,105 @@
+﻿@using Application.ViewModels.Asignaciones
+@model List<AsignacionesDetailsViewModel>
+
+@{
+    ViewData["Title"] = "Asignaciones";
+}
+
+<head>
+    <style>
+        .row {
+        margin-top: 30px;
+        }
+
+        .crearbtn {
+        margin-top: 30px;
+        text-align: center;
+        }
+
+        .form-btn {
+        display: flex;
+        }
+
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card {
+        border: 1px solid black;
+        }
+
+        .footer {
+        margin-top: 100px;
+        }
+    </style>
+</head>
+
+<div class="crearbtn">
+    <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+        <input name="id" value="0" type="hidden" />
+        <intput name="ModoEditar" value="false" type="hidden" />
+        <button class="btn btn-primary" type="submit">Crear asignación</button>
+    </form>
+</div>
+
+<div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @try
+        {   
+            if (Model != null)
+            {
+                @foreach (var obj in Model)
+                {
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <p>Ruta: @(obj.NombreRuta ?? "Ninguna")</p>
+                                @if (obj.HorarioId.HasValue)
+                                {
+                                    if (obj.DiaFin.Equals(obj.DiaInicio)) 
+                                    {
+                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio a @obj.DiaFin</p>
+                                    }
+                                }
+                                else
+                                {
+                                    <P>Horario: Ninguno</P>
+                                }
+
+                                <p>Placa del Camión: @(obj.PlacaCamion ?? "Ninguno")</p>
+                                <p>Chofer: @(obj.NombreChofer ?? "Ninguno")</p>
+
+                                <div class="form-btn">
+                                    <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+                                        <input type="hidden" name="Id" value="@obj.AsignacionId" />
+										<input type="hidden" name="ModoEditar" value="true" />
+                                        <button class="btn btn-warning" type="submit">Editar</button>
+                                    </form>
+                                    <form asp-controller="Asignaciones" asp-action="DeleteAsign" method="get">
+                                        <input type="hidden" name="Id" value="@obj.AsignacionId" />
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+			}
+			else
+			{
+				<h2>No se encontraron asignaciones.</h2>
+            }
+        }
+        catch (Exception ex)
+        {
+            <h2>Error: @ex</h2>
+        }
+    </div>
+</div>

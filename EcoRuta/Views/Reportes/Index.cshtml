@@ -1,0 +1,91 @@
+﻿@model List<Application.ViewModels.Reportes.ReporteViewModel>
+
+@{
+    ViewData["Title"] = "Reportes";
+}
+
+<head>
+    <style>
+        .row{
+        margin-top: 30px;
+        }
+
+        .crearbtn{
+        margin-top: 30px;
+        text-align: center;
+        }
+
+        .form-btn{
+        display: flex;
+        }
+
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card {
+        border: 1px solid black;
+        }
+
+        .footer {
+        margin-top: 100px;
+        }
+
+    </style>
+</head>
+
+@if (User.IsInRole("Usuario"))
+{
+    <div class="crearbtn">
+        <a class="btn btn-primary" asp-controller="Reportes" asp-action="CreateReporte">Nuevo Reporte</a>
+    </div>
+}
+
+<div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        @try
+        {
+            if (Model != null)
+            {
+                @foreach (var obj in Model)
+                {
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <p>Titulo: @obj.Titulo</p>
+                                <p>Descripción: @obj.Descripcion</p>
+                                <p>Estado: @obj.Estado</p>
+
+                                <div class="form-btn">
+
+                                    <a name="id" class="btn btn-secondary" asp-action="Detalles" asp-route-id="@obj.ReporteId">Detalles</a>
+
+                                    @if(obj.Estado == "Pendiente" & User.IsInRole("Usuario"))
+                                    {
+                                        <a name="id" class="btn btn-warning" asp-action="EditReporte" asp-route-id="@obj.ReporteId">Editar</a>
+                                        <a name="id" class="btn btn-danger" asp-action="DeleteReporte" asp-route-id="@obj.ReporteId">Eliminar</a>
+                                    }
+                                    else if (obj.Estado == "Pendiente" && User.IsInRole("Administrador"))
+                                    {
+                                        <a name="id" class="btn btn-success" asp-action="EditReporte" asp-route-id="@obj.ReporteId">Evaluar</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+			else
+			{
+				<h2>No se encontraron reportes.</h2>
+			}
+
+        }
+        catch (Exception ex)
+        {
+            <h2>Error: @ex</h2>
+        }
+    </div>
+</div>

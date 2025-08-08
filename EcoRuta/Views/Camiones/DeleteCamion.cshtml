@@ -1,0 +1,55 @@
+﻿@using Application.ViewModels.Camiones
+@model CamionViewModel
+
+@{
+    ViewData["Title"] = "Borrar";
+}
+
+<head>
+    <style>
+        body {
+        background-color: #f3e3b2;
+        }
+
+        .card{
+        border: 1px solid black;
+        margin-top: 100px;
+        width: 400px;
+        justify-self: center;
+        }
+
+        .footer {
+        margin-top: 210px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+
+        @if (Model != null)
+        {
+            <div class="card-header">
+                <hS>¿Seguro que quieres borrar este camión?</hS>
+            </div>
+            <div class="card-body">
+
+                <p>Titulo: @Model.Placa</p>
+                <p>Modelo: @Model.Modelo</p>
+                <p>Año: @Model.Año</p>
+
+                <form asp-controller="Camiones" asp-action="DeleteCamionPost" method="post">
+                    <input type="hidden" name="Id" value="@Model.CamionId" />
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                    <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="card-body">
+                <h2>No se encontró el camión</h2>
+            </div>
+        }
+    </div>
+</body>

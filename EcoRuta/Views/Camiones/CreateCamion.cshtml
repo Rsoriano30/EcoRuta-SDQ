@@ -1,0 +1,46 @@
+﻿@using Application.ViewModels.Camiones
+@model CamionSaveViewModel
+
+@{
+    ViewData["title"] = "Crear";
+}
+
+<head>
+    <style>
+        body {
+            background-color: #f3e3b2;
+        }
+
+        .card {
+            border: 1px solid black;
+            margin-top: 100px;
+            width: 400px;
+        }
+
+        .footer {
+            margin-top: 190px;
+        }
+    </style>
+</head>
+
+<div class="card col-4 offset-4">
+    <div class="card-body">
+        <form asp-controller="Camiones" asp-action="CreateCamionPost" method="post">
+
+            <label asp-for="Placa">Placa:</label>
+            <input class="form-control" type="text" asp-for="Placa" required />
+
+            <label asp-for="Modelo">Modelo:</label>
+            <input class="form-control" type="text" asp-for="Modelo" required />
+
+            <label asp-for="Año">Año:</label>
+            <input class="form-control" type="text" asp-for="Año" required />
+
+            <div>
+                <br />
+                <button class="btn btn-success" type="submit">Crear</button>
+                <a class="btn btn-danger" asp-action="Index">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
