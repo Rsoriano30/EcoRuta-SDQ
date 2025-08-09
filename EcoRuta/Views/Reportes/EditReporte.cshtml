@@ -28,10 +28,10 @@
                             {
                                 case true:
                                     <label asp-for="Titulo">Titulo:</label>
-                                    <input class="form-control" type="text" asp-for="Descripcion" readonly />
+                                    <input class="form-control" type="text" asp-for="Titulo" readonly />
 
                                     <label asp-for="Descripcion">Descripción:</label>
-                                    <input class="form-control" type="text" asp-for="Titulo" readonly />
+                                    <input class="form-control" type="text" asp-for="Descripcion" readonly />
 
 								    <label asp-for="Estado">Repuesta:</label>
                                     <select class="form-control" asp-for="Estado" required>
@@ -45,10 +45,10 @@
 
                                 case false:
                                     <label asp-for="Titulo">Titulo:</label>
-                                    <input class="form-control" type="text" asp-for="Descripcion" required />
+                                    <input class="form-control" type="text" asp-for="Titulo" required />
 
                                     <label asp-for="Descripcion">Descripción:</label>
-                                    <input class="form-control" type="text" asp-for="Titulo" required />
+                                    <input class="form-control" type="text" asp-for="Descripcion" required />
 
                                     <input type="hidden" asp-for="Estado" required />
                                     break;
