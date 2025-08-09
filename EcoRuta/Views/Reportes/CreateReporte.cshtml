@@ -19,46 +19,36 @@
 }
 
 <head>
-    <style>
-        body {
-            background-color: #f3e3b2;
-        }
-
-        .card {
-            border: 1px solid black;
-            margin-top: 100px;
-            width: 400px;
-        }
-
-        .footer {
-            margin-top: 190px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
-<div class="card col-4 offset-4">
-    <div class="card-body">
-        <form asp-controller="Reportes" asp-action="CreateReportePost" method="post">
+<body>
+    <div class="main-wrapper">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Reportes" asp-action="CreateReportePost" method="post">
 
-			<input asp-for="UsuarioId" type="hidden" value="@user_id" />
-            <label asp-for="Titulo">Titulo:</label>
-            <input class="form-control" type="text" asp-for="Titulo" required />
+			        <input asp-for="UsuarioId" type="hidden" value="@user_id" />
+                    <label asp-for="Titulo">Titulo:</label>
+                    <input class="form-control" type="text" asp-for="Titulo" required />
 
-            <label asp-for="Descripcion">Descripción:</label>
-            <input class="form-control" type="text" asp-for="Descripcion" required />
+                    <label asp-for="Descripcion">Descripción:</label>
+                    <input class="form-control" type="text" asp-for="Descripcion" required />
 
-            <!-- <input class="form-control" type="hidden" value="(Model.ReporteId)" asp-for="UsuarioId" required /> -->
-            <input class="form-control" type="hidden" value="@null" asp-for="UsuarioId" required />
+                    <!-- <input class="form-control" type="hidden" value="(Model.ReporteId)" asp-for="UsuarioId" required /> -->
+                    <input class="form-control" type="hidden" value="@null" asp-for="UsuarioId" required />
 
 
-            <input class="form-control" type="hidden" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")" asp-for="FechaHora" required />
-            <input class="form-control" type="hidden" value="Pendiente" asp-for="Estado" required />
+                    <input class="form-control" type="hidden" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")" asp-for="FechaHora" required />
+                    <input class="form-control" type="hidden" value="Pendiente" asp-for="Estado" required />
 
-            <div>
-                <br />
-                <button class="btn btn-success" type="submit">Crear</button>
-                <a class="btn btn-danger" asp-action="Index">Volver</a>
+                    <div>
+                        <br />
+                        <button class="btn btn-success" type="submit">Crear</button>
+                        <a class="btn btn-danger" asp-action="Index">Volver</a>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+<</body>

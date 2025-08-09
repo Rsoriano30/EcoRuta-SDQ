@@ -6,59 +6,46 @@
 }
 
 <head>
-    <style>
-        body {
-        background-color: #f3e3b2;
-        }
-
-        .card{
-        border: 1px solid black;
-        margin-top: 100px;
-        width: 400px;
-        justify-self: center;
-        }
-
-        .footer {
-        margin-top: 210px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
 <body>
-    <div class="card">
+    <div class="main-wrapper">
+        <div class="card">
 
-        @if (Model != null)
-        {
-            @if (Model.Estado == "Pendiente")
+            @if (Model != null)
             {
-                <div class="card-header">
-                    <hS>¿Seguro que quieres borrar esta reporte?</hS>
-                </div>
-                <div class="card-body">
+                @if (Model.Estado == "Pendiente")
+                {
+                    <div class="card-header">
+                        <hS>¿Seguro que quieres borrar esta reporte?</hS>
+                    </div>
+                    <div class="card-body">
 
-                    <p>Titulo: @Model.Titulo</p>
-                    <p>Descripción: @Model.Descripcion</p>
+                        <p>Titulo: @Model.Titulo</p>
+                        <p>Descripción: @Model.Descripcion</p>
 
-                    <form asp-controller="Reportes" asp-action="DeleteReportePost" method="post">
+                        <form asp-controller="Reportes" asp-action="DeleteReportePost" method="post">
 
-                        <input type="hidden" name="Id" value="@Model.ReporteId" />
-                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                        <a class="btn btn-warning" asp-action="Index">Cancelar</a>
-                    </form>
-                </div>
+                            <input type="hidden" name="Id" value="@Model.ReporteId" />
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                            <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body">
+                        <p>Este reporte ya no puede ser borrado</p>
+                    </div>
+                }
             }
             else
             {
                 <div class="card-body">
-                    <p>Este reporte ya no puede ser borrado</p>
+                    <h2>No se encontró el reporte</h2>
                 </div>
             }
-        }
-        else
-        {
-            <div class="card-body">
-                <h2>No se encontró el reporte</h2>
-            </div>
-        }
+        </div>
     </div>
 </body>

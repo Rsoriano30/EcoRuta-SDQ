@@ -1,37 +1,22 @@
-﻿@using Application.ViewModels.Camiones;
+﻿@using Application.ViewModels.Camiones
 @model CamionViewModel
 
 @{
-    ViewData["title"] = "Editar";
+    ViewData["Title"] = "Editar Camión";
 }
 
 <head>
-    <style>
-        .footer {
-            margin-top: 125px;
-        }
-
-        body {
-            background-color: #f3e3b2;
-        }
-
-        .card {
-            border: 1px solid black;
-            margin-top: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
-
 <body>
-    <div class="card col-4 offset-4">
-        <div class="card-body">
-
+    <div class="main-wrapper">
+        <div class="card">
+            <h3 style="text-align: center; margin-bottom: 20px;">Editar Camión</h3>
             @if (Model != null)
             {
                 <form asp-controller="Camiones" asp-action="EditCamionPost" method="post">
-
-                    <input class="form-control" type="hidden" asp-for="CamionId" required />
+                    <input type="hidden" asp-for="CamionId" />
 
                     <label asp-for="Placa">Placa:</label>
                     <input class="form-control" type="text" asp-for="Placa" required />
@@ -42,17 +27,16 @@
                     <label asp-for="Año">Año:</label>
                     <input class="form-control" type="number" asp-for="Año" required />
 
-                    <div>
-                        <br />
-                        <button class="btn btn-success" type="submit">Editar</button>
+                    <div class="btn-container">
+                        <button class="btn btn-success" type="submit">Guardar</button>
                         <a class="btn btn-danger" asp-action="Index">Volver</a>
                     </div>
                 </form>
             }
-			else
-			{
+            else
+            {
                 <p>No se encontró el camión.</p>
-			}
+            }
         </div>
     </div>
 </body>

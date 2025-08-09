@@ -2,54 +2,40 @@
 @model ChoferViewModel
 
 @{
-    ViewData["Title"] = "Borrar";
+    ViewData["Title"] = "Eliminar Chofer";
 }
 
 <head>
-    <style>
-        body {
-        background-color: #f3e3b2;
-        }
-
-        .card{
-        border: 1px solid black;
-        margin-top: 100px;
-        width: 400px;
-        justify-self: center;
-        }
-
-        .footer {
-        margin-top: 210px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
 <body>
-    <div class="card">
+    <div class="main-wrapper">
+        <div class="card">
+            @if (Model != null)
+            {
+                <div class="card-header">
+                    <h5>¿Seguro que quieres borrar este chofer?</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Nombre:</strong> @Model.Nombre</p>
+                    <p><strong>Cédula:</strong> @Model.Cedula</p>
 
-        @if (Model != null)
-        {
-            <div class="card-header">
-                <hS>¿Seguro que quieres borrar este chofer?</hS>
-            </div>
-            <div class="card-body">
-
-                <p>Nombre: @Model.Nombre</p>
-                <p>Cédula: @Model.Cedula</p>
-
-                <form asp-controller="Choferes" asp-action="DeleteChoferPost" method="post">
-                    <input type="hidden" name="Id" value="@Model.ChoferId" />
-
-                    <button class="btn btn-danger" type="submit">Eliminar</button>
-                    <a class="btn btn-warning" asp-action="Index">Cancelar</a>
-                </form>
-            </div>
-        }
-        else
-        {
-            <div class="card-body">
-                <h2>No se encontró el chofer</h2>
-            </div>
-        }
+                    <form asp-controller="Choferes" asp-action="DeleteChoferPost" method="post">
+                        <input type="hidden" name="Id" value="@Model.ChoferId" />
+                        <div class="btn-container">
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                            <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="card-body">
+                    <h2 style="text-align: center;">No se encontró el chofer</h2>
+                </div>
+            }
+        </div>
     </div>
 </body>

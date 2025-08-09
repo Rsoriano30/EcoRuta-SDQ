@@ -6,72 +6,61 @@
 }
 
 <head>
-    <style>
-        .footer {
-            margin-top: 125px;
-        }
-
-        body {
-            background-color: #f3e3b2;
-        }
-
-        .card {
-            border: 1px solid black;
-            margin-top: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
 
 <body>
-    <div class="card col-4 offset-4">
-        <div class="card-body">
+    <div class="main-wrapper">
+        <div class="card">
+            <div class="card-body">
 
-            @if (Model != null)
-            {
-                <form asp-controller="Horarios" asp-action="EditHorarioPost" method="post">
+                @if (Model != null)
+                {
+                    <form asp-controller="Horarios" asp-action="EditHorarioPost" method="post">
 
-                    <input class="form-control" type="hidden" asp-for="HorarioId" required />
+                        <input class="form-control" type="hidden" asp-for="HorarioId" required />
 
-                    <label asp-for="HoraSalida">HoraSalida:</label>
-                    <input class="form-control" type="time" asp-for="HoraSalida" required />
+                        <label asp-for="HoraSalida">HoraSalida:</label>
+                        <input class="form-control" type="time" asp-for="HoraSalida" required />
 
-                    <label asp-for="HoraLlegada">HoraLlegada:</label>
-                    <input class="form-control" type="time" asp-for="HoraLlegada" required />
+                        <label asp-for="HoraLlegada">HoraLlegada:</label>
+                        <input class="form-control" type="time" asp-for="HoraLlegada" required />
 
-                    <label asp-for="DiaInicio">Dia de inicio:</label>
-                    <select class="form-control" asp-for="DiaInicio" >
-                        <option value="Lunes">Lunes</option>
-                        <option value="Martes">Martes</option>
-                        <option value="Miércoles">Miércoles</option>
-                        <option value="Jueves">Jueves</option>
-                        <option value="Viernes">Viernes</option>
-						<option value="Sábado">Sábado</option>
-						<option value="Domingo">Domingo</option>
-                    </select>
+                        <label asp-for="DiaInicio">Dia de inicio:</label>
+                        <select class="form-control" asp-for="DiaInicio" >
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+						    <option value="Sábado">Sábado</option>
+						    <option value="Domingo">Domingo</option>
+                        </select>
 
-                    <label asp-for="DiaFin">Dia de finalización:</label>
-                    <select class="form-control" asp-for="DiaFin">
-                        <option value="Lunes">Lunes</option>
-                        <option value="Martes">Martes</option>
-                        <option value="Miércoles">Miércoles</option>
-                        <option value="Jueves">Jueves</option>
-                        <option value="Viernes">Viernes</option>
-                        <option value="Sábado">Sábado</option>
-                        <option value="Domingo">Domingo</option>
-                    </select>
+                        <label asp-for="DiaFin">Dia de finalización:</label>
+                        <select class="form-control" asp-for="DiaFin">
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
 
-                    <div>
-                        <br />
-                        <button class="btn btn-success" type="submit">Editar</button>
-                        <a class="btn btn-danger" asp-action="Index">Volver</a>
-                    </div>
-                </form>
-            }
-			else
-			{
-				<p>No se encontró el horario.</p>
-			}
+                        <div>
+                            <br />
+                            <button class="btn btn-success" type="submit">Editar</button>
+                            <a class="btn btn-danger" asp-action="Index">Volver</a>
+                        </div>
+                    </form>
+                }
+			    else
+			    {
+				    <p>No se encontró el horario.</p>
+			    }
+            </div>
         </div>
     </div>
 </body>
