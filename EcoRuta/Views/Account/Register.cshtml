@@ -13,6 +13,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EcoRuta</title>
     <link href="~/css/login.css" rel="stylesheet" />
+
+    <style>
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E8E8E8;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+            box-sizing: border-box;
+            cursor: pointer;
+            appearance: none;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+    </style>
 </head>
 <body>
     <div class="login-page">
