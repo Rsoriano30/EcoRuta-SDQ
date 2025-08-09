@@ -12,112 +12,344 @@
 
 <head>
     <style>
-        .footer {
-        margin-top: 125px;
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        body {
-        background-color: #f3e3b2;
+        .form-container {
+            max-width: 600px;
+            width: 100%;
         }
 
         .card {
-        border: 1px solid black;
-        margin-top: 100px;
+            background-color: #f8fcff;
+            border-radius: 15px;
+            border: 1px solid #bbdefb;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+            .card:hover {
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+
+        .card-header {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: none;
+        }
+
+            .card-header h2 {
+                margin: 0;
+                font-size: 28px;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1565C0;
+            font-size: 16px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e3f2fd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #2196F3;
+                background-color: #fff;
+                box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+                transform: translateY(-1px);
+            }
+
+            .form-control:hover {
+                border-color: #90caf9;
+            }
+
+        select.form-control {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 45px;
+        }
+
+            select.form-control option {
+                padding: 10px;
+                font-size: 15px;
+            }
+
+        .ruta-label {
+            color: #388E3C;
+        }
+
+        .horario-label {
+            color: #F57C00;
+        }
+
+        .camion-label {
+            color: #7B1FA2;
+        }
+
+        .chofer-label {
+            color: #1976D2;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 2px solid #e3f2fd;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-weight: 600;
+            min-width: 140px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+            .btn-success:hover {
+                background: linear-gradient(135deg, #45a049 0%, #2e7d32 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+            }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+
+            .btn-danger:hover {
+                background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
+            }
+
+        .form-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .create-icon {
+            color: #4CAF50;
+        }
+
+        .edit-icon {
+            color: #2196F3;
+        }
+
+        /* Estilo para opciones vacías */
+        option[value="null"] {
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .form-buttons
+
+        {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-header {
+            padding: 20px;
+        }
+
+            .card-header h2 {
+                font-size: 24px;
+            }
+
+        }
+
+        /* Animación de entrada */
+        @@keyframes slideInUp {
+            from
+
+            {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .card {
+            animation: slideInUp 0.6s ease-out;
         }
     </style>
 </head>
 
-
 <body>
-    <div class="card col-4 offset-4">
-        <div class="card-body">
-            <form asp-controller="Asignaciones" asp-action="@(ModoEditar ? "EditAsignPost" : "CreateAsignPost")" method="post">
-
-                <input asp-for="AsignacionId" value="@Model.AsignacionId" type="hidden" />
-
-                <label asp-for="RutaId">Ruta:</label>
-                <select class="form-control" asp-for="RutaId">
-                    @if (Rutas != null)
-                    {
-                        <option value="null">Ninguna</option>
-                        foreach (var ruta in Rutas)
-                        {
-                            <option value="@ruta.RutaId">@ruta.NombreRuta</option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay rutas</option>
-                    }
-                </select>
-
-                <label asp-for="HorarioId">Horario:</label>
-                <select class="form-control" asp-for="HorarioId">
-                    @if (Horarios != null)
-                    {
-                        <option value="null">Ninguno</option>
-                        foreach (var horario in Horarios)
-                        {
-                            <option value="@horario.HorarioId">
-                                @(horario.HoraSalida) - @(horario.HoraLlegada) @if (horario.DiaInicio == horario.DiaFin)
-                                {
-                                    <p>- @horario.DiaInicio </p>
-                                }
-                                else
-                                {
-                                    <p>- @horario.DiaInicio a @horario.DiaFin </p>
-                                }
-                            </option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay horarios</option>
-                    }
-                </select>
-
-                <label asp-for="CamionId">Camion:</label>
-                <select class="form-control" asp-for="CamionId">
-                    @if (Camiones != null)
-                    {
-                        <option value="null">Ninguno</option>
-                        foreach (var camion in Camiones)
-                        {
-                            <option value="@camion.CamionId">
-                                <p>@camion.Placa - @camion.Modelo - @camion.Año </p>
-                            </option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay camiones</option>
-                    }
-                </select>
-
-                <label asp-for="ChoferId">Chofer:</label>
-                <select class="form-control" asp-for="ChoferId">
-                    @if (Choferes != null)
-                    {
-                        <option value="null">Ninguno</option>
-                        foreach (var chofer in Choferes)
-                        {
-                            <option value="@chofer.ChoferId">
-                                <p>@chofer.Nombre - @chofer.Cedula </p>
-                            </option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay choferes</option>
-                    }
-                </select>
-
-                <div>
-                    <br />
-                    <button class="btn btn-success" type="submit">@(ModoEditar ? "Editar" : "Crear")</button>
-                    <a class="btn btn-danger" asp-action="Index">Volver</a>
+    <div class="form-container">
+        <div class="card">
+            <div class="card-header">
+                <div class="form-icon @(ModoEditar ? "edit-icon" : "create-icon")">
+                    @(ModoEditar ? "✏️" : "➕")
                 </div>
-            </form>
+                <h2>@(ModoEditar ? "Editar Asignación" : "Crear Nueva Asignación")</h2>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Asignaciones" asp-action="@(ModoEditar ? "EditAsignPost" : "CreateAsignPost")" method="post">
+
+                    <input asp-for="AsignacionId" value="@Model.AsignacionId" type="hidden" />
+
+                    <div class="form-group">
+                        <label asp-for="RutaId" class="ruta-label">🛣️ Ruta:</label>
+                        <select class="form-control" asp-for="RutaId">
+                            @if (Rutas != null)
+                            {
+                                <option value="null">Seleccionar ruta...</option>
+                                foreach (var ruta in Rutas)
+                                {
+                                    <option value="@ruta.RutaId">@ruta.NombreRuta</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="null">No hay rutas disponibles</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="HorarioId" class="horario-label">⏰ Horario:</label>
+                        <select class="form-control" asp-for="HorarioId">
+                            @if (Horarios != null)
+                            {
+                                <option value="null">Seleccionar horario...</option>
+                                foreach (var horario in Horarios)
+                                {
+                                    <option value="@horario.HorarioId">
+                                        @(horario.HoraSalida) - @(horario.HoraLlegada) @if (horario.DiaInicio == horario.DiaFin)
+                                        {
+                                            @:- @horario.DiaInicio
+                                        }
+                                        else
+                                        {
+                                            @:- @horario.DiaInicio a @horario.DiaFin
+                                        }
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="null">No hay horarios disponibles</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CamionId" class="camion-label">🚛 Camión:</label>
+                        <select class="form-control" asp-for="CamionId">
+                            @if (Camiones != null)
+                            {
+                                <option value="null">Seleccionar camión...</option>
+                                foreach (var camion in Camiones)
+                                {
+                                    <option value="@camion.CamionId">
+                                        @camion.Placa - @camion.Modelo - @camion.Año
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="null">No hay camiones disponibles</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ChoferId" class="chofer-label">👤 Chofer:</label>
+                        <select class="form-control" asp-for="ChoferId">
+                            @if (Choferes != null)
+                            {
+                                <option value="null">Seleccionar chofer...</option>
+                                foreach (var chofer in Choferes)
+                                {
+                                    <option value="@chofer.ChoferId">
+                                        @chofer.Nombre - @chofer.Cedula
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="null">No hay choferes disponibles</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button class="btn btn-success" type="submit">
+                            @(ModoEditar ? "💾 Guardar Cambios" : "➕ Crear Asignación")
+                        </button>
+                        <a class="btn btn-danger" asp-action="Index">
+                            🔙 Volver
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>

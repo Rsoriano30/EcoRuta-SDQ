@@ -8,6 +8,7 @@ using Application.Intefaces.Services;
 using Application.ViewModels.Usuarios;
 using AutoMapper;
 using Domain.Entities;
+using Application.ViewModels.Admin;
 
 namespace Application.Services
 {
@@ -25,6 +26,17 @@ namespace Application.Services
         public async Task<Usuario> GetByEmailAsync(string email)
         {
             return await _repository.GetByEmailAsync(email);
+        }
+
+        public async Task<EstadisticasDashboardViewModel> ObtenerEstadisticasDashboardAsync()
+        {
+            var usuarios = await _repository.GetAllAsync();
+            return new EstadisticasDashboardViewModel
+            {
+                TotalUsuarios = usuarios.Count,
+                TotalAdministradores = usuarios.Count(u => u.TipoUsuario == "Administrador"),
+                TotalRutas = usuarios.Count(u => u.TipoUsuario == "Usuario")
+            };
         }
     }
 }
