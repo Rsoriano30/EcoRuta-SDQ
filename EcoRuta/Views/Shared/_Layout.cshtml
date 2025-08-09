@@ -9,12 +9,127 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EcoRuta.styles.css" asp-append-version="true" />
+    
 
     <style>
         .session-btn{
             margin-right: 10px;
             list-style: none;
         }
+
+        .navbar-brand {
+            color: #2e7d32 !important; 
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+            .navbar-brand:hover {
+                color:#4CAF50 !important;
+                border-radius:15px;
+            }
+
+        
+        .nav-link {
+            color: #333333 !important;
+            font-size: 1rem;
+            padding: 0.75rem 1.25rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .nav-link:hover {
+                color: #ffffff !important;
+                background-color: #4CAF50;
+                border-radius: 100px; 
+            }
+
+            .nav-link.active {
+                color: #ffffff !important;
+                background-color: #2e7d32;
+            }
+
+        
+        .btn-logout {
+            background-color: transparent;
+            color: #333333 !important;
+            border: 1px solid #333333;
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-logout:hover {
+                background-color: #d32f2f; 
+                color: #ffffff !important;
+                border-color: #d32f2f;
+            }
+
+        
+        .container {
+            flex: 1;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        
+        footer {
+            background-color: #f5f5f5;
+            color: #f5f5f5;
+            padding-bottom: 5px;
+            margin-top: 200px;
+            text-align: center;
+        }
+
+            footer a {
+                color: #2e7d32;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                footer a:hover {
+                    color: #1b5e20;
+                    text-decoration: underline;
+                }
+
+        
+        @@media (max-width: 992px) {
+
+            .navbar-collapse
+
+        {
+            padding-top: 1rem;
+        }
+
+            .nav-link:hover {
+                color: #ffffff !important;
+                background-color: #4CAF50;
+                border-radius: 100px;
+            }
+
+            .nav-link.active {
+                color: #ffffff !important;
+                background-color: #000;
+                
+            }
+
+        .nav-item {
+            margin: 0.3rem 0;
+        }
+
+        .btn-logout {
+            margin-top: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        }
+
+       
+
     </style>
 </head>
 <body>
@@ -33,7 +148,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                        @if (User.Claims.Any(c => c.Type == System.Security.Claims.ClaimTypes.Role))
+                       @if (User.Claims.Any(c => c.Type == System.Security.Claims.ClaimTypes.Role))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Reportes" asp-action="Index">Reportes</a>
@@ -44,6 +159,7 @@
 
                             @if (User.IsInRole("Administrador"))
                             {
+                            
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Asignaciones" asp-action="Index">Asignaciones</a>
                                 </li>

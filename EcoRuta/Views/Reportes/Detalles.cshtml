@@ -3,24 +3,57 @@
 
 @{
     ViewData["Title"] = "Detalles";
+    <link rel="stylesheet" href="~/css/responsive.css" />
 }
 
 <head>
     <style>
-        .row {
-        margin-top: 30px;
+        
+         body {
+            background: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
         }
 
-        body {
-        background-color: #f3e3b2;
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .card {
-        border: 1px solid black;
+            background-color: #f4fef4;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            border: none;
         }
 
-        .footer {
-        margin-top: 100px;
+        .card p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: black;
+        }
+
+        .btn {
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+
+        h2 {
+            color: black;
         }
 
     </style>

@@ -16,23 +16,101 @@
     }
 
     ViewData["title"] = "Crear";
+    <link rel="stylesheet" href="~/css/responsive.css"/>
 }
 
 <head>
     <style>
         body {
-            background-color: #f3e3b2;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .card {
-            border: 1px solid black;
-            margin-top: 100px;
-            width: 400px;
+            background-color: #f4fef4;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 35px;
+            width: 90%;
+            max-width: 450px;
         }
 
-        .footer {
-            margin-top: 190px;
+        .form-group {
+            margin-bottom: 20px;
         }
+
+        label {
+            display: block;
+            margin-bottom: 2px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+            .button-group button,
+            .button-group a {
+                flex: 1;
+                text-align: center;
+                padding: 10px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                text-decoration: none;
+                color: #fff;
+            }
+
+        .btn-success {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 10px;
+          
+            transition: background-color 0.3s;
+            font-size: 17px;
+        }
+
+            .btn-success:hover {
+                background-color: #079C1E;
+            }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            font-size: 15px;
+        }
+
+            .btn-danger:hover {
+                background-color: #c62828;
+            }
     </style>
 </head>
 

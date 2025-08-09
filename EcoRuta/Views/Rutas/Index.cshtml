@@ -2,33 +2,127 @@
 
 @{
     ViewData["Title"] = "Rutas";
+    
 }
 
 <head>
     <style>
-        .row {
-        margin-top: 30px;
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
         .crearbtn {
-        margin-top: 30px;
-        text-align: center;
+            margin-top: 40px;
+            text-align: center;
         }
 
-        .form-btn {
-        display: flex;
+        .crearbtn a {
+                background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
         }
 
-        body {
-        background-color: #f3e3b2;
+        .crearbtn a:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .row {
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+
+        .col {
+            transition: transform 0.3s ease;
+        }
+
+        .col:hover {
+            transform: translateY(-5px);
         }
 
         .card {
-        border: 1px solid black;
+            background-color: #f4fef4;
+            border-radius: 12px;
+            border: 1px solid #c8e6c9;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease;
         }
 
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .estado-activa {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .estado-inactiva {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .form-btn {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .form-btn a {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-warning {
+            background-color: #fdd835;
+            color: #000;
+        }
+
+        .btn-warning:hover {
+            background-color: #fbc02d;
+        }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c62828;
+        }
+
+      
+
         .footer {
-        margin-top: 100px;
+            margin-top: 100px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
         }
     </style>
 </head>

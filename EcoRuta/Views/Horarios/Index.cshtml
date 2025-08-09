@@ -6,30 +6,140 @@
 
 <head>
     <style>
-        .row {
-        margin-top: 30px;
+        
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
         .crearbtn {
-        margin-top: 30px;
-        text-align: center;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+            .crearbtn a {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 25px;
+                font-size: 16px;
+                border-radius: 10px;
+                border: none;
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+                box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+            }
+
+                .crearbtn a:hover {
+                    background-color: #45a049;
+                    transform: scale(1.05);
+                }
+
+        .row {
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+
+        .col {
+            transition: transform 0.3s ease;
+        }
+
+            .col:hover {
+                transform: translateY(-5px);
+            }
+
+        .card {
+            background-color: #f4fef4;
+            border-radius: 12px;
+            border: 1px solid #c8e6c9;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 12px;
+        }
+
+        .info-label {
+            min-width: 140px;
+        }
+
+
+        .info-value {
+            flex-grow: 1;
+            padding: 6px 12px;
+            border-radius: 6px;
         }
 
         .form-btn {
-        display: flex;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        body {
-        background-color: #f3e3b2;
+            .form-btn a {
+                flex: 1;
+                padding: 10px;
+                border-radius: 8px;
+                font-size: 14px;
+                text-align: center;
+                text-decoration: none;
+                transition: all 0.2s ease;
+            }
+
+        .btn-warning {
+            background-color: #fdd835;
+            color: #000;
         }
 
-        .card {
-        border: 1px solid black;
+            .btn-warning:hover {
+                background-color: #fbc02d;
+                transform: translateY(-2px);
+            }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: #fff;
         }
 
-        .footer {
-        margin-top: 100px;
+            .btn-danger:hover {
+                background-color: #c62828;
+                transform: translateY(-2px);
+            }
+
+        .no-data {
+            text-align: center;
+            color: #666;
+            margin: 40px 0;
         }
+
+        @@media (max-width: 768px) {
+            .info-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .info-label {
+                min-width: auto;
+            }
+
+            .form-btn {
+                flex-direction: column;
+            }
+        }
+
 
     </style>
 </head>
@@ -69,20 +179,20 @@
                                         }
                                     }
 
-									<div class="form-btn">
-										<a name="id" class="btn btn-warning" asp-action="EditHorario" asp-route-id="@obj.HorarioId">Editar</a>
+                                    <div class="form-btn">
+                                        <a name="id" class="btn btn-warning" asp-action="EditHorario" asp-route-id="@obj.HorarioId">Editar</a>
                                         <a name="id" class="btn btn-danger" asp-action="DeleteHorario" asp-route-id="@obj.HorarioId">Eliminar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				<p>Error al cargar los horarios: @ex.Message</p>
-			}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                <p>Error al cargar los horarios: @ex.Message</p>
+            }
         </div>
     </div>
 </body>
