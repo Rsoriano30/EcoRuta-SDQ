@@ -7,127 +7,46 @@
 }
 
 <head>
-    
-    <style>
-        body {
-            background: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            margin: 0;
-            padding: 20px; 
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 40px);
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        .card {
-            background-color: #f4fef4;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-            padding: 30px;
-            width: 100%;
-            max-width: 500px;
-            margin: 20px; 
-        }
-
-        .card-header {
-            color: black;
-        }
-
-        .card p {
-            margin-bottom: 15px;
-            font-size: 1rem;
-            word-wrap: break-word;
-            color: black;
-        }
-
-        .card-body h2 {
-            color: black;
-        }
-
-        .btn {
-            border-radius: 10px;
-            padding: 10px 20px;
-            margin-top: 15px;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        .btn-danger {
-            background-color: #d9534f;
-            border: none;
-            color: white;
-            font-size: 17px;
-        }
-
-            .btn-danger:hover {
-                background-color: #c9302c;
-            }
-
-        .btn-warning {
-            background-color: #f0ad4e;
-            border: none;
-            color: white;
-        }
-
-            .btn-warning:hover {
-                background-color: #ec971f;
-            }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        h5 {
-            margin-bottom: 20px;
-        }
-    </style>
-
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
 <body>
-    <div class="card">
+    <div class="main-wrapper">
+        <div class="card">
 
-        @if (Model != null)
-        {
-            @if (Model.Estado == "Pendiente")
+            @if (Model != null)
             {
-                <div class="card-header">
-                    <hS>¿Seguro que quieres borrar esta reporte?</hS>
-                </div>
-                <div class="card-body">
+                @if (Model.Estado == "Pendiente")
+                {
+                    <div class="card-header">
+                        <hS>¿Seguro que quieres borrar esta reporte?</hS>
+                    </div>
+                    <div class="card-body">
 
-                    <p>Titulo: @Model.Titulo</p>
-                    <p>Descripción: @Model.Descripcion</p>
+                        <p>Titulo: @Model.Titulo</p>
+                        <p>Descripción: @Model.Descripcion</p>
 
-                    <form asp-controller="Reportes" asp-action="DeleteReportePost" method="post">
+                        <form asp-controller="Reportes" asp-action="DeleteReportePost" method="post">
 
-                        <input type="hidden" name="Id" value="@Model.ReporteId" />
-                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                        <a class="btn btn-warning" asp-action="Index">Cancelar</a>
-                    </form>
-                </div>
+                            <input type="hidden" name="Id" value="@Model.ReporteId" />
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                            <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body">
+                        <p>Este reporte ya no puede ser borrado</p>
+                    </div>
+                }
             }
             else
             {
                 <div class="card-body">
-                    <p>Este reporte ya no puede ser borrado</p>
+                    <h2>No se encontró el reporte</h2>
                 </div>
             }
-        }
-        else
-        {
-            <div class="card-body">
-                <h2>No se encontró el reporte</h2>
-            </div>
-        }
+        </div>
     </div>
 </body>

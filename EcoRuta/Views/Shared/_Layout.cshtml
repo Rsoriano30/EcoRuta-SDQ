@@ -84,25 +84,23 @@
             text-align: center;
         }
 
-            footer a {
+        footer a {
                 color: #2e7d32;
                 text-decoration: none;
                 transition: color 0.3s;
-            }
+        }
 
-                footer a:hover {
-                    color: #1b5e20;
-                    text-decoration: underline;
-                }
+        footer a:hover {
+            color: #1b5e20;
+            text-decoration: underline;
+        }
 
         
         @@media (max-width: 992px) {
 
-            .navbar-collapse
-
-        {
-            padding-top: 1rem;
-        }
+            .navbar-collapse {
+                padding-top: 1rem;
+            }
 
             .nav-link:hover {
                 color: #ffffff !important;
@@ -116,20 +114,17 @@
                 
             }
 
-        .nav-item {
-            margin: 0.3rem 0;
+            .nav-item {
+                margin: 0.3rem 0;
+            }
+
+            .btn-logout {
+                margin-top: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+
         }
-
-        .btn-logout {
-            margin-top: 1rem;
-            width: 100%;
-            text-align: center;
-        }
-
-        }
-
-       
-
     </style>
 </head>
 <body>
@@ -157,7 +152,6 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
                                 break;
-
                         }
 
                        @if (User.Claims.Any(c => c.Type == System.Security.Claims.ClaimTypes.Role))
@@ -192,8 +186,8 @@
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <li class="nav-item ms-auto" style="margin-right: 10px;">
+                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
                     </ul>

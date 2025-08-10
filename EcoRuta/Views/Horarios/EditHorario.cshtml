@@ -7,151 +7,61 @@
 }
 
 <head>
-    
-    <style>
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .card {
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-            width: 350px;
-            background: white;
-            background-color: #f4fef4;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .form-control {
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            
-            font-size: 14px;
-        }
-
-        .btn-success {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 17px;
-        }
-
-        .btn-danger {
-            background-color: #f44336;
-            color: white;
-            font-size: 15px;
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin-top: 30px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
-    </style>
-
+    <link rel="stylesheet" href="~/css/form.css">
 </head>
 
 
 <body>
-    <div class="card col-4 offset-4">
-        <div class="card-body">
+    <div class="main-wrapper">
+        <div class="card">
+            <div class="card-body">
 
-            @if (Model != null)
-            {
-                <form asp-controller="Horarios" asp-action="EditHorarioPost" method="post">
+                @if (Model != null)
+                {
+                    <form asp-controller="Horarios" asp-action="EditHorarioPost" method="post">
 
-                    <input class="form-control" type="hidden" asp-for="HorarioId" required />
+                        <input class="form-control" type="hidden" asp-for="HorarioId" required />
 
-                    <label asp-for="HoraSalida">Hora Salida:</label>
-                    <input class="form-control" type="time" asp-for="HoraSalida" required />
+                        <label asp-for="HoraSalida">HoraSalida:</label>
+                        <input class="form-control" type="time" asp-for="HoraSalida" required />
 
-                    <label asp-for="HoraLlegada">Hora Llegada:</label>
-                    <input class="form-control" type="time" asp-for="HoraLlegada" required />
+                        <label asp-for="HoraLlegada">HoraLlegada:</label>
+                        <input class="form-control" type="time" asp-for="HoraLlegada" required />
 
-                    <label asp-for="DiaInicio">Dia de inicio:</label>
-                    <select class="form-control" asp-for="DiaInicio" >
-                        <option value="Lunes">Lunes</option>
-                        <option value="Martes">Martes</option>
-                        <option value="Miércoles">Miércoles</option>
-                        <option value="Jueves">Jueves</option>
-                        <option value="Viernes">Viernes</option>
-						<option value="Sábado">Sábado</option>
-						<option value="Domingo">Domingo</option>
-                    </select>
+                        <label asp-for="DiaInicio">Dia de inicio:</label>
+                        <select class="form-control" asp-for="DiaInicio" >
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
 
-                    <label asp-for="DiaFin">Dia de finalización:</label>
-                    <select class="form-control" asp-for="DiaFin">
-                        <option value="Lunes">Lunes</option>
-                        <option value="Martes">Martes</option>
-                        <option value="Miércoles">Miércoles</option>
-                        <option value="Jueves">Jueves</option>
-                        <option value="Viernes">Viernes</option>
-                        <option value="Sábado">Sábado</option>
-                        <option value="Domingo">Domingo</option>
-                    </select>
+                        <label asp-for="DiaFin">Dia de finalización:</label>
+                        <select class="form-control" asp-for="DiaFin">
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
 
-                    <div>
-                        <br />
-                        <button class="btn btn-success" type="submit">Editar</button>
-                        <a class="btn btn-danger" asp-action="Index">Volver</a>
-                    </div>
-                </form>
-            }
-			else
-			{
-				<p>No se encontró el horario.</p>
-			}
+                        <div>
+                            <br />
+                            <button class="btn btn-success" type="submit">Editar</button>
+                            <a class="btn btn-danger" asp-action="Index">Volver</a>
+                        </div>
+                    </form>
+                }
+			    else
+			    {
+				    <p>No se encontró el horario.</p>
+			    }
+            </div>
         </div>
     </div>
 </body>
