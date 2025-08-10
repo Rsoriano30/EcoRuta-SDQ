@@ -3,23 +3,87 @@
 
 @{
     ViewData["Title"] = "Borrar";
+    
 }
 
 <head>
     <style>
         body {
-        background-color: #f3e3b2;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
         }
 
-        .card{
-        border: 1px solid black;
-        margin-top: 100px;
-        width: 400px;
-        justify-self: center;
+        .card {
+            background-color: #f4fef4;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            max-width: 450px;
+            margin: 100px auto;
+            padding: 25px;
+            color: #333;
         }
+
+        .card-header {
+            background-color: transparent !important; 
+            border-bottom: none !important; 
+            padding-bottom: 0 !important; 
+            color: #333 !important; 
+        }
+
+            .card-header h5 {
+                margin: 0; 
+                padding: 0; 
+                font-size: 18px; 
+                font-weight: 600; 
+            }
+
+        .card-body p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-warning {
+            background-color: #fdd835;
+            color: #ffffff;
+            
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-warning:hover {
+                background-color: #fbc02d;
+            }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+            .btn-danger:hover {
+                background-color: #c62828;
+            }
 
         .footer {
-        margin-top: 210px;
+            margin-top: 210px;
+            text-align: center;
+            color: #ccc;
         }
     </style>
 </head>
@@ -30,7 +94,7 @@
         @if (Model != null)
         {
             <div class="card-header">
-                <hS>¿Seguro que quieres borrar esta ruta?</hS>
+                <h5>¿Seguro que quieres borrar esta ruta?</h5>
             </div>
             <div class="card-body">
 
