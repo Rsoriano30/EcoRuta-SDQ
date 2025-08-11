@@ -6,47 +6,48 @@
     <link rel="stylesheet" href="~/css/responsive.css" />
 }
 
+<html>
 <head>
     <link rel="stylesheet" href="~/css/form.css">
 </head>
 
-<body>
-    <div class="main-wrapper">
-        <div class="card">
-            @if (Model != null)
-            {
-                <div class="card-header">
-                    <hS>¿Seguro que quieres borrar este horario?</hS>
-                </div>
-                <div class="card-body">
+    <body>
+        <div class="main-wrapper">
+            <div class="card">
+                @if (Model != null)
+                {
+                    <div class="card-header">
+                        <h5>¿Seguro que quieres borrar este horario?</h5>
+                    </div>
+                    <div class="card-body">
 
-                    <p>Hora de salida: @Model.HoraSalida</p>
-                    <p>Hora de llegada: @Model.HoraLlegada</p>
+                        <p><strong>Hora de salida: </strong>@Model.HoraSalida</p>
+                        <p><strong>Hora de llegada: </strong>@Model.HoraLlegada</p>
 
-                    @if (Model.DiaInicio == Model.DiaFin)
-                    {
-                        <p>Día activa: @Model.DiaInicio</p>
-                    }
-                    else
-                    {
-                        <p>Día de inicio: @Model.DiaInicio</p>
-                        <p>Día de finalización: @Model.DiaFin</p>
-                    }
+                        @if (Model.DiaInicio == Model.DiaFin)
+                        {
+                            <p><strong>Día activa: </strong>@Model.DiaInicio</p>
+                        }
+                        else
+                        {
+                            <p><strong>Días aciva: </strong>@Model.DiaInicio a @Model.DiaFin</p>
+                        }
 
-                    <form asp-controller="Horarios" asp-action="DeleteHorarioPost" method="post">
-                        <input type="hidden" name="Id" value="@Model.HorarioId" />
+                        <form asp-controller="Horarios" asp-action="DeleteHorarioPost" method="post">
+                            <input type="hidden" name="Id" value="@Model.HorarioId" />
 
-                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                        <a class="btn btn-warning" asp-action="Index">Cancelar</a>
-                    </form>
-                </div>
-            }
-            else
-            {
-                <div class="card-body">
-                    <h2>No se encontró el horario</h2>
-                </div>
-            }
+                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                            <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body">
+                        <h2>No se encontró el horario</h2>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
-</body>
+    </body>
+</html>

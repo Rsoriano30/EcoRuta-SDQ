@@ -24,21 +24,21 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <p>Horas: @obj.HoraSalida - @obj.HoraLlegada</p>
+                                    <p><strong>Horas: </strong>@obj.HoraSalida - @obj.HoraLlegada</p>
                                     @if (obj.DiaInicio != null && obj.DiaFin != null && obj.DiaInicio != obj.DiaFin)
                                     {
-                                        <p>Días: @obj.DiaInicio a @obj.DiaFin</p>
+                                        <p><strong>Días: </strong>@obj.DiaInicio a @obj.DiaFin</p>
                                     }
                                     else
                                     {
                                         switch (obj.DiaInicio)
                                         {
                                             case null:
-                                                <p>Días: @obj.DiaFin</p>
+                                                <p><strong>Días: </strong>@obj.DiaFin</p>
                                                 break;
 
                                             case not null:
-                                                <p>Días: @obj.DiaInicio</p>
+                                                <p><strong>Días: </strong>@obj.DiaInicio</p>
                                                 break;
                                         }
                                     }

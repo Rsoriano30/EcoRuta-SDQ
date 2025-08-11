@@ -6,7 +6,7 @@
 }
 
 <head>
-    <link rel="stylesheet" href="~/css/lista.css" />
+    <link rel="stylesheet" href="~/css/form_alt.css" />
 </head>
 
 @if (User.IsInRole("Usuario"))
@@ -18,7 +18,6 @@
 
 <div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
         @try
         {
             if (Model != null)
@@ -29,9 +28,9 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <p>Titulo: @obj.Titulo</p>
-                                <p>Descripción: @obj.Descripcion</p>
-                                <p>Estado: @obj.Estado</p>
+                                <p><strong>Titulo: </strong>@obj.Titulo</p>
+                                <p><strong>Descripción: </strong>@obj.Descripcion</p>
+                                <p><strong>Estado: </strong>@obj.Estado</p>
 
                                 <div class="form-btn">
 

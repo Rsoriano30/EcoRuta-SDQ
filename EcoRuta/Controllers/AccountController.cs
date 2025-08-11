@@ -85,7 +85,7 @@ namespace EcoRuta.Controllers
 
                 return RedirectToAction("Login");
             }
-            catch (Exception ex)
+            catch
             {
                 return View(model);
             }

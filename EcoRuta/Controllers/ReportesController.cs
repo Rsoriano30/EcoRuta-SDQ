@@ -125,7 +125,7 @@ namespace EcoRuta.Controllers
 
                 return RedirectToAction("Index", "Reportes");
             }
-            catch (Exception ex)
+            catch
             {
                 var model = await _reportesService.GetById(Id);
 

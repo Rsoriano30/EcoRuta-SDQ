@@ -28,10 +28,10 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <p>Nombre: @obj.NombreRuta</p>
-                                <p>Punto de Salida: @obj.PuntoInicio</p>
-                                <p>Punto de Llegada: @obj.PuntoFinal</p>
-                                <p>Estado: @(obj.Estado == true ? "Activa" : "Inactiva")</p>
+                                <p><strong>Nombre: </strong>@obj.NombreRuta</p>
+                                <p><strong>Punto de Salida: </strong>@obj.PuntoInicio</p>
+                                <p><strong>Punto de Llegada: </strong>@obj.PuntoFinal</p>
+                                <p><strong>Estado: </strong>@(obj.Estado == true ? "Activa" : "Inactiva")</p>
 
                                 @if (User.IsInRole("Administrador"))
                                 {
