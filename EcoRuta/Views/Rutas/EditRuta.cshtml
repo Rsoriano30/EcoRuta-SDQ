@@ -6,126 +6,49 @@
     <link rel="stylesheet" href="~/css/responsive.css"/>
 }
 
-<head>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-        }
-
-        .card {
-            background-color: #f4fef4;
-            border-radius: 12px;
-            border: groove;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-            max-width: 400px;
-            margin: 100px auto;
-            margin-top: 50px;
-            padding: 30px;
-            color: #333;
-        }
-
-        label {
-            font-weight: 500;
-            margin-top: 15px;
-            display: block;
-        }
-
-        .form-control {
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            padding: 8px 12px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+<html>
+    <head>
+        <link rel="stylesheet" href="~/css/form.css"/>            
+    </head>
 
 
-        .btn-success {
-            background-color: #2e7d32;
-            color: white;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            font-size: 17px;
-        }
+    <body>
+        <div class="card col-4 offset-4">
+            <div class="card-body">
 
-            .btn-success:hover {
-                background-color: #1b5e20;
-            }
+                @if (Model != null)
+                {
+                    <form asp-controller="Rutas" asp-action="EditRutaPost" method="post">
 
-        .btn-danger {
-            background-color: #e53935;
-            color: white;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-            font-size: 16px;
-        }
+                        <input type="hidden" value="@Model.RutaId" asp-for="RutaId" required />
 
-            .btn-danger:hover {
-                background-color: #c62828;
-            }
+                        <label asp-for="NombreRuta">Nombre:</label>
+                        <input class="form-control" type="text" asp-for="NombreRuta" required />
 
+                        <label asp-for="PuntoInicio">Punto de salida:</label>
+                        <input class="form-control" type="text" asp-for="PuntoInicio" required />
 
-        .footer {
-            margin-top: 80px;
-            text-align: center;
-            color: #ccc;
-        }    
-        
-    </style>
-</head>
+                        <label asp-for="PuntoFinal">Punto de llegada:</label>
+                        <input class="form-control" type="text" asp-for="PuntoFinal" required />
 
+                        <label asp-for="Estado">Estado:</label>
+                        <select class="form-control" asp-for="Estado" required>
+                            <option value="@(true)">Activa</option>
+                            <option value="@(false)">Inactiva</option>
+                        </select>
 
-<body>
-    <div class="card col-4 offset-4">
-        <div class="card-body">
-
-            @if (Model != null)
-            {
-                <form asp-controller="Rutas" asp-action="EditRutaPost" method="post">
-
-                    <input type="hidden" value="@Model.RutaId" asp-for="RutaId" required />
-
-                    <label asp-for="NombreRuta">Nombre:</label>
-                    <input class="form-control" type="text" asp-for="NombreRuta" required />
-
-                    <label asp-for="PuntoInicio">Punto de salida:</label>
-                    <input class="form-control" type="text" asp-for="PuntoInicio" required />
-
-                    <label asp-for="PuntoFinal">Punto de llegada:</label>
-                    <input class="form-control" type="text" asp-for="PuntoFinal" required />
-
-                    <label asp-for="Estado">Estado:</label>
-                    <select class="form-control" asp-for="Estado" required>
-                        <option value="@(true)">Activa</option>
-                        <option value="@(false)">Inactiva</option>
-                    </select>
-
-                    <div>
-                        <br />
-                        <button class="btn btn-success" type="submit">Editar</button>
-                        <a class="btn btn-danger" asp-action="Index">Volver</a>
-                    </div>
-                </form>
-            }
-            else
-            {
-                <p>No se encontro la ruta.</p>
-            }
+                        <div>
+                            <br />
+                            <button class="btn btn-success" type="submit">Editar</button>
+                            <a class="btn btn-danger" asp-action="Index">Volver</a>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <p>No se encontro la ruta.</p>
+                }
+            </div>
         </div>
-    </div>
-</body>
+    </body>
+</html>

@@ -12,36 +12,36 @@
 
 <body>
     <div class="main-wrapper">
-            <div class="card">
-                <div class="card-body">
+        <div class="card">
+            <div class="card-body">
 
-                    @if (Model != null)
+                @if (Model != null)
+                {
+                    <p><strong>Titulo: </strong>@Model.Titulo</p>
+                    <p><strong>Descripción: </strong>@Model.Descripcion</p>
+                    <p><strong>Estado: </strong>@Model.Estado</p>
+                    <p><strong>Fecha de creación: </strong>@Model.FechaHora </p>
+
+                    @if (Model.Comentario != null && Model.Estado != "Pendiente")
                     {
-                        <p>Titulo: @Model.Titulo</p>
-                        <p>Descripción: @Model.Descripcion</p>
-                        <p>Estado: @Model.Estado</p>
-                        <p>Fecha de creación: @Model.FechaHora </p>
-
-                        @if (Model.Comentario != null && Model.Comentario != "Pendiente")
-                        {
-                            <P>Comentario: @Model.Comentario</P>
-                        }
-                        else if (Model.Estado == "Pendiente")
-                        {
-                            <p>Este reporte sigue pendiente</p>
-                        }
-                        else
-                        {
-                            <p><strong>No hay comentario</strong></p>
-                        }
-
-                        <a class="btn btn-danger" asp-action="Index">Volver</a>
+                        <P><strong>Comentario: </strong>@Model.Comentario</P>
+                    }
+                    else if (Model.Estado == "Pendiente")
+                    {
+                        <p><strong>- Este reporte sigue pendiente -</strong></p>
                     }
                     else
                     {
-                        <h2>No se encontró el Reporte</h2>
+                        <p><strong>Sin comentario</strong></p>
                     }
-                </div>
+
+                    <a class="btn btn-danger" asp-action="Index">Volver</a>
+                }
+                else
+                {
+                    <h2>No se encontró el Reporte</h2>
+                }
             </div>
+        </div>
     </div>
 </body>

@@ -40,7 +40,6 @@
 
             .card-header h5 {
                 text-align: center;
-                color: #d32f2f;
                 margin-bottom: 20px;
             }
 
@@ -102,15 +101,15 @@
                 @if (Model.Estado == "Pendiente")
                 {
                     <div class="card-header">
-                        <hS>¿Seguro que quieres borrar esta reporte?</hS>
+                        <h5>¿Seguro que quieres borrar esta reporte?</h5>
                     </div>
                     <div class="card-body">
 
-                        <p>Titulo: @Model.Titulo</p>
-                        <p>Descripción: @Model.Descripcion</p>
+                        <p><strong>Titulo: </strong>@Model.Titulo</p>
+                        <p><strong>Descripción: </strong>@Model.Descripcion</p>
 
                         <form asp-controller="Reportes" asp-action="DeleteReportePost" method="post">
-
+                            <br />
                             <input type="hidden" name="Id" value="@Model.ReporteId" />
                             <button class="btn btn-danger" type="submit">Eliminar</button>
                             <a class="btn btn-warning" asp-action="Index">Cancelar</a>

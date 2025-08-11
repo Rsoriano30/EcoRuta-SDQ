@@ -24,7 +24,7 @@ namespace EcoRuta.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateChofer()
+        public IActionResult CreateChofer()
         {
             return View();
         }

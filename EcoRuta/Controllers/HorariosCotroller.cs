@@ -26,7 +26,7 @@ namespace EcoRuta.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateHorario()
+        public IActionResult CreateHorario()
         {
             return View();
         }

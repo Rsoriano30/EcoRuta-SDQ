@@ -82,21 +82,6 @@
             color: white;
         }
 
-            .btn-danger:hover {
-                background-color: #c62828;
-                transform: scale(1.03);
-            }
-
-        .btn-success {
-            background-color: #fdd835;
-            color: #000;
-        }
-
-            .btn-success:hover {
-                background-color: #fbc02d;
-                transform: scale(1.03);
-            }
-
         /* Responsivo */
         @@media (min-width: 600px) {
             .btn-container
@@ -141,7 +126,13 @@
                                     </select>
                                                                 
                                     <label asp-for="Comentario">Comentario</label>
-                                    <input class="form-control" type="text" asp-for="Comentario"  required />
+                                    <input class="form-control" type="text" asp-for="Comentario" />
+
+                                    <div>
+                                        <br />
+                                        <button class="btn btn-success" type="submit">Evaluar</button>
+                                        <a class="btn btn-warning" asp-action="Index">Volver</a>
+                                    </div>
                                     break;
 
                                 case false:
@@ -152,14 +143,14 @@
                                     <input class="form-control" type="text" asp-for="Descripcion" required />
 
                                     <input type="hidden" asp-for="Estado" required />
+
+                                    <div>
+                                        <br />
+                                        <button class="btn btn-danger" type="submit">Editar</button>
+                                        <a class="btn btn-warning" asp-action="Index">Volver</a>
+                                    </div>
                                     break;
                             }
-
-                            <div>
-                                <br />
-                                <button class="btn btn-success" type="submit">Editar</button>
-                                <a class="btn btn-danger" asp-action="Index">Volver</a>
-                            </div>
                         </form>
                     }
                     else
