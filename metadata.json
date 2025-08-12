@@ -1,0 +1,6 @@
+{
+  "name": "EcoRutaRD Chatbot",
+  "description": "An intelligent chatbot to help citizens of EcoRutaRD with waste collection schedules, routes, service reports, and recycling tips.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
