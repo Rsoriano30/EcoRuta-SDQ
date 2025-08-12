@@ -18,6 +18,8 @@ public partial class Reporte
     public string? Comentario { get; set; }
 
     public string? Estado { get; set; }
+    public Decimal? Latitud { get; set; }
+    public Decimal? Longitud { get; set; }
 
     public virtual Usuario? Usuario { get; set; }
 }

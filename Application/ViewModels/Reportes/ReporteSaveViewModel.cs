@@ -18,6 +18,10 @@ namespace Application.ViewModels.Reportes
 
         public string? Estado { get; set; }
 
+        public decimal? Latitud { get; set; }
+
+        public decimal? Longitud { get; set; }
+
         public string? Comentario { get; set; }
     }
 }
