@@ -5,51 +5,39 @@
     ViewData["Title"] = "Borrar";
 }
 
-<head>
-    <style>
-        body {
-        background-color: #f3e3b2;
-        }
+<html>
+    <head>
+        <link rel="stylesheet" href="~/css/form.css"/>
+    </head>
 
-        .card{
-        border: 1px solid black;
-        margin-top: 100px;
-        width: 400px;
-        justify-self: center;
-        }
+    <body>
+        <div class="main-wrapper">
+            <div class="card">
+                @if (Model != null)
+                {
+                    <div class="card-header">
+                        <h5>¿Seguro que quieres borrar esta ruta?</h5>
+                    </div>
+                    <div class="card-body">
 
-        .footer {
-        margin-top: 210px;
-        }
-    </style>
-</head>
+                        <p><strong>Nombre: </strong>@Model.NombreRuta</p>
+                        <p><strong>Punto de salida: </strong>@Model.PuntoInicio</p>
+				        <p><strong>Punto de llegada: </strong>@Model.PuntoFinal</p>
 
-<body>
-    <div class="card">
-
-        @if (Model != null)
-        {
-            <div class="card-header">
-                <hS>¿Seguro que quieres borrar esta ruta?</hS>
+                        <form asp-controller="Rutas" asp-action="DeleteRutaPost" method="post">
+                            <input type="hidden" name="Id" value="@Model.RutaId" />
+                            <button class="btn btn-warning" type="submit">Eliminar</button>
+                            <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body">
+                        <h2>No se encontró la ruta</h2>
+                    </div>
+                }
             </div>
-            <div class="card-body">
-
-                <p>Nombre: @Model.NombreRuta</p>
-                <p>Punto de salida: @Model.PuntoInicio</p>
-				<p>Punto de llegada: @Model.PuntoFinal</p>
-
-                <form asp-controller="Rutas" asp-action="DeleteRutaPost" method="post">
-                    <input type="hidden" name="Id" value="@Model.RutaId" />
-                    <button class="btn btn-warning" type="submit">Eliminar</button>
-                    <a class="btn btn-danger" asp-action="Index">Cancelar</a>
-                </form>
-            </div>
-        }
-        else
-        {
-            <div class="card-body">
-                <h2>No se encontró la ruta</h2>
-            </div>
-        }
-    </div>
-</body>
+        </div>
+    </body>
+<</html>>

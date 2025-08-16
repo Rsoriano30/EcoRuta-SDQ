@@ -3,22 +3,43 @@
 
 @{
     ViewData["title"] = "Crear";
+    <link rel="stylesheet" href="~/css/responsive.css"/>
 }
 
 <head>
     <style>
         body {
-            background-color: #f3e3b2;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
         }
 
         .card {
-            border: 1px solid black;
-            margin-top: 100px;
-            width: 400px;
+            background-color: #f4fef4;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            max-width: 450px;
+            margin: 100px auto;
+            margin-top: 50px;
+            padding: 25px;
+            color: #333;
         }
 
-        .footer {
-            margin-top: 190px;
+        label {
+            font-weight: 500;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .form-control {
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            width: 100%;
+            margin-bottom: 10px;
         }
     </style>
 </head>

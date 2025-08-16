@@ -10,114 +10,123 @@
     ViewData["title"] = ModoEditar ? "Editar" : "Crear";
 }
 
-<head>
-    <style>
-        .footer {
-        margin-top: 125px;
-        }
+<html>
+    <head>
+        <link rel="stylesheet" href="~/css/formAsignaciones.css" />
 
-        body {
-        background-color: #f3e3b2;
-        }
+        <style>
+            label {
+                color: black !important;
+            }
+        </style>
+    </head>
 
-        .card {
-        border: 1px solid black;
-        margin-top: 100px;
-        }
-    </style>
-</head>
+    <body>
+        <div class="main-wrapper">
+            <div class="card">
+                @* <div class="card-header">
+                    <h2>@(ModoEditar ? "Editar Asignación" : "Crear Nueva Asignación")</h2>
+                </div> *@
+                <div class="card-body">
+                    <form asp-controller="Asignaciones" asp-action="@(ModoEditar ? "EditAsignPost" : "CreateAsignPost")" method="post">
 
+                        <input asp-for="AsignacionId" value="@Model.AsignacionId" type="hidden" />
 
-<body>
-    <div class="card col-4 offset-4">
-        <div class="card-body">
-            <form asp-controller="Asignaciones" asp-action="@(ModoEditar ? "EditAsignPost" : "CreateAsignPost")" method="post">
-
-                <input asp-for="AsignacionId" value="@Model.AsignacionId" type="hidden" />
-
-                <label asp-for="RutaId">Ruta:</label>
-                <select class="form-control" asp-for="RutaId">
-                    @if (Rutas != null)
-                    {
-                        <option value="null">Ninguna</option>
-                        foreach (var ruta in Rutas)
-                        {
-                            <option value="@ruta.RutaId">@ruta.NombreRuta</option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay rutas</option>
-                    }
-                </select>
-
-                <label asp-for="HorarioId">Horario:</label>
-                <select class="form-control" asp-for="HorarioId">
-                    @if (Horarios != null)
-                    {
-                        <option value="null">Ninguno</option>
-                        foreach (var horario in Horarios)
-                        {
-                            <option value="@horario.HorarioId">
-                                @(horario.HoraSalida) - @(horario.HoraLlegada) @if (horario.DiaInicio == horario.DiaFin)
+                        <div class="form-group">
+                            <label asp-for="RutaId">Ruta:</label>
+                            <select class="form-control" asp-for="RutaId">
+                                @if (Rutas != null)
                                 {
-                                    <p>- @horario.DiaInicio </p>
+                                    <option value="null">Seleccionar ruta...</option>
+                                    foreach (var ruta in Rutas)
+                                    {
+                                        <option value="@ruta.RutaId">@ruta.NombreRuta</option>
+                                    }
                                 }
                                 else
                                 {
-                                    <p>- @horario.DiaInicio a @horario.DiaFin </p>
+                                    <option value="null">No hay rutas disponibles</option>
                                 }
-                            </option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay horarios</option>
-                    }
-                </select>
+                            </select>
+                        </div>
 
-                <label asp-for="CamionId">Camion:</label>
-                <select class="form-control" asp-for="CamionId">
-                    @if (Camiones != null)
-                    {
-                        <option value="null">Ninguno</option>
-                        foreach (var camion in Camiones)
-                        {
-                            <option value="@camion.CamionId">
-                                <p>@camion.Placa - @camion.Modelo - @camion.Año </p>
-                            </option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay camiones</option>
-                    }
-                </select>
+                        <div class="form-group">
+                            <label asp-for="HorarioId">Horario:</label>
+                            <select class="form-control" asp-for="HorarioId">
+                                @if (Horarios != null)
+                                {
+                                    <option value="null">Seleccionar horario...</option>
+                                    foreach (var horario in Horarios)
+                                    {
+                                        <option value="@horario.HorarioId">
+                                            @(horario.HoraSalida) - @(horario.HoraLlegada) @if (horario.DiaInicio == horario.DiaFin)
+                                            {
+                                                @:- @horario.DiaInicio
+                                            }
+                                            else
+                                            {
+                                                @:- @horario.DiaInicio a @horario.DiaFin
+                                            }
+                                        </option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="null">No hay horarios disponibles</option>
+                                }
+                            </select>
+                        </div>
 
-                <label asp-for="ChoferId">Chofer:</label>
-                <select class="form-control" asp-for="ChoferId">
-                    @if (Choferes != null)
-                    {
-                        <option value="null">Ninguno</option>
-                        foreach (var chofer in Choferes)
-                        {
-                            <option value="@chofer.ChoferId">
-                                <p>@chofer.Nombre - @chofer.Cedula </p>
-                            </option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="null">No hay choferes</option>
-                    }
-                </select>
+                        <div class="form-group">
+                            <label asp-for="CamionId">Camión:</label>
+                            <select class="form-control" asp-for="CamionId">
+                                @if (Camiones != null)
+                                {
+                                    <option value="null">Seleccionar camión...</option>
+                                    foreach (var camion in Camiones)
+                                    {
+                                        <option value="@camion.CamionId">
+                                            @camion.Placa - @camion.Modelo - @camion.Año
+                                        </option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="null">No hay camiones disponibles</option>
+                                }
+                            </select>
+                        </div>
 
-                <div>
-                    <br />
-                    <button class="btn btn-success" type="submit">@(ModoEditar ? "Editar" : "Crear")</button>
-                    <a class="btn btn-danger" asp-action="Index">Volver</a>
+                        <div class="form-group">
+                            <label asp-for="ChoferId">Chofer:</label>
+                            <select class="form-control" asp-for="ChoferId">
+                                @if (Choferes != null)
+                                {
+                                    <option value="null">Seleccionar chofer...</option>
+                                    foreach (var chofer in Choferes)
+                                    {
+                                        <option value="@chofer.ChoferId">
+                                            @chofer.Nombre - @chofer.Cedula
+                                        </option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="null">No hay choferes disponibles</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-success" type="submit">
+                                Guardar
+                            </button>
+                            <a class="btn btn-danger" asp-action="Index">Volver</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</body>
+        <br /><br />
+    </body>
+</html>

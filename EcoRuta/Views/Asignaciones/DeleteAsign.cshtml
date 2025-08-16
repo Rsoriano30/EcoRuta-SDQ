@@ -1,64 +1,67 @@
 ﻿@using Application.ViewModels.Asignaciones
 @model AsignacionesDetailsViewModel
-
 @{
     ViewData["Title"] = "Borrar";
 }
 
-<head>
-    <style>
-        body {
-        background-color: #f3e3b2;
-        }
+<html>
+    <head>
+        <link rel="stylesheet" href="~/css/deleteAsignacion.css" />
+    </head>
 
-        .card{
-        border: 1px solid black;
-        margin-top: 100px;
-        width: 400px;
-        justify-self: center;
-        }
+    <body>
+        <div class="main-wrapper">
+            <div class="card">
+                @if (Model != null)
+                {
+                    @* <div class="card-header">
+                        <h5>¿Seguro que quieres borrar esta asignación?</h5>
+                    </div> *@
+                    <div class="card-body">
+                        @* <div class="warning-text">
+                            Esta acción no se puede deshacer. La asignación se eliminará permanentemente.
+                        </div> *@
 
-        .footer {
-        margin-top: 210px;
-        }
-    </style>
-</head>
+                        <p><strong>Ruta:</strong> @Model.NombreRuta</p>
+                        <p><strong>Camión:</strong> @Model.PlacaCamion</p>
+                        <p><strong>Chofer:</strong> @Model.NombreChofer - @Model.CedulaChofer<p>
+                        @if (Model.DiaInicio != null || Model.DiaFin != null)
+                        {
+                            @if (Model.DiaFin.Equals(Model.DiaInicio))
+                            {
+                                <p><strong>Horario:</strong>@Model.HoraSalida - @Model.HoraLlegada - @Model.DiaInicio</p>
+                            }
+                            else
+                            {
+                                <p><strong>Horario:</strong> @Model.HoraSalida - @Model.HoraLlegada - @Model.DiaInicio a @Model.DiaFin</p>
+                            }
+                        }
+                        else
+                        {
+                            <p><strong>Horario: </strong></p>
+                        }
 
-<body>
-    <div class="card">
-
-        @if (Model != null)
-        {
-                <div class="card-header">
-                    <hS>¿Seguro que quieres borrar esta asignación?</hS>
-                </div>
-                <div class="card-body">
-
-                    <p>Ruta: @Model.NombreRuta</p>
-                    @if (Model.DiaFin.Equals(Model.DiaInicio))
-                    {
-                        <p>Horario: @Model.HoraSalida - @Model.HoraLlegada - @Model.DiaInicio</p>
-                    }
-                    else
-                    {
-                        <p>Horario: @Model.HoraSalida - @Model.HoraLlegada - @Model.DiaInicio a @Model.DiaFin</p>
-                    }
-                    <p>Camion: @Model.PlacaCamion</p>
-                    <p>Chofer: @Model.NombreChofer - @Model.CedulaChofer</p>
-
-                    <form asp-controller="Asignaciones" asp-action="DeleteAsignPost" method="post">
-
-                        <input type="hidden" name="id" value="@Model.AsignacionId" />
-                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                        <a class="btn btn-warning" asp-action="Index">Cancelar</a>
-                    </form>
-                </div>
-        }
-        else
-        {
-            <div class="card-body">
-                <h2>No se encontró la asignación</h2>
+                        <form asp-controller="Asignaciones" asp-action="DeleteAsignPost" method="post">
+                            <input type="hidden" name="id" value="@Model.AsignacionId" />
+                            <div class="form-buttons">
+                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                                <a class="btn btn-warning" asp-action="Index">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body">
+                        <div class="no-data">
+                            <h2>No se encontró la asignación</h2>
+                            <p>La asignación que intenta eliminar no existe o ya fue eliminada.</p>
+                            <a class="btn btn-warning" asp-action="Index">Volver a la lista</a>
+                        </div>
+                    </div>
+                }
             </div>
-        }
-    </div>
-</body>
+        </div>
+        <br /><br />
+    </body>
+</html>

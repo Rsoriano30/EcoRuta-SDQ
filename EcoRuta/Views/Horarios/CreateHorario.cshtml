@@ -2,65 +2,153 @@
 @model HorarioSaveViewModel
 
 @{
-    //List<TimeOnly> horas = new();
+    
     ViewData["title"] = "Crear";
+    <link rel="stylesheet" href="~/css/responsive.css" />
 }
 
 <head>
+    
     <style>
         body {
-            background-color: #f3e3b2;
+            background-color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
         }
 
         .card {
-            border: 1px solid black;
-            margin-top: 100px;
-            width: 400px;
+            background-color: #f4fef4;
+            border-radius: 12px;
+            border: 1px solid #c8e6c9;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 150px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
         }
 
-        .footer {
-            margin-top: 190px;
+        .card-header h5 {
+            text-align: center;
+            color: #d32f2f;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input, select {
+            padding: 10px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-success {
+            background-color: #4caf50;
+            color: white;
+        }
+
+            .btn-success:hover {
+                background-color: #43a047;
+                transform: scale(1.03);
+            }
+
+        .btn-danger {
+            background-color: #e53935;
+            color: white;
+        }
+
+            .btn-danger:hover {
+                background-color: #c62828;
+                transform: scale(1.03);
+            }
+
+        /* Responsive en pantallas medianas/grandes */
+        @@media (min-width: 600px) {
+            .btn-container
+
+        {
+            flex-direction: row;
+        }
+
         }
     </style>
+
 </head>
 
-<div class="card col-4 offset-4">
-    <div class="card-body">
-        <form asp-controller="Horarios" asp-action="CreateHorarioPost" method="post">
+<body>
+    <div class="main-wrapper">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Horarios" asp-action="CreateHorarioPost" method="post">
 
-            <label asp-for="HoraSalida">Hora de salida:</label>
-            <input class="form-control" type="time" asp-for="HoraSalida" required />
+                    <label asp-for="HoraSalida">Hora de salida:</label>
+                    <input class="form-control" type="time" asp-for="HoraSalida" required />
 
-            <label asp-for="HoraLlegada">Hora de llegada:</label>
-            <input class="form-control" type="time" asp-for="HoraLlegada" required />
+                    <label asp-for="HoraLlegada">Hora de llegada:</label>
+                    <input class="form-control" type="time" asp-for="HoraLlegada" required />
 
-            <label asp-for="DiaInicio">Dia de inicio</label>
-            <select class="form-control" asp-for="DiaInicio">
-                <option value="Lunes">Lunes</option>
-                <option value="Martes">Martes</option>
-                <option value="Miércoles">Miércoles</option>
-                <option value="Jueves">Jueves</option>
-                <option value="Viernes">Viernes</option>
-                <option value="Sábado">Sábado</option>
-                <option value="Domingo">Domingo</option>
-            </select>
+                    <label asp-for="DiaInicio">Dia de inicio</label>
+                    <select class="form-control" asp-for="DiaInicio">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
 
-            <label asp-for="DiaFin">Dia de finalización:</label>
-            <select class="form-control" asp-for="DiaFin">
-                <option value="Lunes">Lunes</option>
-                <option value="Martes">Martes</option>
-                <option value="Miércoles">Miércoles</option>
-                <option value="Jueves">Jueves</option>
-                <option value="Viernes">Viernes</option>
-                <option value="Sábado">Sábado</option>
-                <option value="Domingo">Domingo</option>
-            </select>
+                    <label asp-for="DiaFin">Dia de finalización:</label>
+                    <select class="form-control" asp-for="DiaFin">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
 
-            <div>
-                <br />
-                <button class="btn btn-success" type="submit">Crear</button>
-                <a class="btn btn-danger" asp-action="Index">Volver</a>
+                    <div>
+                        <br />
+                        <button class="btn btn-success" type="submit">Crear</button>
+                        <a class="btn btn-danger" asp-action="Index">Volver</a>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</body>

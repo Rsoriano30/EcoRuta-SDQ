@@ -2,35 +2,11 @@
 
 @{
     ViewData["Title"] = "Rutas";
+    
 }
 
 <head>
-    <style>
-        .row {
-        margin-top: 30px;
-        }
-
-        .crearbtn {
-        margin-top: 30px;
-        text-align: center;
-        }
-
-        .form-btn {
-        display: flex;
-        }
-
-        body {
-        background-color: #f3e3b2;
-        }
-
-        .card {
-        border: 1px solid black;
-        }
-
-        .footer {
-        margin-top: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/lista.css" />
 </head>
 
 @if (User.IsInRole("Administrador"))
@@ -52,10 +28,10 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <p>Nombre: @obj.NombreRuta</p>
-                                <p>Punto de Salida: @obj.PuntoInicio</p>
-                                <p>Punto de Llegada: @obj.PuntoFinal</p>
-                                <p>Estado: @(obj.Estado == true ? "Activa" : "Inactiva")</p>
+                                <p><strong>Nombre: </strong>@obj.NombreRuta</p>
+                                <p><strong>Punto de Salida: </strong>@obj.PuntoInicio</p>
+                                <p><strong>Punto de Llegada: </strong>@obj.PuntoFinal</p>
+                                <p><strong>Estado: </strong>@(obj.Estado == true ? "Activa" : "Inactiva")</p>
 
                                 @if (User.IsInRole("Administrador"))
                                 {

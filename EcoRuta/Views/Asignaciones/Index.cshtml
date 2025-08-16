@@ -1,105 +1,138 @@
 ﻿@using Application.ViewModels.Asignaciones
 @model List<AsignacionesDetailsViewModel>
-
 @{
     ViewData["Title"] = "Asignaciones";
 }
 
 <head>
+    <link rel="stylesheet" href="~/css/listaAsignaciones.css" />
+
     <style>
-        .row {
-        margin-top: 30px;
+        .card-body strong {
+            color: black !important;
         }
 
-        .crearbtn {
-        margin-top: 30px;
-        text-align: center;
-        }
-
-        .form-btn {
-        display: flex;
-        }
-
-        body {
-        background-color: #f3e3b2;
-        }
-
-        .card {
-        border: 1px solid black;
-        }
-
-        .footer {
-        margin-top: 100px;
+        .crearbtn button {
+            background: #4cb050 !important;
         }
     </style>
 </head>
 
-<div class="crearbtn">
-    <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
-        <input name="id" value="0" type="hidden" />
-        <intput name="ModoEditar" value="false" type="hidden" />
-        <button class="btn btn-primary" type="submit">Crear asignación</button>
-    </form>
-</div>
+<body>
+    <div class="crearbtn">
+        <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+            <input name="id" value="0" type="hidden" />
+            <input name="ModoEditar" value="false" type="hidden" />
+            <button class="btn btn-primary" type="submit">Nueva Asignación</button>
+        </form>
+    </div>
 
-<div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-        @try
-        {   
-            if (Model != null)
+    <div class="main-wrapper">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @try
             {
-                @foreach (var obj in Model)
+                if (Model != null && Model.Any())
                 {
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
+                    @foreach (var obj in Model)
+                    {
+                        <div class="col">
+                            <div class="card">                                
+                                <div class="card-body">
+                                    <div class="info-row">
+                                        <p>
+                                            <strong>Ruta:</strong>
+                                            <span class="@(string.IsNullOrEmpty(obj.NombreRuta) ? "ninguno-info" : "ruta-info")">
+                                                @(obj.NombreRuta ?? "Ninguna")
+                                            </span>
+                                        </p>
+                                    </div>
 
-                                <p>Ruta: @(obj.NombreRuta ?? "Ninguna")</p>
-                                @if (obj.HorarioId.HasValue)
-                                {
-                                    if (obj.DiaFin.Equals(obj.DiaInicio)) 
+                                    @if (obj.HorarioId.HasValue)
                                     {
-                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio</p>
+                                        <div>
+                                            @if (obj.DiaFin.Equals(obj.DiaInicio))
+                                            {
+                                                <p>
+                                                    <strong>Horario:</strong>
+                                                    <span>@obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio</span>
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    <strong>Horario:</strong>
+                                                    <span>@obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio a @obj.DiaFin</span>
+                                                </p>
+                                            }
+                                        </div>
                                     }
                                     else
                                     {
-                                        <p>Horario: @obj.HoraSalida - @obj.HoraLlegada - @obj.DiaInicio a @obj.DiaFin</p>
+                                        <div class="info-row">
+                                            <p><strong>Horario:</strong> <span class="ninguno-info">Ninguno</span></p>
+                                        </div>
                                     }
-                                }
-                                else
-                                {
-                                    <P>Horario: Ninguno</P>
-                                }
 
-                                <p>Placa del Camión: @(obj.PlacaCamion ?? "Ninguno")</p>
-                                <p>Chofer: @(obj.NombreChofer ?? "Ninguno")</p>
+                                    <div class="info-row">
+                                        <p>
+                                            <strong>Placa del Camión:</strong>
+                                            <span>
+                                                @(obj.PlacaCamion ?? "Ninguno")
+                                            </span>
+                                        </p>
+                                    </div>
 
-                                <div class="form-btn">
-                                    <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
-                                        <input type="hidden" name="Id" value="@obj.AsignacionId" />
-										<input type="hidden" name="ModoEditar" value="true" />
-                                        <button class="btn btn-warning" type="submit">Editar</button>
-                                    </form>
-                                    <form asp-controller="Asignaciones" asp-action="DeleteAsign" method="get">
-                                        <input type="hidden" name="Id" value="@obj.AsignacionId" />
-                                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                                    </form>
+                                    <div class="info-row">
+                                        <p>
+                                            <strong>Chofer:</strong>
+                                            <span>
+                                                @(obj.NombreChofer ?? "Ninguno")
+                                            </span>
+                                        </p>
+                                    </div>
+
+                                    <div class="form-btn">
+                                        <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+                                            <input type="hidden" name="Id" value="@obj.AsignacionId" />
+                                            <input type="hidden" name="ModoEditar" value="true" />
+                                            <button class="btn btn-warning" type="submit">Editar</button>
+                                        </form>
+                                        <form asp-controller="Asignaciones" asp-action="DeleteAsign" method="get">
+                                            <input type="hidden" name="Id" value="@obj.AsignacionId" />
+                                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                                        </form>
+                                    </div>
                                 </div>
-
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body no-data">
+                                <h2>No se encontraron asignaciones</h2>
+                                <p>¡Comienza creando tu primera asignación!</p>
+                                <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
+                                    <input name="id" value="0" type="hidden" />
+                                    <input name="ModoEditar" value="false" type="hidden" />
+                                    <button class="btn btn-primary" type="submit">Crear Primera Asignación</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 }
-			}
-			else
-			{
-				<h2>No se encontraron asignaciones.</h2>
             }
-        }
-        catch (Exception ex)
-        {
-            <h2>Error: @ex</h2>
-        }
+            catch (Exception ex)
+            {
+                <div class="col-12">
+                    <div class="error-message">
+                        <h2>Error</h2>
+                        <p>@ex.Message</p>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-</div>
+</body>

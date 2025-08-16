@@ -1,0 +1,88 @@
+﻿body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #f4fef5;
+    border-radius: 12px;
+    border: 1px solid #c8e6c9;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    width: 400px;
+    margin-top: 50px;
+}
+
+
+.card-header {
+    background-color: transparent;
+    font-weight: bolder;
+}
+
+input:hover{
+    background-color: lightgray;
+}
+
+.card-header h5 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-body p {
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.card label{
+    font-weight: bold;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    flex: 1;
+}
+
+.btn-danger {
+    background-color: #e53935;
+    color: white;
+    box-shadow: 0 4px 8px rgba(198, 40, 40, 0.3);
+}
+
+    .btn-danger:hover {
+        background-color: #c62828;
+        transform: scale(1.05);
+    }
+
+.btn-warning {
+    background-color: #fdd835;
+    color: #000;
+    box-shadow: 0 4px 8px rgba(253, 216, 53, 0.3);
+}
+
+    .btn-warning:hover {
+        background-color: #fbc02d;
+        transform: scale(1.05);
+    }
