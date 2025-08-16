@@ -58,15 +58,16 @@ namespace EcoRuta.Controllers
 
                 await HttpContext.SignInAsync("MyCookieAuth", principal);
 
-                if (user.TipoUsuario == "Administrador")
-                {
-                    return RedirectToAction("Dashboard", "Home");
-                }
+                //if (user.TipoUsuario == "Administrador")
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
 
-                else if (user.TipoUsuario == "Usuario")
-                {
-                    return RedirectToAction("Index", "Reportes");
-                }
+                //else if (user.TipoUsuario == "Usuario")
+                //{
+                //    return RedirectToAction("Index", "Reportes");
+                //}
+                return RedirectToAction("Index", "Home");
             }
 
             return RedirectToAction("Login");
