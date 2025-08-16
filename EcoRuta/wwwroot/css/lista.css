@@ -57,6 +57,9 @@
 
 .card-body {
     padding: 20px;
+    min-height: 250px; 
+    display: flex;
+    flex-direction: column;
 }
 
     .card-body p {
