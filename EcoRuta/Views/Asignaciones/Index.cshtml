@@ -6,6 +6,16 @@
 
 <head>
     <link rel="stylesheet" href="~/css/listaAsignaciones.css" />
+
+    <style>
+        .card-body strong {
+            color: black !important;
+        }
+
+        .crearbtn button {
+            background: #4cb050 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,7 +23,7 @@
         <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
             <input name="id" value="0" type="hidden" />
             <input name="ModoEditar" value="false" type="hidden" />
-            <button class="btn btn-primary" type="submit">➕ Nueva Asignación</button>
+            <button class="btn btn-primary" type="submit">Nueva Asignación</button>
         </form>
     </div>
 
@@ -26,13 +36,9 @@
                     @foreach (var obj in Model)
                     {
                         <div class="col">
-                            <div class="card">
-                                <div class="card-header">
-                                    📋 Asignación #@obj.AsignacionId
-                                </div>
+                            <div class="card">                                
                                 <div class="card-body">
                                     <div class="info-row">
-                                        <span class="info-icon">🛣️</span>
                                         <p>
                                             <strong>Ruta:</strong>
                                             <span class="@(string.IsNullOrEmpty(obj.NombreRuta) ? "ninguno-info" : "ruta-info")">
@@ -43,8 +49,7 @@
 
                                     @if (obj.HorarioId.HasValue)
                                     {
-                                        <div class="info-row">
-                                            <span class="info-icon">⏰</span>
+                                        <div>
                                             @if (obj.DiaFin.Equals(obj.DiaInicio))
                                             {
                                                 <p>
@@ -64,13 +69,11 @@
                                     else
                                     {
                                         <div class="info-row">
-                                            <span class="info-icon">⏰</span>
                                             <p><strong>Horario:</strong> <span class="ninguno-info">Ninguno</span></p>
                                         </div>
                                     }
 
                                     <div class="info-row">
-                                        <span class="info-icon">🚛</span>
                                         <p>
                                             <strong>Placa del Camión:</strong>
                                             <span>
@@ -80,7 +83,6 @@
                                     </div>
 
                                     <div class="info-row">
-                                        <span class="info-icon">👤</span>
                                         <p>
                                             <strong>Chofer:</strong>
                                             <span>
@@ -93,11 +95,11 @@
                                         <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
                                             <input type="hidden" name="Id" value="@obj.AsignacionId" />
                                             <input type="hidden" name="ModoEditar" value="true" />
-                                            <button class="btn btn-warning" type="submit">✏️ Editar</button>
+                                            <button class="btn btn-warning" type="submit">Editar</button>
                                         </form>
                                         <form asp-controller="Asignaciones" asp-action="DeleteAsign" method="get">
                                             <input type="hidden" name="Id" value="@obj.AsignacionId" />
-                                            <button class="btn btn-danger" type="submit">🗑️ Eliminar</button>
+                                            <button class="btn btn-danger" type="submit">Eliminar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -110,12 +112,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body no-data">
-                                <h2>📋 No se encontraron asignaciones</h2>
+                                <h2>No se encontraron asignaciones</h2>
                                 <p>¡Comienza creando tu primera asignación!</p>
                                 <form asp-controller="Asignaciones" asp-action="EditAsign" method="get">
                                     <input name="id" value="0" type="hidden" />
                                     <input name="ModoEditar" value="false" type="hidden" />
-                                    <button class="btn btn-primary" type="submit">➕ Crear Primera Asignación</button>
+                                    <button class="btn btn-primary" type="submit">Crear Primera Asignación</button>
                                 </form>
                             </div>
                         </div>
@@ -126,10 +128,11 @@
             {
                 <div class="col-12">
                     <div class="error-message">
-                        <h2>❌ Error</h2>
+                        <h2>Error</h2>
                         <p>@ex.Message</p>
                     </div>
                 </div>
             }
+        </div>
     </div>
 </body>

@@ -1,7 +1,6 @@
 ﻿body {
     background-color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
     margin: 0;
     padding: 0;
 }
@@ -57,7 +56,6 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #1565C0;
     font-size: 16px;
 }
 
@@ -97,22 +95,6 @@ select.form-control {
         font-size: 15px;
     }
 
-.ruta-label {
-    color: #388E3C;
-}
-
-.horario-label {
-    color: #F57C00;
-}
-
-.camion-label {
-    color: #7B1FA2;
-}
-
-.chofer-label {
-    color: #1976D2;
-}
-
 .btn {
     padding: 14px 30px;
     font-size: 16px;
@@ -150,19 +132,6 @@ select.form-control {
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
     }
-
-.form-icon {
-    font-size: 48px;
-    margin-bottom: 10px;
-}
-
-.create-icon {
-    color: #4CAF50;
-}
-
-.edit-icon {
-    color: #2196F3;
-}
 
 /* Estilo para opciones vacías */
 option[value="null"] {

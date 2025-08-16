@@ -13,24 +13,27 @@
 <html>
     <head>
         <link rel="stylesheet" href="~/css/formAsignaciones.css" />
+
+        <style>
+            label {
+                color: black !important;
+            }
+        </style>
     </head>
 
     <body>
         <div class="main-wrapper">
             <div class="card">
-                <div class="card-header">
-                    <div class="form-icon @(ModoEditar ? "edit-icon" : "create-icon")">
-                        @(ModoEditar ? "✏️" : "➕")
-                    </div>
+                @* <div class="card-header">
                     <h2>@(ModoEditar ? "Editar Asignación" : "Crear Nueva Asignación")</h2>
-                </div>
+                </div> *@
                 <div class="card-body">
                     <form asp-controller="Asignaciones" asp-action="@(ModoEditar ? "EditAsignPost" : "CreateAsignPost")" method="post">
 
                         <input asp-for="AsignacionId" value="@Model.AsignacionId" type="hidden" />
 
                         <div class="form-group">
-                            <label asp-for="RutaId" class="ruta-label">🛣️ Ruta:</label>
+                            <label asp-for="RutaId">Ruta:</label>
                             <select class="form-control" asp-for="RutaId">
                                 @if (Rutas != null)
                                 {
@@ -48,7 +51,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="HorarioId" class="horario-label">⏰ Horario:</label>
+                            <label asp-for="HorarioId">Horario:</label>
                             <select class="form-control" asp-for="HorarioId">
                                 @if (Horarios != null)
                                 {
@@ -75,7 +78,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="CamionId" class="camion-label">🚛 Camión:</label>
+                            <label asp-for="CamionId">Camión:</label>
                             <select class="form-control" asp-for="CamionId">
                                 @if (Camiones != null)
                                 {
@@ -95,7 +98,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="ChoferId" class="chofer-label">👤 Chofer:</label>
+                            <label asp-for="ChoferId">Chofer:</label>
                             <select class="form-control" asp-for="ChoferId">
                                 @if (Choferes != null)
                                 {
@@ -116,15 +119,14 @@
 
                         <div>
                             <button class="btn btn-success" type="submit">
-                                @(ModoEditar ? "💾 Guardar Cambios" : "➕ Crear Asignación")
+                                Guardar
                             </button>
-                            <a class="btn btn-danger" asp-action="Index">
-                                🔙 Volver
-                            </a>
+                            <a class="btn btn-danger" asp-action="Index">Volver</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <br /><br />
     </body>
 </html>
