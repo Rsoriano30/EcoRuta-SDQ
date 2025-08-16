@@ -38,13 +38,6 @@ namespace EcoRuta.Controllers
             return View("404");
         }
 
-        // [Authorize(Roles = "Administrador")]
-        // public async Task<IActionResult> Dashboard()
-        // {
-        //     await Task.Delay(1);
-        //     return View();
-        // }
-
         [Authorize(Roles = "Administrador")]
         public async Task<IActionResult> Dashboard()
         {

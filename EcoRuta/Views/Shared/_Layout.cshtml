@@ -2,213 +2,182 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EcoRuta</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/EcoRuta.styles.css" asp-append-version="true" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - EcoRuta</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/EcoRuta.styles.css" asp-append-version="true" />
     
-
-    <style>
-        .session-btn{
-        margin-right: 10px;
-        list-style: none;
-        }
-
-        .navbar-brand {
-            color: #2e7d32 !important; 
-            font-weight: bold;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-            .navbar-brand:hover {
-                color:#4CAF50 !important;
-                border-radius:15px;
+        <link rel="stylesheet" href="~/css/layout.css" />
+        <style>
+            .app-container {
+                display: grid;
+                min-height: 100dvh;
+                grid-template-rows: auto 1fr auto;
+                row-gap: 10px;
             }
 
-        
-        .nav-link {
-            color: #333333 !important;
-            font-size: 1rem;
-            padding: 0.75rem 1.25rem;
-            margin: 0 0.2rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+            footer {
+                min-height: 50px;
+                bottom: 0;
+                position: absolute;
+                width: 100%;
+                background-color: #959995;
+                text-align: center;
+            } 
 
-            .nav-link:hover {
-                color: #ffffff !important;
-                background-color: #4CAF50;
-                border-radius: 100px; 
-            }
-
-            .nav-link.active {
-                color: #ffffff !important;
-                background-color: #2e7d32;
-            }
-
-        
-        .btn-logout {
-            background-color: transparent;
-            color: #333333 !important;
-            border: 1px solid #333333;
-            padding: 0.5rem 1.25rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-            .btn-logout:hover {
-                background-color: #d32f2f; 
-                color: #ffffff !important;
-                border-color: #d32f2f;
-            }
-
-        
-        .container {
-            flex: 1;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-
-        
-        footer {
-            background-color: #f5f5f5;
-            color: #f5f5f5;
-            padding-bottom: 5px;
-            margin-top: 200px;
-            text-align: center;
-        }
-
-        footer a {
+            footer a {
                 color: #2e7d32;
                 text-decoration: none;
                 transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #1b5e20;
-            text-decoration: underline;
-        }
-
-        
-        @@media (max-width: 992px) {
-
-            .navbar-collapse {
-                padding-top: 1rem;
             }
 
-            .nav-link:hover {
-                color: #ffffff !important;
-                background-color: #4CAF50;
-                border-radius: 100px;
+            footer a:hover {
+                color: #1b5e20;
+                text-decoration: underline;
             }
 
-            .nav-link.active {
-                color: #ffffff !important;
-                background-color: #000;
-                
+            .app-container footer {
+                grid-row-gap: 40px;
             }
 
-            .nav-item {
-                margin: 0.3rem 0;
+            .Cbot-button {
+                position: fixed;
+                bottom: 9dvh;
+                right: 3dvh;
+                background-color: #1fb142;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                cursor: pointer;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             }
 
-            .btn-logout {
-                margin-top: 1rem;
+            .Cpopup-container {
+                display: none;
+                position: fixed;
+                bottom: 20dvh;
+                right: 20px;
+                width: 60dvh;
+                height: 70%;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                overflow: hidden;
+                background: white;
+            }
+
+            .Cpopup-container iframe {
                 width: 100%;
-                text-align: center;
+                height: 100%;
+                border: none;
+                background: transparent;
             }
+        </style>
+    </head>
+    <body>
+        <div class="app-container">
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EcoRuta</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
 
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EcoRuta</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                                @switch (User.IsInRole("Administrador"))
+                                {
+                                    case true:
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                                        </li>
+                                        break;
 
-                        @switch (User.IsInRole("Administrador"))
-                        {
-                            case true:
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
-                                </li>
-                                break;
+                                    case false:
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                        </li>
+                                        break;
+                                }
 
-                            case false:
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                                break;
-                        }
+                               @if (User.Claims.Any(c => c.Type == System.Security.Claims.ClaimTypes.Role))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Reportes" asp-action="Index">Reportes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Rutas" asp-action="Index">Rutas</a>
+                                    </li>
 
-                       @if (User.Claims.Any(c => c.Type == System.Security.Claims.ClaimTypes.Role))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Reportes" asp-action="Index">Reportes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Rutas" asp-action="Index">Rutas</a>
-                            </li>
-
-                            @if (User.IsInRole("Administrador"))
-                            {
+                                    @if (User.IsInRole("Administrador"))
+                                    {
                             
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Asignaciones" asp-action="Index">Asignaciones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Camiones" asp-action="Index">Camiones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Choferes" asp-action="Index">Choferes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a>
-                                </li>
-                            }
-
-                            <li class="nav-item ms-auto" style="margin-right: 10px;">
-                                <a class="btn btn-danger" name="NameIdentifier" asp-area="" asp-controller="Account" asp-route-id="@(User.FindFirst(ClaimTypes.NameIdentifier))" asp-action="CloseSession">Cerrar sesión</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item ms-auto" style="margin-right: 10px;">
-                                <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                            </li>
-                        }
-                    </ul>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Asignaciones" asp-action="Index">Asignaciones</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Camiones" asp-action="Index">Camiones</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Choferes" asp-action="Index">Choferes</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a>
+                                        </li>
+                                    }
+                                    <li class="nav-item ms-auto" style="margin-right: 10px;">
+                                        <a class="btn btn-danger" name="NameIdentifier" asp-area="" asp-controller="Account" asp-route-id="@(User.FindFirst(ClaimTypes.NameIdentifier))" asp-action="CloseSession">Cerrar sesión</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item ms-auto" style="margin-right: 10px;">
+                                        <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            <div>
+                <button class="Cbot-button" onclick="togglePopup()">
+                    <img width="48" height="45" src="https://img.icons8.com/fluency/48/chatbot--v1.png" alt="chatbot--v1" />
+                </button>
+                <div class="Cpopup-container" id="chatPopup">
+                    <iframe src="http://localhost:5173/"></iframe>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - EcoRuta - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <script>
+                    function togglePopup() {
+                        const popup = document.getElementById("chatPopup");
+                        popup.style.display = popup.style.display === "block" ? "none" : "block";
+                    }
+                </script>
+            </div>
+            </div>
+
+            <footer>
+                <div class="container" style="font-weight: bold; color: black;">
+                    &copy; 2025 - EcoRuta 
+                </div>
+            </footer>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
 </html>

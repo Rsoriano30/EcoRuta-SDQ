@@ -6,32 +6,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<<<<<<< refs/remotes/origin/BackADM
-    <style>
-        .row {
-        margin-top: 30px;
-        }
-
-        .crearbtn {
-        margin-top: 30px;
-        text-align: center;
-        }
-
-        .form-btn {
-        display: flex;
-        }
-
-        body {
-        background-color: #f3e3b2;
-        }
-
-        .card {
-        border: 1px solid black;
-        }
-
-        .footer {
-        margin-top: 100px;
-=======
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
@@ -52,7 +26,6 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
->>>>>>> local
         }
     </style>
 </head>
@@ -77,11 +50,11 @@
                     <div class="col">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">@obj.NombreRuta</h5>
-                                <p class="card-text">Salida: @obj.PuntoInicio</p>
-                                <p class="card-text">Llegada: @obj.PuntoFinal</p>
-                                <p class="card-text">Estado: @(obj.Estado.HasValue ? (obj.Estado.Value ? "Activa" : "Inactiva") : "Indefinido")</p>
-
+                                <p><strong>Nombre: </strong>@obj.NombreRuta</p>
+                                <p><strong>Salida: </strong>@obj.PuntoInicio</p>
+                                <p><strong>Llegada: </strong>@obj.PuntoFinal</p>
+                                <p><strong>Estado: </strong>@(obj.Estado.HasValue ? (obj.Estado.Value ? "Activa" : "Inactiva") : "Indefinido")</p>
+                              
                                 @if (User.IsInRole("Administrador"))
                                 {
                                     <div class="form-btn">
