@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+ @using System.Text.Json
+@model IEnumerable<Application.ViewModels.Reportes.ReporteViewModel>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Mapa de Reportes</h2>
+<div id="map" style="height:500px;"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    var map = L.map('map').setView([18.5075691261201, -69.89721519648516], 20); // RD
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // datos modelo
+    var reportes = @Html.Raw(JsonSerializer.Serialize(Model));
+
+    // Consola
+    console.log("Reportes recibidos:", reportes);
+
+    
+    var markers = [];
+
+    //marcadores
+    reportes.forEach(function(r) {
+        if (r.Latitud && r.Longitud) {
+            var marker = L.marker([r.Latitud, r.Longitud])
+                .addTo(map)
+                .bindPopup(`<b>Reporte #${r.ReporteId}</b><br>${r.Descripcion}`);
+            markers.push(marker.getLatLng());
+        }
+    });
+
+    
+    // puntos
+    if (markers.length > 0) {
+        map.fitBounds(markers);
+    }
+</script>
+
+
+

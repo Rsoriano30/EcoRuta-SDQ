@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Application.Intefaces.Services;
 using Application.ViewModels.Admin;
+using System.Threading.Tasks;
 
 namespace EcoRuta.Controllers
 {
@@ -11,16 +12,20 @@ namespace EcoRuta.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUsuarioService _usuarioService;
-        public HomeController(ILogger<HomeController> logger, IUsuarioService usuarioService)
+        private readonly IReportesService _reportesService;
+        public HomeController(ILogger<HomeController> logger, IUsuarioService usuarioService, IReportesService reportesService)
             {
                 _logger = logger;
                 _usuarioService = usuarioService;
+                _reportesService = reportesService;
             }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await _reportesService.GetAll();
+            return View(model);
+            //ViewBag.Reportes = await _reportesService.GetAll();
         }
 
         public IActionResult Privacy()

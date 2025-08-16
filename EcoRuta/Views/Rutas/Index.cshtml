@@ -1,43 +1,65 @@
 ﻿@model List<Application.ViewModels.Rutas.RutaViewModel>
-
 @{
     ViewData["Title"] = "Rutas";
-    
 }
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <link rel="stylesheet" href="~/css/lista.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/lista.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <style>
+        #map-container {
+            margin-bottom: 30px;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+    </style>
 </head>
-
-@if (User.IsInRole("Administrador"))
-{
-    <div class="crearbtn">
-        <a class="btn btn-primary" asp-controller="Rutas" asp-action="CreateRuta">Nueva ruta</a>
-    </div>
-}
-
-<div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-        @try
+<body>
+    <div class="container content-container">
+        @if (User.IsInRole("Administrador"))
         {
-            if (Model != null)
+            <div class="crearbtn">
+                <a class="btn btn-primary" asp-controller="Rutas" asp-action="CreateRuta">Nueva ruta</a>
+            </div>
+        }
+
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @if (Model != null && Model.Any())
             {
                 @foreach (var obj in Model)
                 {
                     <div class="col">
-                        <div class="card">
+                        <div class="card h-100">
                             <div class="card-body">
                                 <p><strong>Nombre: </strong>@obj.NombreRuta</p>
-                                <p><strong>Punto de Salida: </strong>@obj.PuntoInicio</p>
-                                <p><strong>Punto de Llegada: </strong>@obj.PuntoFinal</p>
-                                <p><strong>Estado: </strong>@(obj.Estado == true ? "Activa" : "Inactiva")</p>
-
+                                <p><strong>Salida: </strong>@obj.PuntoInicio</p>
+                                <p><strong>Llegada: </strong>@obj.PuntoFinal</p>
+                                <p><strong>Estado: </strong>@(obj.Estado.HasValue ? (obj.Estado.Value ? "Activa" : "Inactiva") : "Indefinido")</p>
+                              
                                 @if (User.IsInRole("Administrador"))
                                 {
                                     <div class="form-btn">
-                                        <a name="id" class="btn btn-warning" asp-action="EditRuta" asp-route-id="@obj.RutaId">Editar</a>
-                                        <a name="id" class="btn btn-danger" asp-action="DeleteRuta" asp-route-id="@obj.RutaId">Eliminar</a>
+                                        <a asp-action="EditRuta" asp-route-id="@obj.RutaId" class="btn btn-warning">Editar</a>
+                                        <a asp-action="DeleteRuta" asp-route-id="@obj.RutaId" class="btn btn-danger">Eliminar</a>
                                     </div>
                                 }
                             </div>
@@ -47,13 +69,105 @@
             }
             else
             {
-              <h2>No se econtraron rutas</h2>
+                <div class="col-12">
+                    <h2 class="text-center">No se encontraron rutas</h2>
+                </div>
             }
-
-        }
-        catch (Exception ex)
-        {
-            <h2>Error: @ex</h2>
-        }
+        </div>
     </div>
-</div>
+
+    @section Scripts {
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                var map = L.map('map').setView([18.4861, -69.9312], 13);
+                
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(18.4716, -69.8919),
+                        L.latLng(18.4429, -69.9500)
+                    ],
+                    routeWhileDragging: false,
+                    show: false,
+                    addWaypoints: false,
+                    draggableWaypoints: false,
+                    lineOptions: {
+                        styles: [{ 
+                            color: '#8BC34A', 
+                            weight: 6,
+                            opacity: 0.8
+                        }]
+                    },
+                    createMarker: function(i, waypoint, n) {
+                        if (i === 0) {
+                            return L.marker(waypoint.latLng, {
+                                icon: L.icon({
+                                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                                    shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+                                    iconSize: [25, 41],
+                                    iconAnchor: [12, 41]
+                                })
+                            }).bindPopup("<b>Inicio Ruta 1</b><br>Parque Independencia");
+                        }
+                        return L.marker(waypoint.latLng, {
+                            icon: L.icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+                                shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41]
+                            })
+                        }).bindPopup("<b>Fin Ruta 1</b><br>Parque Mirador Sur");
+                    }
+                }).addTo(map);
+
+                
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(18.4762, -69.8829),
+                        L.latLng(18.5061, -69.9577)
+                    ],
+                    routeWhileDragging: false,
+                    show: false,
+                    addWaypoints: false,
+                    draggableWaypoints: false,
+                    lineOptions: {
+                        styles: [{ 
+                            color: '#2E7D32',
+                            weight: 6,
+                            opacity: 0.8
+                        }]
+                    },
+                    createMarker: function(i, waypoint, n) {
+                        if (i === 0) {
+                            return L.marker(waypoint.latLng, {
+                                icon: L.icon({
+                                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                                    shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+                                    iconSize: [25, 41],
+                                    iconAnchor: [12, 41]
+                                })
+                            }).bindPopup("<b>Inicio Ruta 2</b><br>Zona Colonial");
+                        }
+                        return L.marker(waypoint.latLng, {
+                            icon: L.icon({
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+                                shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41]
+                            })
+                        }).bindPopup("<b>Fin Ruta 2</b><br>Jardín Botánico");
+                    }
+                }).addTo(map);
+            });
+        </script>
+    }
+</body>
+</html>
